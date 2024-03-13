@@ -1,0 +1,16 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+}
+.logo{
+    width:auto;
+    height: 60px;
+    margin-left: 10px;
+    display:inline;
+    float: left;
+    cursor:pointer;
+}
+*{
+    box-sizing: border-box;
+}
