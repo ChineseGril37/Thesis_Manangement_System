@@ -40,9 +40,9 @@
           </el-submenu>
           <el-submenu index="论文管理">
             <template slot="title">
-                <i class="el-icon-folder-opened"></i>
-                <span>论文管理</span>
-              </template>
+              <i class="el-icon-folder-opened"></i>
+              <span>论文管理</span>
+            </template>
             <el-menu-item index="初稿提交">
               <i class="el-icon-document-add"></i>
               <span>初稿提交</span>
