@@ -11,7 +11,7 @@
     <div style="display: flex;margin-top: 5px">
       <!-- 侧边栏导航 -->
       <div style="width: 200px;min-height:calc(100vh - 70px);overflow: hidden;margin-right: 5px;background-color: white;border-radius:5px 5px 5px 5px">
-        <el-menu :default-active="$router.path" :default-openeds="['课题申报','论文管理']" router class="el-menu-demo">
+        <el-menu :default-active="$router.path" :default-openeds="['课题申报','论文管理','人员管理','流程管理']" router class="el-menu-demo">
           <el-menu-item index="/">
             <i class="el-icon-house"></i>
             <span>首页</span>
@@ -51,23 +51,75 @@
               <i class="el-icon-document"></i>
               <span>初稿修改</span>
             </el-menu-item>
-            <el-menu-item index="格式检测">
-              <i class="el-icon-takeaway-box"></i>
-              <span>格式检测</span>
-            </el-menu-item>
             <el-menu-item index="定稿提交">
               <i class="el-icon-document-add"></i>
               <span>定稿提交</span>
             </el-menu-item>
+            <el-menu-item index="终稿提交">
+              <i class="el-icon-document-add"></i>
+              <span>终稿提交</span>
+            </el-menu-item>
+            <el-menu-item index="格式检测">
+              <i class="el-icon-takeaway-box"></i>
+              <span>格式检测</span>
+            </el-menu-item>
+            <el-menu-item index="论文查看">
+              <i class="el-icon-notebook-2"></i>
+              <span>论文查看</span>
+            </el-menu-item>
+            <el-menu-item index="论文审核">
+              <i class="el-icon-takeaway-box"></i>
+              <span>论文审核</span>
+            </el-menu-item>
           </el-submenu>
-          <el-submenu index="3">
+          <el-submenu index="人员管理">
+            <template slot="title">
+              <i class="el-icon-user"></i>
+              <span>人员管理</span>
+            </template>
+            <el-menu-item index="studentList">
+              <i class="el-icon-tickets"></i>
+              <span>学生列表</span>
+            </el-menu-item>
+            <el-menu-item index="addStudent">
+              <i class="el-icon-circle-plus-outline"></i>
+              <span>添加组员</span>
+            </el-menu-item>
+            <el-menu-item index="teacherList">
+              <i class="el-icon-tickets"></i>
+              <span>教师列表</span>
+            </el-menu-item>
+            <el-menu-item index="informationChange">
+              <i class="el-icon-document"></i>
+              <span>信息修改</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="流程管理">
+            <template slot="title">
+              <i class="el-icon-files"></i>
+              <span>流程管理</span>
+            </template>
+            <el-menu-item index="processView">
+              <i class="el-icon-tickets"></i>
+              <span>流程查看</span>
+            </el-menu-item>
+            <el-menu-item index="processChange">
+              <i class="el-icon-document"></i>
+              <span>流程修改</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="关于">
             <template slot="title">
               <i class="el-icon-more-outline"></i>
-              <span>更多信息</span>
+              <span>关于</span>
             </template>
-            <el-menu-item index="/about">
-              <i class="el-icon-info"></i>
-              <span>关于页面</span>
+            <el-menu-item index="appView">
+              <i class="el-icon-chat-dot-round"></i>
+              <span>应用信息</span>
+            </el-menu-item>
+            <el-menu-item index="devView">
+              <i class="el-icon-coffee-cup"></i>
+              <span>开发人员</span>
             </el-menu-item>
           </el-submenu>
         </el-menu>
