@@ -28,4 +28,8 @@ public class UserController {
     public Result page(UserPageRequest userPageRequest){
         return Result.success(userService.page(userPageRequest));
     }
+    @GetMapping("/change")
+    public int change(){
+        return 1;
+    }
 }

@@ -10,8 +10,11 @@
     <select id="listByCondition" resultType="org.lengs.springboot.entity.User">
         select * from User
                  <where>
-                     <if test="name != null and name != ''">
-                         name like concat('%', #{ name } , '%')
+                     <if test="userType != null and userType != ''">
+                         userType = #{ userType }
+                     </if>
+                     <if test="userRealName != null and userRealName != ''">
+                         and userRealName like concat('%', #{ userRealName } , '%')
                      </if>
                      <if test="userId != null and userId != ''">
                          and userId like concat('%', #{ userId } , '%')

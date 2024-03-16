@@ -11,8 +11,8 @@
     <div style="display: flex;margin-top: 5px">
       <!-- 侧边栏导航 -->
       <div style="width: 200px;min-height:calc(100vh - 70px);overflow: hidden;margin-right: 5px;background-color: white;border-radius:5px 5px 5px 5px">
-        <el-menu :default-active="$router.path" :default-openeds="['课题申报','论文管理','人员管理','流程管理']" router class="el-menu-demo">
-          <el-menu-item index="/">
+        <el-menu :default-active="$router.path" router class="el-menu-demo">
+          <el-menu-item index="/Home">
             <i class="el-icon-house"></i>
             <span>首页</span>
           </el-menu-item>
@@ -33,9 +33,9 @@
               <i class="el-icon-document"></i>
               <span>填写任务书</span>
             </el-menu-item>
-            <el-menu-item index="填写开题报告">
+            <el-menu-item index="填写中期检查">
               <i class="el-icon-document"></i>
-              <span>填写开题报告</span>
+              <span>填写中期检查</span>
             </el-menu-item>
           </el-submenu>
           <el-submenu index="论文管理">
@@ -72,25 +72,39 @@
               <span>论文审核</span>
             </el-menu-item>
           </el-submenu>
+          <el-submenu index="答辩管理">
+            <template slot="title">
+              <i class="el-icon-folder-opened"></i>
+              <span>答辩管理</span>
+            </template>
+            <el-menu-item index="论文查看">
+              <i class="el-icon-notebook-2"></i>
+              <span>答辩信息</span>
+            </el-menu-item>
+            <el-menu-item index="初稿提交">
+              <i class="el-icon-document-add"></i>
+              <span>材料提交</span>
+            </el-menu-item>
+          </el-submenu>
           <el-submenu index="人员管理">
             <template slot="title">
               <i class="el-icon-user"></i>
               <span>人员管理</span>
             </template>
-            <el-menu-item index="studentList">
+            <el-menu-item index="/studentList">
               <i class="el-icon-tickets"></i>
               <span>学生列表</span>
             </el-menu-item>
-            <el-menu-item index="addStudent">
+            <el-menu-item index="/addStudent">
               <i class="el-icon-circle-plus-outline"></i>
               <span>添加组员</span>
             </el-menu-item>
-            <el-menu-item index="teacherList">
+            <el-menu-item index="/teacherList">
               <i class="el-icon-tickets"></i>
               <span>教师列表</span>
             </el-menu-item>
-            <el-menu-item index="informationChange">
-              <i class="el-icon-document"></i>
+            <el-menu-item index="/userManage">
+              <i class="el-icon-edit-outline"></i>
               <span>信息修改</span>
             </el-menu-item>
           </el-submenu>
@@ -99,13 +113,13 @@
               <i class="el-icon-files"></i>
               <span>流程管理</span>
             </template>
-            <el-menu-item index="processView">
+            <el-menu-item index="/processView">
               <i class="el-icon-tickets"></i>
               <span>流程查看</span>
             </el-menu-item>
-            <el-menu-item index="processChange">
-              <i class="el-icon-document"></i>
-              <span>流程修改</span>
+            <el-menu-item index="/processManage">
+              <i class="el-icon-edit-outline"></i>
+              <span>流程管理</span>
             </el-menu-item>
           </el-submenu>
           <el-submenu index="关于">
@@ -113,11 +127,11 @@
               <i class="el-icon-more-outline"></i>
               <span>关于</span>
             </template>
-            <el-menu-item index="appView">
+            <el-menu-item index="/appView">
               <i class="el-icon-chat-dot-round"></i>
               <span>应用信息</span>
             </el-menu-item>
-            <el-menu-item index="devView">
+            <el-menu-item index="/devView">
               <i class="el-icon-coffee-cup"></i>
               <span>开发人员</span>
             </el-menu-item>
@@ -143,3 +157,13 @@ export default defineComponent({
   }
 })
 </script>
+<style  scoped>
+/* 文字 */
+::v-deep.el-submenu.is-active > .el-submenu__title {
+  color: #409eff !important;
+}
+/* icon图标也跟着变 */
+::v-deep .el-submenu.is-active > .el-submenu__title i {
+  color: #409eff !important;
+}
+</style>

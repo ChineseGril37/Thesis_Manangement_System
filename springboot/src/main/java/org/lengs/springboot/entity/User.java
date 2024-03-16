@@ -3,11 +3,18 @@ import lombok.Data;
 
 @Data
 public class User {
-    private Integer id;
-    private String name;
-    private String username;
-    private Integer age;
+    private Integer userId;
+    private Integer userType;
+    private String userRealName;
+    private String userName;
     private String sexual;
-    private String phone;
-    private String address;
+    private String accountCreateTime;
+    private String phoneNum;
+    private String email;
+    private String ancestralPlace;
+    private String politicalStatus;
+    private String groupID;
+    private Integer userAge;
+    private String registerCode;
+    private String accountChangeTime;
 }
