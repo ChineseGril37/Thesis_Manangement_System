@@ -4,10 +4,7 @@ import org.lengs.springboot.controller.request.UserPageRequest;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,8 +25,9 @@ public class UserController {
     public Result page(UserPageRequest userPageRequest){
         return Result.success(userService.page(userPageRequest));
     }
-    @GetMapping("/change")
-    public int change(){
-        return 1;
+    @PostMapping("/change")
+    public Result change(@RequestBody User user){
+        userService.change(user);
+        return Result.success();
     }
 }

@@ -8,7 +8,7 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh"></i><span>重置</span></el-button>
     </div>
     <!--  数据表单  -->
-    <el-table :data="tableData" stripe>
+    <el-table :data="tableData" stripe >
       <el-table-column prop="userId" label="教务号" width="180"></el-table-column>
       <el-table-column prop="userRealName" label="姓名" width="180"></el-table-column>
       <el-table-column prop="userAge" label="年龄" width="180"></el-table-column>

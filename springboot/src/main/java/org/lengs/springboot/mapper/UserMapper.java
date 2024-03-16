@@ -12,4 +12,6 @@ public interface UserMapper {
     List<User> list();
 
     List<User> listByCondition(UserPageRequest userPageRequest);
+
+    void change(User user);
 }

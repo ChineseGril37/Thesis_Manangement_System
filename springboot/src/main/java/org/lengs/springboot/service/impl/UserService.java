@@ -29,4 +29,9 @@ public class UserService implements IUserService {
         return new PageInfo<>(users);
     }
 
+    @Override
+    public void change(User user) {
+        userMapper.change(user);
+    }
+
 }

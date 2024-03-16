@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.lengs.springboot.mapper.UserMapper">
+    <insert id="change">
+        if no exists (select userId from User where userId = #{ userId })
+            insert into User(userId,userType,userRealName,userName,password,sexual,accountChangeTime,phoneNum,email,ancestralPlace,politicalStatus,groupID,registerCode)
+            values (#{ userId },#{ userType },#{ userRealName },#{ userName },#{ password },#{ sexual },#{ accountChangeTime },#{ phoneNum },#{ email },#{ ancestralPlace },#{ politicalStatus },#{ groupID },#{ registerCode })
+        else
+            update User set userId=#{ userId },userType=#{ userType },userRealName=#{ userRealName },userName=#{ userName },password=#{ password },sexual=#{ sexual },accountChangeTime=#{ accountChangeTime },phoneNum=#{ phoneNum },email=#{ email },ancestralPlace=#{ ancestralPlace },politicalStatus=#{ politicalStatus },groupID=#{ groupID },registerCode=#{ registerCode }
+    </insert>
 
     <select id="list" resultType="org.lengs.springboot.entity.User">
         select * from User

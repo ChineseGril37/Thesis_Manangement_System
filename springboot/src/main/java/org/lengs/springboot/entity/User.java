@@ -7,6 +7,7 @@ public class User {
     private Integer userType;
     private String userRealName;
     private String userName;
+    private String password;
     private String sexual;
     private String accountCreateTime;
     private String phoneNum;

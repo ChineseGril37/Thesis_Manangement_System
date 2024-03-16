@@ -9,4 +9,6 @@ public interface IUserService {
     List<User> list();
 
     Object page(UserPageRequest userPageRequest);
+
+    void change(User user);
 }
