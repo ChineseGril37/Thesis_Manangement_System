@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  name:"AppView",
   data() {
     return {
       tableData: [{

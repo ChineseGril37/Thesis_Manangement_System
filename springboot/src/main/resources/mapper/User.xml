@@ -3,14 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.lengs.springboot.mapper.UserMapper">
-    <insert id="change">
-        if no exists (select userId from User where userId = #{ userId })
-            insert into User(userId,userType,userRealName,userName,password,sexual,accountChangeTime,phoneNum,email,ancestralPlace,politicalStatus,groupID,registerCode)
-            values (#{ userId },#{ userType },#{ userRealName },#{ userName },#{ password },#{ sexual },#{ accountChangeTime },#{ phoneNum },#{ email },#{ ancestralPlace },#{ politicalStatus },#{ groupID },#{ registerCode })
-        else
-            update User set userId=#{ userId },userType=#{ userType },userRealName=#{ userRealName },userName=#{ userName },password=#{ password },sexual=#{ sexual },accountChangeTime=#{ accountChangeTime },phoneNum=#{ phoneNum },email=#{ email },ancestralPlace=#{ ancestralPlace },politicalStatus=#{ politicalStatus },groupID=#{ groupID },registerCode=#{ registerCode }
+    <insert id="addUer">
+        <!-- 如果user表中找不到相同ID的用户则新建一个 -->
+        INSERT INTO User(userId, userType, userRealName, userName, password, sexual, accountChangeTime, phoneNum, email, ancestralPlace, politicalStatus, groupID, registerCode, userAge)
+        VALUES(#{userId}, #{userType}, #{userRealName}, #{userName}, #{password}, #{sexual}, #{accountChangeTime}, #{phoneNum}, #{email}, #{ancestralPlace}, #{politicalStatus}, #{groupID}, #{registerCode}, #{userAge})
+            ON DUPLICATE KEY UPDATE
+                                 userType = VALUES(userType),
+                                 userRealName = VALUES(userRealName),
+                                 userName = VALUES(userName),
+                                 password = VALUES(password),
+                                 sexual = VALUES(sexual),
+                                 accountChangeTime = VALUES(accountChangeTime),
+                                 phoneNum = VALUES(phoneNum),
+                                 email = VALUES(email),
+                                 ancestralPlace = VALUES(ancestralPlace),
+                                 politicalStatus = VALUES(politicalStatus),
+                                 groupID = VALUES(groupID),
+                                 registerCode = VALUES(registerCode),
+                                 userAge = VALUES(userAge);
     </insert>
-
+    <delete id="delete">
+        DELETE FROM User WHERE userId = #{userId} and userName = #{userName}
+    </delete>
     <select id="list" resultType="org.lengs.springboot.entity.User">
         select * from User
     </select>

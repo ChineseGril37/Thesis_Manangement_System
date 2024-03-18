@@ -2,14 +2,14 @@
   <div style="padding-left: 20px;margin-top: 20px">
     <!-- 搜索表单 -->
     <div style="margin-bottom: 20px">
-      <el-input style="width: 240px" placeholder="请输入学号" v-model="params.userId"></el-input>
+      <el-input style="width: 240px" placeholder="请输入教务号" v-model="params.userId"></el-input>
       <el-input style="width: 240px;margin-left: 10px" placeholder="请输入姓名" v-model="params.userRealName"></el-input>
       <el-button style="margin-left: 5px" type="primary" @click="load"><i class="el-icon-search"></i><span>搜索</span></el-button>
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh"></i><span>重置</span></el-button>
     </div>
     <!--  数据表单  -->
-    <el-table :data="tableData" stripe>
-      <el-table-column prop="userId" label="学号" width="180"></el-table-column>
+    <el-table :data="tableData" :row-style="{ height:'80px'}" style="font-size: 15px" stripe >
+      <el-table-column prop="userId" label="教务号" width="180"></el-table-column>
       <el-table-column prop="userRealName" label="姓名" width="180"></el-table-column>
       <el-table-column prop="userAge" label="年龄" width="180"></el-table-column>
       <el-table-column prop="sexual" label="性别" width="180">
@@ -17,9 +17,6 @@
           {{ scope.row.sexual === '1' ? '男' : '女' }}
         </template>
       </el-table-column>
-      <el-table-column prop="groupID" label="分组" width="180"></el-table-column>
-      <el-table-column prop="ancestralPlace" label="籍贯" width="180"></el-table-column>
-      <el-table-column prop="politicalStatus" label="政治面貌"></el-table-column>
       <el-table-column prop="phoneNum" label="联系方式"></el-table-column>
       <el-table-column prop="email" label="邮箱"></el-table-column>
     </el-table>
@@ -39,17 +36,16 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import request from "@/utils/request";
 
 export default {
-  name: 'studentsList',
+  name: 'TeacherList',
   data(){
     return{
       tableData:[],
       total: 0,
       params:{
-        userType: 3,
+        userType: 2,
         pageNum: 1,
         pageSize: 10,
         userRealName: '',
@@ -73,7 +69,7 @@ export default {
     },
     reset(){
       this.params = {
-        userType: 3,
+        userType: 2,
         pageNum: 1,
         pageSize: 10,
         name: '',

@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/thesis_management?serverTimezone=GMT%2b8 # 北京时间
+    url: jdbc:mysql://localhost:3306/thesis_management?serverTimezone=GMT%2b8&allowMultiQueries=true # 北京时间
     username: root
     password: root
 mybatis:

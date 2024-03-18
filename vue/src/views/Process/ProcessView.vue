@@ -1,13 +1,11 @@
 <script>
 export default {
-  name: "studentManage"
+  name: "ProcessView"
 }
 </script>
 
 <template>
-<div>
-  添加
-</div>
+  <div>ProcessView</div>
 </template>
 
 <style scoped>

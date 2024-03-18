@@ -1,11 +1,11 @@
 <script>
 export default {
-  name: "thesisFirstDraftSubmission"
+  name: "OralDefenseInformation"
 }
 </script>
 
 <template>
-
+  <div>OralDefenseInformation</div>
 </template>
 
 <style scoped>

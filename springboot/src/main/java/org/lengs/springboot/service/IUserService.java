@@ -10,5 +10,7 @@ public interface IUserService {
 
     Object page(UserPageRequest userPageRequest);
 
-    void change(User user);
+    void addUer(User user);
+
+    void delete(User user);
 }

@@ -30,8 +30,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void change(User user) {
-        userMapper.change(user);
+    public void addUer(User user) {
+        userMapper.addUer(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        userMapper.delete(user);
     }
 
 }

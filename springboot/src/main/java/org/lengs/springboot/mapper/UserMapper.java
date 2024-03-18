@@ -1,6 +1,5 @@
 package org.lengs.springboot.mapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import org.lengs.springboot.controller.request.UserPageRequest;
 import org.lengs.springboot.entity.User;
 
@@ -13,5 +12,7 @@ public interface UserMapper {
 
     List<User> listByCondition(UserPageRequest userPageRequest);
 
-    void change(User user);
+    void addUer(User user);
+
+    void delete(User user);
 }
