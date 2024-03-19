@@ -139,7 +139,7 @@
         </el-menu>
       </div>
       <!-- 主体内容 -->
-      <div style="flex: 1;min-height:calc(100vh - 70px);background-color: white;border-radius:5px 5px 5px 5px">
+      <div style="flex: 1;min-height:calc(100vh - 70px);background-color: white;border-radius:5px 5px 5px 5px;">
         <div style="height: 40px;padding-left: 20px;padding-top: 14px;background-color:whitesmoke;border-radius:5px 5px 0 0">
           <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path:'/Home' }">首页 </el-breadcrumb-item>

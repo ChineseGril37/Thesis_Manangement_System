@@ -5,25 +5,29 @@
 <mapper namespace="org.lengs.springboot.mapper.UserMapper">
     <insert id="addUer">
         <!-- 如果user表中找不到相同ID的用户则新建一个 -->
-        INSERT INTO User(userId, userType, userRealName, userName, password, sexual, accountChangeTime, phoneNum, email, ancestralPlace, politicalStatus, groupID, registerCode, userAge)
-        VALUES(#{userId}, #{userType}, #{userRealName}, #{userName}, #{password}, #{sexual}, #{accountChangeTime}, #{phoneNum}, #{email}, #{ancestralPlace}, #{politicalStatus}, #{groupID}, #{registerCode}, #{userAge})
+        INSERT INTO User(userId, userType, userRealName, userName, password, sexual, accountChangeTime,accountCreateTime, phoneNum, email, ancestralPlace, politicalStatus, groupID, registerCode, userAge,userAcademy,userMajor,userClass)
+        VALUES(#{userId}, #{userType}, #{userRealName}, #{userName}, #{password}, #{sexual}, #{accountChangeTime},#{accountCreateTime},#{phoneNum}, #{email}, #{ancestralPlace}, #{politicalStatus}, #{groupID}, #{registerCode}, #{userAge}, #{userAcademy}, #{userMajor}, #{userClass})
             ON DUPLICATE KEY UPDATE
-                                 userType = VALUES(userType),
-                                 userRealName = VALUES(userRealName),
-                                 userName = VALUES(userName),
-                                 password = VALUES(password),
-                                 sexual = VALUES(sexual),
-                                 accountChangeTime = VALUES(accountChangeTime),
-                                 phoneNum = VALUES(phoneNum),
-                                 email = VALUES(email),
-                                 ancestralPlace = VALUES(ancestralPlace),
-                                 politicalStatus = VALUES(politicalStatus),
-                                 groupID = VALUES(groupID),
-                                 registerCode = VALUES(registerCode),
-                                 userAge = VALUES(userAge);
+                userId = VALUES(userId),
+                userType = VALUES(userType),
+                userRealName = VALUES(userRealName),
+                userName = VALUES(userName),
+                password = VALUES(password),
+                sexual = VALUES(sexual),
+                accountChangeTime = VALUES(accountChangeTime),
+                phoneNum = VALUES(phoneNum),
+                email = VALUES(email),
+                ancestralPlace = VALUES(ancestralPlace),
+                politicalStatus = VALUES(politicalStatus),
+                groupID = VALUES(groupID),
+                registerCode = VALUES(registerCode),
+                userAge = VALUES(userAge),
+                userAcademy = VALUES(userAcademy),
+                userMajor = VALUES(userMajor),
+                userClass = VALUES(userClass)
     </insert>
-    <delete id="delete">
-        DELETE FROM User WHERE userId = #{userId} and userName = #{userName}
+    <delete id="deleteById">
+        DELETE FROM User WHERE userId = #{userId}
     </delete>
     <select id="list" resultType="org.lengs.springboot.entity.User">
         select * from User

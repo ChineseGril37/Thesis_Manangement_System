@@ -31,10 +31,9 @@ public class UserController {
         userService.addUer(user);
         return Result.success();
     }
-
     @DeleteMapping("/delete")
     public Result delete(@RequestBody User user){
-        userService.delete(user);
+        userService.deleteById(user);
         return Result.success();
     }
 }

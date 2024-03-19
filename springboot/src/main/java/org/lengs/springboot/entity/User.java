@@ -18,4 +18,7 @@ public class User {
     private Integer userAge;
     private String registerCode;
     private String accountChangeTime;
+    private String userAcademy;
+    private String userMajor;
+    private String userClass;
 }

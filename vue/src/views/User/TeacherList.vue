@@ -9,16 +9,17 @@
     </div>
     <!--  数据表单  -->
     <el-table :data="tableData" :row-style="{ height:'80px'}" style="font-size: 15px" stripe >
-      <el-table-column prop="userId" label="教务号" width="180"></el-table-column>
-      <el-table-column prop="userRealName" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="userAge" label="年龄" width="180"></el-table-column>
-      <el-table-column prop="sexual" label="性别" width="180">
+      <el-table-column prop="userId" label="教务号" min-width="10%"></el-table-column>
+      <el-table-column prop="userRealName" label="姓名"  min-width="8%"></el-table-column>
+      <el-table-column prop="userAcademy" label="所属学院" min-width="12%"></el-table-column>
+      <el-table-column prop="userAge" label="年龄" min-width="5%"></el-table-column>
+      <el-table-column prop="sexual" label="性别" min-width="6%" >
         <template slot-scope="scope">
           {{ scope.row.sexual === '1' ? '男' : '女' }}
         </template>
       </el-table-column>
-      <el-table-column prop="phoneNum" label="联系方式"></el-table-column>
-      <el-table-column prop="email" label="邮箱"></el-table-column>
+      <el-table-column prop="phoneNum" label="联系方式" min-width="12%"></el-table-column>
+      <el-table-column prop="email" label="邮箱" min-width="12%"></el-table-column>
     </el-table>
     <!-- 分页 -->
     <div class="block">

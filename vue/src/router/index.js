@@ -24,22 +24,22 @@ const routes = [
     children:[{
       //申报课题(学生)
       path: 'ProjectSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Project/ProjectSubmission.vue'),
+      component: () => import('../views/Project/ProjectSubmission.vue'),
       meta:{ title:'申报课题'}
     },{
       //填写开题报告(学生)
       path: 'ProjectReportSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Project/ProjectReportSubmission.vue'),
+      component: () => import('../views/Project/ProjectReportSubmission.vue'),
       meta:{ title:'开题报告'}
     },{
       //填写任务书(学生)
       path: 'MissionReportSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Project/MissionReportSubmission.vue'),
+      component: () => import( '../views/Project/MissionReportSubmission.vue'),
       meta:{ title:'填写任务书'}
     },{
       //填写中期检查(学生)
       path: 'MidCheckSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Project/MidCheckSubmission.vue'),
+      component: () => import('../views/Project/MidCheckSubmission.vue'),
       meta:{ title:'中期检查'}
     },]
   },

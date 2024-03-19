@@ -18,6 +18,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="groupID" label="分组" min-width="10%"></el-table-column>
+      <el-table-column prop="userAcademy" label="所属学院" min-width="12%"></el-table-column>
+      <el-table-column prop="userMajor" label="所属专业" min-width="12%"></el-table-column>
+      <el-table-column prop="userClass" label="所属班级" min-width="12%"></el-table-column>
       <el-table-column prop="ancestralPlace" label="籍贯" min-width="15%"></el-table-column>
       <el-table-column prop="politicalStatus" label="政治面貌" min-width="15%"></el-table-column>
       <el-table-column prop="phoneNum" label="联系方式" min-width="15%"></el-table-column>

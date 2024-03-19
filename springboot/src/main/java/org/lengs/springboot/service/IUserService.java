@@ -12,5 +12,5 @@ public interface IUserService {
 
     void addUer(User user);
 
-    void delete(User user);
+    void deleteById(User user);
 }

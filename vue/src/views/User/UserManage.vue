@@ -16,24 +16,33 @@
         :row-style="{ height:'80px'}"
         style="font-size: 15px"
         stripe>
-      <el-table-column prop="userId" label="学号/教务号" min-width="15%"></el-table-column>
-      <el-table-column prop="userRealName" label="姓名" min-width="10%"></el-table-column>
-      <el-table-column prop="userAge" label="年龄" min-width="10%"></el-table-column>
-      <el-table-column prop="sexual" label="性别" min-width="10%" >
+      <el-table-column prop="userId" label="学号/教务号" min-width="10%"></el-table-column>
+      <el-table-column prop="userRealName" label="姓名" min-width="8%"></el-table-column>
+      <el-table-column prop="userAge" label="年龄" min-width="5%"></el-table-column>
+      <el-table-column prop="userAcademy" label="所属学院" min-width="12%"></el-table-column>
+      <el-table-column prop="userMajor" label="所属专业" min-width="12%"></el-table-column>
+      <el-table-column prop="userClass" label="所属班级" min-width="6%"></el-table-column>
+      <el-table-column prop="sexual" label="性别" min-width="6%" >
         <template slot-scope="scope">
           {{ scope.row.sexual === '1' ? '男' : '女' }}
         </template>
       </el-table-column>
-      <el-table-column prop="groupID" label="分组" min-width="10%"></el-table-column>
-      <el-table-column prop="ancestralPlace" label="籍贯" min-width="15%"></el-table-column>
-      <el-table-column prop="politicalStatus" label="政治面貌" min-width="13%"></el-table-column>
-      <el-table-column prop="phoneNum" label="联系方式" min-width="15%"></el-table-column>
-      <el-table-column prop="email" label="邮箱" min-width="22%"></el-table-column>
+      <el-table-column prop="groupID" label="分组" min-width="6%"></el-table-column>
+      <el-table-column prop="ancestralPlace" label="籍贯" min-width="10%"></el-table-column>
+      <el-table-column prop="politicalStatus" label="政治面貌" min-width="10%"></el-table-column>
+      <el-table-column prop="phoneNum" label="联系方式" min-width="12%"></el-table-column>
+      <el-table-column prop="email" label="邮箱" min-width="12%"></el-table-column>
       <el-table-column prop="accountChangeTime" label="修改时间" min-width="20%"></el-table-column>
       <el-table-column label="操作" min-width="20%">
         <template v-slot="scope">
-          <el-button @click="editRow(scope.row);editInForm=scope.row" style="font-size: 15px">编辑</el-button>
-          <el-button type="danger" @click.native.prevent="deleteDialog = true;" style="font-size: 15px">删除</el-button>
+          <el-button @click="editRow(scope.row);" style="font-size: 15px">编辑</el-button>
+          <el-popconfirm
+              style="margin-left: 5px"
+              title="确认要删除吗？"
+              @confirm="del(scope.row)"
+          >
+            <el-button type="danger" slot="reference" style="font-size: 15px">删除</el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -53,15 +62,10 @@
         v-if="showDialog"
         ref="UserDialog"
         :dialog-title="dialogTitle"
-        :item-info="tableData"
+        :editInForm="tableDataRow"
         @closeDialog="closeDialog"
     ></UserDialog>
     <!--弹框组件开始-----------------------end-->
-    <!-- 删除用户表单弹窗 -->
-    <el-dialog title="确认要删除吗？" :visible.sync="deleteDialog" width="500px">
-      <div>注意</div>
-      <div>本操作不可修改！</div>
-    </el-dialog>
   </div>
 </template>
 
@@ -74,16 +78,19 @@ export default {
   data(){
     return{
       showDialog:false,
-      deleteDialog:false,
+      showDeleteDialog:false,
       tableLoading:false,
       dialogTitle: "添加人员",
       total: 0,
       tableData:[],
+      tableDataRow:{},
+      deleteData:[],
       params:{
         pageNum: 1,
         pageSize: 10,
         userRealName: '',
-        userId: ''
+        userId: '',
+        userName:''
       },
       formLabelWidth: '100px',
     }
@@ -95,6 +102,24 @@ export default {
     this.fetchData();
   },
   methods:{
+    // 获取表格数据
+    // 这里最好把tableData换一个，这tableData是表格数据，给弹窗的应该是表格里面对应的行，要改不/OK
+    fetchData() {
+      console.log(JSON.parse(JSON.stringify(this.tableDataRow)));
+      const that = this;
+      that.tableLoading = true;
+      request.get('/user/page', {
+        params: this.params
+      }).then(res =>{
+        if(res.code === '200'){
+          that.tableData = res.data.list
+          that.total = res.data.total
+        }
+      })
+      setTimeout(() => {
+        that.tableLoading = false;
+      }, 200);
+    },
     load() {
       request.get('/user/page', {
         params: this.params
@@ -105,16 +130,8 @@ export default {
         }
       })
     },
-    // 获取表格数据
-    fetchData() {
-      const that = this;
-      that.tableLoading = true;
-      that.tableData = [];
-      setTimeout(() => {
-        that.tableLoading = false;
-      }, 1500);
-    },
     addItem() {
+      this.tableDataRow = {}
       this.dialogTitle = "添加人员";
       this.showDialog = true;
       this.$nextTick(() => {
@@ -122,7 +139,7 @@ export default {
       });
     },
     editRow(row) {
-      this.tableData = row;
+      this.tableDataRow = row;
       this.dialogTitle = "编辑人员";
       this.showDialog = true;
       this.$nextTick(() => {
@@ -133,8 +150,20 @@ export default {
       if (flag) {
         // 重新刷新表格内容
         this.fetchData();
+        this.$refs.UserDialog.resetFields();
       }
       this.showDialog = false;
+    },
+    del(row){
+      this.deleteData={userId:row.userId}
+      console.log(this.deleteData)
+      request.delete("/user/delete" ,{params: this.deleteData}).then(res =>{
+        if(res.code === '200'){
+          this.$notify.success("删除成功")
+        }else {
+          this.$notify.error(res.msg)
+        }
+      })
     },
     reset(){
       //重置当前
