@@ -2,6 +2,7 @@ package org.lengs.springboot.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserPageRequest;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.mapper.UserMapper;
@@ -34,8 +35,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void deleteById(User user) {
-        userMapper.deleteById(user);
+    public void deleteById(Integer userId) {
+        userMapper.deleteById(userId);
+    }
+
+    @Override
+    public void login(LoginRequest loginRequest) {
+        userMapper.login(loginRequest);
     }
 
 }

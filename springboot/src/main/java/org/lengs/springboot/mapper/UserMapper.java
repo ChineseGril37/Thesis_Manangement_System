@@ -1,5 +1,6 @@
 package org.lengs.springboot.mapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserPageRequest;
 import org.lengs.springboot.entity.User;
 
@@ -14,6 +15,7 @@ public interface UserMapper {
 
     void addUer(User user);
 
-    void deleteById(User user);
+    void deleteById(Integer userId);
 
+    void login(LoginRequest loginRequest);
 }

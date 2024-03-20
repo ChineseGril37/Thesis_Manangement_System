@@ -6,193 +6,216 @@ import Thesis from "@/views/Thesis/Thesis.vue";
 import OralDefense from "@/views/OralDefense/OralDefense.vue";
 import Process from "@/views/Process/Process.vue";
 import About from "@/views/About/About.vue";
+import BeginView from "@/views/Begin/BeginView.vue";
 
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',          // 路径
+    redirect: '/Login'  // 重定向
+  },
+  {
+    path: '/Login',
+    component: () => import("@/views/Login/LoginView.vue"),
+    meta: { title: '登录'}
+  },
+  {
+    path: '/SIdentify',
+    component:()=>import("@/views/Login/SIdentify.vue"),
+    meta:{title: '验证码生成'}
+  },
+  {
     path: '/Home',
+    name:'Home',
     component: () => import("@/views/Home.vue"),
-    meta: { title: '首页'}
-  },
-  {
-    path: '/Project',
-    name: 'Project',
-    component: Project,
-    meta:{ title:'课题申报'},
-    children:[{
-      //申报课题(学生)
-      path: 'ProjectSubmission',
-      component: () => import('../views/Project/ProjectSubmission.vue'),
-      meta:{ title:'申报课题'}
-    },{
-      //填写开题报告(学生)
-      path: 'ProjectReportSubmission',
-      component: () => import('../views/Project/ProjectReportSubmission.vue'),
-      meta:{ title:'开题报告'}
-    },{
-      //填写任务书(学生)
-      path: 'MissionReportSubmission',
-      component: () => import( '../views/Project/MissionReportSubmission.vue'),
-      meta:{ title:'填写任务书'}
-    },{
-      //填写中期检查(学生)
-      path: 'MidCheckSubmission',
-      component: () => import('../views/Project/MidCheckSubmission.vue'),
-      meta:{ title:'中期检查'}
-    },]
-  },
-  {
-    path: '/Thesis',
-    name: 'Thesis',
-    component: Thesis,
-    meta:{ title:'论文管理'},
-    children:[{
-      //论文初稿提交(学生)
-      path: 'ThesisFirstDraftSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFirstDraftSubmission.vue'),
-      meta:{ title:'论文初稿'}
-    },{
-      //论文定稿提交(学生)
-      path: 'ThesisFinalizeSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFinalizeSubmission.vue'),
-      meta:{ title:'论文定稿'}
-    },{
-      //论文终稿提交(学生)
-      path: 'ThesisFinalSubmission',
-      name: 'ThesisFinalSubmission',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFinalSubmission.vue'),
-      meta:{ title:'论文终稿'}
-    },
+    meta: { title: '首页'},
+    children:[
       {
-        //论文初稿修改(学生)
-        path: 'ThesisFirstDraftEdit',
-        name: 'ThesisFirstDraftEdit',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFirstDraftEdit.vue'),
-        meta:{ title:'论文初稿修改'}
+        path: '/BeginView',
+        meta: {title: '开屏首页'},
+        component: () => import("@/views/Begin/BeginView.vue"),
       },
       {
-        //论文格式检查(学生)
-        path: 'ThesisCheck',
-        name: 'ThesisCheck',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisCheck.vue'),
-        meta:{ title:'格式检查'}
+        path: '/Project',
+        name: 'Project',
+        component: Project,
+        meta:{ title:'课题申报'},
+        children:[{
+          //申报课题(学生)
+          path: 'ProjectSubmission',
+          component: () => import('@/views/Project/ProjectSubmission.vue'),
+          meta:{ title:'申报课题'}
+        },{
+          //填写开题报告(学生)
+          path: 'ProjectReportSubmission',
+          component: () => import('@/views/Project/ProjectReportSubmission.vue'),
+          meta:{ title:'开题报告'}
+        },{
+          //填写任务书(学生)
+          path: 'MissionReportSubmission',
+          component: () => import( '@/views/Project/MissionReportSubmission.vue'),
+          meta:{ title:'填写任务书'}
+        },{
+          //填写中期检查(学生)
+          path: 'MidCheckSubmission',
+          component: () => import('@/views/Project/MidCheckSubmission.vue'),
+          meta:{ title:'中期检查'}
+        },]
       },
       {
-        //论文查看(全角色)
-        path: 'ThesisView',
-        name: 'ThesisView',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisView.vue'),
-        meta:{ title:'论文查看'}
+        path: '/Thesis',
+        name: 'Thesis',
+        component: Thesis,
+        meta:{ title:'论文管理'},
+        children:[{
+          //论文初稿提交(学生)
+          path: 'ThesisFirstDraftSubmission',
+          component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFirstDraftSubmission.vue'),
+          meta:{ title:'论文初稿'}
+        },{
+          //论文定稿提交(学生)
+          path: 'ThesisFinalizeSubmission',
+          component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFinalizeSubmission.vue'),
+          meta:{ title:'论文定稿'}
+        },{
+          //论文终稿提交(学生)
+          path: 'ThesisFinalSubmission',
+          name: 'ThesisFinalSubmission',
+          component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFinalSubmission.vue'),
+          meta:{ title:'论文终稿'}
+        },
+          {
+            //论文初稿修改(学生)
+            path: 'ThesisFirstDraftEdit',
+            name: 'ThesisFirstDraftEdit',
+            component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisFirstDraftEdit.vue'),
+            meta:{ title:'论文初稿修改'}
+          },
+          {
+            //论文格式检查(学生)
+            path: 'ThesisCheck',
+            name: 'ThesisCheck',
+            component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisCheck.vue'),
+            meta:{ title:'格式检查'}
+          },
+          {
+            //论文查看(全角色)
+            path: 'ThesisView',
+            name: 'ThesisView',
+            component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisView.vue'),
+            meta:{ title:'论文查看'}
+          },
+          {
+            //论文审核(教师/教务/管理员)
+            path: 'ThesisReview',
+            name: 'ThesisReview',
+            component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisReview.vue'),
+            meta:{ title:'论文审核'}
+          }]
       },
       {
-        //论文审核(教师/教务/管理员)
-        path: 'ThesisReview',
-        name: 'ThesisReview',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Thesis/ThesisReview.vue'),
-        meta:{ title:'论文审核'}
-      }]
+        path: '/OralDefense',
+        name: 'OralDefense',
+        component: OralDefense,
+        meta:{ title:'答辩管理'},
+        children:[{
+          //答辩信息(全角色)
+          path: 'OralDefenseInformation',
+          name: 'OralDefenseInformation',
+          component: () => import(/* webpackChunkName: "about" */ '../views/OralDefense/OralDefenseInformation.vue'),
+          meta:{ title:'答辩信息'}
+        },
+          {
+            //答辩材料提交(学生)
+            path: 'OralDefenseMaterial',
+            name: 'OralDefenseMaterial',
+            component: () => import(/* webpackChunkName: "about" */ '../views/OralDefense/OralDefenseMaterial.vue'),
+            meta:{ title:'材料提交'}
+          },]
+      },
+      {
+        path: '/User',
+        name: 'User',
+        component: User,
+        meta:{ title:'人员管理'},
+        children:[{
+          //用户管理(管理员)
+          path: 'UserManage',
+          name: 'UserManage',
+          component: () => import('@/views/User/UserManage.vue'),
+          meta:{ title:'用户管理'}
+        },
+          {
+            //教师列表查询(管理员)
+            path: 'TeacherList',
+            name: 'TeacherList',
+            component: () => import('@/views/User/TeacherList.vue'),
+            meta:{ title:'教师列表查询'}
+          },
+          {
+            //学生列表查询(教师/教务)
+            path: 'StudentList',
+            name: 'StudentList',
+            component: () => import('@/views/User/StudentsList.vue'),
+            meta:{ title:'学生列表查询'}
+          },
+          {
+            //学生管理(教务)
+            path: 'StudentManage',
+            name: 'StudentManage',
+            component: () => import('@/views/User/StudentManage.vue'),
+            meta:{ title:'学生管理'}
+          },
+          {
+            //学生管理(教务)
+            path: 'UserDialog',
+            name: 'UserDialog',
+            component: () => import('@/views/User/UserDialog.vue'),
+            meta:{ title:'用户管理弹窗'}
+          },]
+      },
+      {
+        path: '/Process',
+        name:'Process',
+        component: Process,
+        meta:{ title:'流程管理'},
+        children:[{
+          //流程查看(全角色)
+          path: 'ProcessView',
+          name: 'ProcessView',
+          component: () => import(/* webpackChunkName: "about" */ '../views/Process/ProcessView.vue'),
+          meta:{ title:'流程查看'}
+        },
+          {
+            //流程管理(教务/管理员)
+            path: 'ProcessManage',
+            name: 'ProcessManage',
+            component: () => import(/* webpackChunkName: "about" */ '../views/Process/ProcessManage.vue'),
+            meta:{ title:'流程管理'}
+          },]
+      },
+      {
+        path: '/About',
+        name: 'About',
+        component: About,
+        meta:{ title:'关于'},
+        children:[{
+          path: 'AppView',
+          name: 'AppView',
+          component: () => import(/* webpackChunkName: "about" */ '../views/About/AppView.vue'),
+          meta:{ title:'应用信息'}
+        },
+          {
+            path: 'Develop',
+            name: 'Develop',
+            component: () => import(/* webpackChunkName: "about" */ '../views/About/Develop.vue'),
+            meta:{ title:'开发人员'}
+          }]
+      }
+    ]
   },
-  {
-    path: '/OralDefense',
-    name: 'OralDefense',
-    component: OralDefense,
-    meta:{ title:'答辩管理'},
-    children:[{
-      //答辩信息(全角色)
-      path: 'OralDefenseInformation',
-      name: 'OralDefenseInformation',
-      component: () => import(/* webpackChunkName: "about" */ '../views/OralDefense/OralDefenseInformation.vue'),
-      meta:{ title:'答辩信息'}
-    },
-      {
-        //答辩材料提交(学生)
-        path: 'OralDefenseMaterial',
-        name: 'OralDefenseMaterial',
-        component: () => import(/* webpackChunkName: "about" */ '../views/OralDefense/OralDefenseMaterial.vue'),
-        meta:{ title:'材料提交'}
-      },]
-  },
-  {
-    path: '/User',
-    name: 'User',
-    component: User,
-    meta:{ title:'人员管理'},
-    children:[{
-      //用户管理(管理员)
-      path: 'UserManage',
-      name: 'UserManage',
-      component: () => import('@/views/User/UserManage.vue'),
-      meta:{ title:'用户管理'}
-    },
-      {
-        //教师列表查询(管理员)
-        path: 'TeacherList',
-        name: 'TeacherList',
-        component: () => import('@/views/User/TeacherList.vue'),
-        meta:{ title:'教师列表查询'}
-      },
-      {
-        //学生列表查询(教师/教务)
-        path: 'StudentList',
-        name: 'StudentList',
-        component: () => import('@/views/User/StudentsList.vue'),
-        meta:{ title:'学生列表查询'}
-      },
-      {
-        //学生管理(教务)
-        path: 'StudentManage',
-        name: 'StudentManage',
-        component: () => import('@/views/User/StudentManage.vue'),
-        meta:{ title:'学生管理'}
-      },
-      {
-        //学生管理(教务)
-        path: 'UserDialog',
-        name: 'UserDialog',
-        component: () => import('@/views/User/UserDialog.vue'),
-        meta:{ title:'用户管理弹窗'}
-      },]
-  },
-  {
-    path: '/Process',
-    name:'Process',
-    component: Process,
-    meta:{ title:'流程管理'},
-    children:[{
-      //流程查看(全角色)
-      path: 'ProcessView',
-      name: 'ProcessView',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Process/ProcessView.vue'),
-      meta:{ title:'流程查看'}
-    },
-      {
-        //流程管理(教务/管理员)
-        path: 'ProcessManage',
-        name: 'ProcessManage',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Process/ProcessManage.vue'),
-        meta:{ title:'流程管理'}
-      },]
-  },
-  {
-    path: '/About',
-    name: 'About',
-    component: About,
-    meta:{ title:'关于'},
-    children:[{
-      path: 'AppView',
-      name: 'AppView',
-      component: () => import(/* webpackChunkName: "about" */ '../views/About/AppView.vue'),
-      meta:{ title:'应用信息'}
-    },
-      {
-        path: 'Develop',
-        name: 'Develop',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About/Develop.vue'),
-        meta:{ title:'开发人员'}
-      }]
-  }
 ]
 
 const router = new VueRouter({
@@ -207,5 +230,23 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
+// router.beforeEach((to, from, next) => {
+//   //用你的方式获取登录的用户信息
+//   const userinfo = localStorage.userinfo
+//   if(userInfo || to.name === 'Login'){
+//     //如果存在用户信息，或者进入的页面是登录页面，则直接进入
+//     next({name:'Home'})
+//   }else {
+//     //不存在用户信息则说明用户未登录，跳转到登录页面，带上当前的页面地址，登录完成后做回跳，
+//     //如未登录用户进入用户中心的页面地址，检测到未登录，
+//     //自动跳转到登录页面，并且带上用户中心的页面地址，登录完成后重新跳到个人中心页面。
+//     next({
+//       name: 'Login',
+//       query: {
+//         redirect: to.path
+//       }
+//     })
+//   }
+// })
 
 export default router

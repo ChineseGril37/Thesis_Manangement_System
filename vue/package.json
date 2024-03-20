@@ -10,9 +10,12 @@
     "axios": "^1.6.7",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",
+    "js-cookie": "^3.0.5",
     "v-fit-columns": "^0.2.0",
     "vue": "^2.6.14",
-    "vue-router": "^3.5.1"
+    "vue-cookies": "^1.8.3",
+    "vue-router": "^3.5.1",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.2.0",

@@ -1,5 +1,6 @@
 package org.lengs.springboot.service;
 
+import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserPageRequest;
 import org.lengs.springboot.entity.User;
 
@@ -12,5 +13,7 @@ public interface IUserService {
 
     void addUer(User user);
 
-    void deleteById(User user);
+    void deleteById(Integer userId);
+
+    void login(LoginRequest loginRequest);
 }

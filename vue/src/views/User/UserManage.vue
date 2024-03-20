@@ -39,7 +39,7 @@
           <el-popconfirm
               style="margin-left: 5px"
               title="确认要删除吗？"
-              @confirm="del(scope.row)"
+              @confirm="del(scope.row);fetchData()"
           >
             <el-button type="danger" slot="reference" style="font-size: 15px">删除</el-button>
           </el-popconfirm>
@@ -157,7 +157,7 @@ export default {
     del(row){
       this.deleteData={userId:row.userId}
       console.log(this.deleteData)
-      request.delete("/user/delete" ,{params: this.deleteData}).then(res =>{
+      request.delete("/user/delete" ,{params:this.deleteData}).then(res =>{
         if(res.code === '200'){
           this.$notify.success("删除成功")
         }else {
