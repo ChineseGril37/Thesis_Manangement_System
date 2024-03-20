@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Begin/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Begin/BeginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Empty Mind Map" />
+        <option value="JavaScript File" />
+        <option value="Class" />
+        <option value="Vue Options API Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev1.0" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2dc8lzTiDzTswNNDeyyEgLbKKn4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.SpringbootApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/lengs/IdeaProjects/Thesis_Manangement_System/vue/public",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.serve.executor": "Run",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "E:\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Options API Component"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\public" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\router" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Login" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\About" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\userManage" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\utils" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SpringbootApplication">
+    <configuration name="SpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="springboot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.lengs.springboot.SpringbootApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-5bc9ecd2" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="" />
+      <created>1710296161283</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710296161283</updated>
+      <workItem from="1710296162623" duration="1276000" />
+      <workItem from="1710299089458" duration="2819000" />
+      <workItem from="1710302173156" duration="7244000" />
+      <workItem from="1710311854211" duration="16764000" />
+      <workItem from="1710391563323" duration="12951000" />
+      <workItem from="1710423070892" duration="5856000" />
+      <workItem from="1710476345938" duration="106000" />
+      <workItem from="1710476459474" duration="5015000" />
+      <workItem from="1710486522074" duration="9433000" />
+      <workItem from="1710554582871" duration="2742000" />
+      <workItem from="1710557334521" duration="13398000" />
+      <workItem from="1710581446969" duration="18051000" />
+      <workItem from="1710642685190" duration="9503000" />
+      <workItem from="1710728401628" duration="40660000" />
+      <workItem from="1710815570732" duration="33809000" />
+      <workItem from="1710897672116" duration="3936000" />
+      <workItem from="1710901648992" duration="34778000" />
+    </task>
+    <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
+      <option name="closed" value="true" />
+      <created>1710425773243</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710425773243</updated>
+    </task>
+    <task id="LOCAL-00002" summary="后端：SpringBoot跨域问题解决&#10;前端：学生管理(教师)、用户管理(教务、管理员)、论文管理(学生)、路由router设置">
+      <option name="closed" value="true" />
+      <created>1710560698492</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710560698492</updated>
+    </task>
+    <task id="LOCAL-00003" summary="后端：用户查询(修改)、数据库格式修改&#10;前端：教师管理-&gt;用户管理、学生列表查询、侧边栏高亮、教师列表">
+      <option name="closed" value="true" />
+      <created>1710599103914</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710599103914</updated>
+    </task>
+    <task id="LOCAL-00004" summary="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对">
+      <option name="closed" value="true" />
+      <created>1710941321065</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710941321065</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作" />
+    <MESSAGE value="后端：SpringBoot跨域问题解决&#10;前端：学生管理(教师)、用户管理(教务、管理员)、论文管理(学生)、路由router设置" />
+    <MESSAGE value="后端：用户查询(修改)、数据库格式修改&#10;前端：教师管理-&gt;用户管理、学生列表查询、侧边栏高亮、教师列表" />
+    <MESSAGE value="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对" />
+    <option name="LAST_COMMIT_MESSAGE" value="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
