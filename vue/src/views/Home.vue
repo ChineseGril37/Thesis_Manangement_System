@@ -12,7 +12,7 @@
       <!-- 侧边栏导航 -->
       <div style="width: 200px;min-height:calc(100vh - 70px);overflow: hidden;margin-right: 5px;background-color: white;border-radius:5px 5px 5px 5px">
         <el-menu :default-active="$router.path" router class="el-menu-demo">
-          <el-menu-item index="/BeginView">
+          <el-menu-item index="/Home">
             <i class="el-icon-house"></i>
             <span>首页</span>
           </el-menu-item>
@@ -142,7 +142,6 @@
       <div style="flex: 1;min-height:calc(100vh - 70px);background-color: white;border-radius:5px 5px 5px 5px;">
         <div style="height: 40px;padding-left: 20px;padding-top: 14px;background-color:whitesmoke;border-radius:5px 5px 0 0">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path:'/Home' }">首页 </el-breadcrumb-item>
             <el-breadcrumb-item v-for="breadCrumbItem in breadCrumbList" :key="breadCrumbItem.path" :to="breadCrumbItem.path">
               {{breadCrumbItem.meta.title}}
             </el-breadcrumb-item>
@@ -164,6 +163,12 @@ export default defineComponent({
     }
   },
   created() {
+    if(sessionStorage.getItem("isLogin")){
+      console.log( sessionStorage.getItem("isLogin"))
+      console.log(sessionStorage.getItem("userId"));
+      console.log(sessionStorage.getItem("userRealName"));
+      console.log(sessionStorage.getItem("groupId"));
+    }
   },
   methods: {
     router() {

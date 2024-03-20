@@ -18,7 +18,6 @@ import router from "@/router";
 import {defineComponent, watch} from "vue";
 export default {
   name: 'BeginView',
-
 }
 </script>
 <style>

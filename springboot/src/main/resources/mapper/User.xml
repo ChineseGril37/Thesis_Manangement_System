@@ -47,6 +47,6 @@
                  </where>
     </select>
     <select id="login">
-        select * from User where userName = #{userName} and password = #{password}
+        select * from User where userName = #{ userName } and password = #{ password }
     </select>
 </mapper>

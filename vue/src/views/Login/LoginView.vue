@@ -110,7 +110,6 @@ export default {
     randomNum (min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     },
-
     submitForm(){
       if (this.ruleForm.code.toLowerCase() !== this.identifyCode.toLowerCase()) {
         this.$message.error('请填写正确验证码')
@@ -121,30 +120,35 @@ export default {
       } else {
         this.loginForm.userName = this.ruleForm.userName
         this.loginForm.password = this.ruleForm.password
-        console.log(JSON.parse(JSON.stringify(this.loginForm)))
-        request.get('/user/login', {params:this.confirmForm}).then( res=>{
+        request.get('/user/login', {
+          params:this.loginForm
+        }).then( res=>{
+          console.log(JSON.parse(JSON.stringify(res)))
           if(res.code === '200'){
-            this.confirmForm = res.data.list
+            if(res.data === null){
+              this.$message.error('用户名或密码有误')
+              this.refreshCode()
+            }else {
+              this.confirmForm = res.data
+              sessionStorage.setItem("isLogin", "true")
+              //这边后面做一个提交，服务器验证，通过之后获得token
+              sessionStorage.setItem("userId", this.confirmForm.userId)
+              sessionStorage.setItem("userType", this.confirmForm.userType)
+              sessionStorage.setItem("userRealName", this.confirmForm.userRealName)
+              sessionStorage.setItem("groupId", this.confirmForm.groupId)
+              this.$router.push("/Home")
+            }
+          }else {
+            this.$message.error(res.msg)
+            this.refreshCode()
           }
         })
-        if(this.confirmForm.userName === this.ruleForm.userName && this.confirmForm.password === this.ruleForm.password){
-          this.$router.push("/Home")
-          sessionStorage.setItem("isLogin",true)
-          //这边后面做一个提交，服务器验证，通过之后获得token
-          console.log("code is right")
-          console.log(this.formLogin.password)
-          console.log(this.formLogin.userName)
-        }else {
-          this.$message.error('用户名或密码有误')
-          this.refreshCode()
-        }
       }
     }
-
   },
 }
 </script>
-<style>
+<style scoped>
 .app{
   position : absolute;
   width : 100%;

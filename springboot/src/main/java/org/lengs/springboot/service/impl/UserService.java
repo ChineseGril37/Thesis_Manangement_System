@@ -40,8 +40,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void login(LoginRequest loginRequest) {
-        userMapper.login(loginRequest);
+    public User login(LoginRequest loginRequest) {
+        return userMapper.login(loginRequest);
     }
-
 }

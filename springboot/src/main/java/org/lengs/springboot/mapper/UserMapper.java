@@ -17,5 +17,5 @@ public interface UserMapper {
 
     void deleteById(Integer userId);
 
-    void login(LoginRequest loginRequest);
+    User login(LoginRequest loginRequest);
 }

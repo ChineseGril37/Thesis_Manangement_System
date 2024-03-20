@@ -1,7 +1,6 @@
 package org.lengs.springboot.controller;
 import org.lengs.springboot.common.Result;
 import org.lengs.springboot.controller.request.LoginRequest;
-import org.lengs.springboot.controller.request.UserExistRequest;
 import org.lengs.springboot.controller.request.UserPageRequest;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.service.IUserService;
@@ -18,11 +17,6 @@ public class UserController {
 
     @Autowired
     IUserService userService;
-    @GetMapping("/login")
-    public Result login(@RequestBody LoginRequest loginRequest){
-        userService.login(loginRequest);
-        return Result.success(loginRequest);
-    }
     @GetMapping("/list")
     public Result list(){
         List<User> users = userService.list();
@@ -32,8 +26,12 @@ public class UserController {
     public Result page(UserPageRequest userPageRequest){
         return Result.success(userService.page(userPageRequest));
     }
+    @GetMapping("/login")
+    public Result login(LoginRequest loginRequest){
+        return Result.success(userService.login(loginRequest));
+    }
     @PostMapping("/addUser")
-    public Result addUer(@RequestBody User user){
+    public Result addUser(@RequestBody User user){
         userService.addUer(user);
         return Result.success();
     }
