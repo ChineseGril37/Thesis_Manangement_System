@@ -26,6 +26,28 @@
                 userMajor = VALUES(userMajor),
                 userClass = VALUES(userClass)
     </insert>
+    <update id="updateUser">
+        update User
+        set
+            userId = #{userId},
+            userType = #{userType},
+            userRealName = #{userRealName},
+            userName = #{userName},
+            password = #{password},
+            sexual = #{sexual},
+            accountChangeTime = #{accountChangeTime},
+            phoneNum = #{phoneNum},
+            email = #{email},
+            ancestralPlace = #{ancestralPlace},
+            politicalStatus = #{politicalStatus},
+            groupID = #{groupID},
+            registerCode = #{registerCode},
+            userAge = #{userAge},
+            userAcademy = #{userAcademy},
+            userMajor = #{userMajor},
+            userClass = #{userClass}
+        where userId = #{userId};
+    </update>
     <delete id="deleteById">
         DELETE FROM User WHERE userId = #{userId}
     </delete>

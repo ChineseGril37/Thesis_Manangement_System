@@ -160,6 +160,7 @@ export default {
       request.delete("/user/delete" ,{params:this.deleteData}).then(res =>{
         if(res.code === '200'){
           this.$notify.success("删除成功")
+          this.fetchData();
         }else {
           this.$notify.error(res.msg)
         }

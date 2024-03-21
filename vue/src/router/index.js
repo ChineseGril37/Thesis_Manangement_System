@@ -6,7 +6,7 @@ import Thesis from "@/views/Thesis/Thesis.vue";
 import OralDefense from "@/views/OralDefense/OralDefense.vue";
 import Process from "@/views/Process/Process.vue";
 import About from "@/views/About/About.vue";
-import BeginView from "@/views/Begin/BeginView.vue";
+import BeginView from "@/views/Home/BeginView.vue";
 
 
 Vue.use(VueRouter)
@@ -36,7 +36,7 @@ const routes = [
     path: '/Home',
     name:'Home',
     redirect: '/BeginView',
-    component: () => import("@/views/Home.vue"),
+    component: () => import("@/views/Home/Home.vue"),
     meta: {
       title: '首页',
       requireAuth:true
@@ -48,7 +48,7 @@ const routes = [
           title: '首页',
           requireAuth:true
         },
-        component: () => import("@/views/Begin/BeginView.vue"),
+        component: () => import("@/views/Home/BeginView.vue"),
       },
       {
         path: '/Project',
@@ -320,30 +320,12 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 //修复面包屑点击当前路由导致的报错
 const originalPush = VueRouter.prototype.push
 //修改原型对象中的push方法
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
-// router.beforeEach((to, from, next) => {
-//   //用你的方式获取登录的用户信息
-//   const userinfo = localStorage.userinfo
-//   if(userInfo || to.name === 'Login'){
-//     //如果存在用户信息，或者进入的页面是登录页面，则直接进入
-//     next({name:'Home'})
-//   }else {
-//     //不存在用户信息则说明用户未登录，跳转到登录页面，带上当前的页面地址，登录完成后做回跳，
-//     //如未登录用户进入用户中心的页面地址，检测到未登录，
-//     //自动跳转到登录页面，并且带上用户中心的页面地址，登录完成后重新跳到个人中心页面。
-//     next({
-//       name: 'Login',
-//       query: {
-//         redirect: to.path
-//       }
-//     })
-//   }
-// })
+
 
 export default router

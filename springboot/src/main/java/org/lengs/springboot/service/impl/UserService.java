@@ -35,6 +35,9 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void updateUser(User user) { userMapper.updateUser(user); }
+
+    @Override
     public void deleteById(Integer userId) {
         userMapper.deleteById(userId);
     }

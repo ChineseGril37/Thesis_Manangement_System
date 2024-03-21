@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -32,7 +33,11 @@ public class UserController {
     }
     @PostMapping("/addUser")
     public Result addUser(@RequestBody User user){
-        userService.addUer(user);
+        if(!Objects.equals(user.getAccountChangeTime(), user.getAccountCreateTime())){
+            userService.updateUser(user);
+        }else {
+            userService.addUer(user);
+        }
         return Result.success();
     }
     @DeleteMapping("/delete")

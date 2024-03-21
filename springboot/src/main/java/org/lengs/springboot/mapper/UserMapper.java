@@ -18,4 +18,6 @@ public interface UserMapper {
     void deleteById(Integer userId);
 
     User login(LoginRequest loginRequest);
+
+    void updateUser(User user);
 }

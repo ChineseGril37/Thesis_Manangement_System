@@ -13,6 +13,8 @@ public interface IUserService {
 
     void addUer(User user);
 
+    void updateUser(User user);
+
     void deleteById(Integer userId);
 
     User login(LoginRequest loginRequest);

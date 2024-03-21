@@ -4,19 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Begin/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Begin/BeginView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Begin/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,41 +58,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.SpringbootApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-20",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lengs/IdeaProjects/Thesis_Manangement_System/vue/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.serve.executor": "Run",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "E:\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SpringbootApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lengs/IdeaProjects/Thesis_Manangement_System/vue/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.serve.executor&quot;: &quot;Run&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Options API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Options API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\public" />
@@ -100,11 +102,11 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Begin" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Login" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\About" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\userManage" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\utils" />
-      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\assets" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SpringbootApplication">
@@ -157,7 +159,8 @@
       <workItem from="1710728401628" duration="40660000" />
       <workItem from="1710815570732" duration="33809000" />
       <workItem from="1710897672116" duration="3936000" />
-      <workItem from="1710901648992" duration="34778000" />
+      <workItem from="1710901648992" duration="35081000" />
+      <workItem from="1710985227452" duration="13069000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -191,7 +194,23 @@
       <option name="project" value="LOCAL" />
       <updated>1710941321065</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态">
+      <option name="closed" value="true" />
+      <created>1710950282520</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710950282520</updated>
+    </task>
+    <task id="LOCAL-00006" summary="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态">
+      <option name="closed" value="true" />
+      <created>1710950297628</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710950297628</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +233,8 @@
     <MESSAGE value="后端：SpringBoot跨域问题解决&#10;前端：学生管理(教师)、用户管理(教务、管理员)、论文管理(学生)、路由router设置" />
     <MESSAGE value="后端：用户查询(修改)、数据库格式修改&#10;前端：教师管理-&gt;用户管理、学生列表查询、侧边栏高亮、教师列表" />
     <MESSAGE value="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对" />
+    <MESSAGE value="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态" />
+    <option name="LAST_COMMIT_MESSAGE" value="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

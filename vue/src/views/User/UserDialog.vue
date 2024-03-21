@@ -10,7 +10,7 @@
       <el-form ref="editForm"
                :model="editForm"
                inline="true"
-               rule="checkRules">
+               :rule="checkRules">
         <el-form-item label="学号/教务号" :label-width="formLabelWidth" prop="userId">
           <el-input v-model="editForm.userId" type="text" maxlength="10" show-word-limit clearable></el-input>
         </el-form-item >
@@ -99,6 +99,12 @@ export default {
       default: function (){
         return {};
       }
+    },
+    checkRules:{
+      userId:[{ required: true, message: "请输入用户名", trigger: "blur" }],
+      userName:[{ required: true, message: "请输入用户名", trigger: "blur" }],
+      password:[{ required: true, message: "请输入密码", trigger: "blur" }],
+      userType:[{ required: true, message: "请输入用户类型", trigger: "blur" }]
     }
   },
   data() {
@@ -110,6 +116,7 @@ export default {
   methods: {
     editUser() {
       const that = this;
+      console.log(this.editForm.accountCreateTime);
       console.log(JSON.parse(JSON.stringify(this.editForm)))
       //把表单中的内容推送到后端
       request.post('/user/addUser', that.editForm).then(res => {

@@ -3,8 +3,11 @@
     <!-- 头部区域 -->
     <div style="height: 60px;line-height: 60px;width:100%;background-color: white;border-radius:5px 5px 5px 5px">
       <div class="logo" onclick="location.href='/Home'">
-        <img src="@/assets/logo_nobackground.png" alt="" style="width: 60px;height: 60px;position: relative;left: 10px;">
+        <img src="../../assets/logo_nobackground.png" alt="" style="width: 60px;height: 60px;position: relative;left: 10px;">
         <span style="margin-left: 10px;font-size: 25px;float: right;">毕业论文管理系统</span>
+      </div>
+      <div class="login">
+        <el-button size="middle" @click="loginOut">您好！{{userRealName}}。您的角色:{{userType}}</el-button>
       </div>
     </div>
     <!-- 侧边栏和主体 -->
@@ -160,20 +163,35 @@ export default defineComponent({
   name: 'Home',
   data(){
     return{
+      userType:'',
+      userRealName:'',
     }
   },
   created() {
-    if(sessionStorage.getItem("isLogin")){
-      console.log( sessionStorage.getItem("isLogin"))
-      console.log(sessionStorage.getItem("userId"));
-      console.log(sessionStorage.getItem("userRealName"));
-      console.log(sessionStorage.getItem("groupId"));
-    }
+    this.setUserType();
   },
   methods: {
     router() {
       return router
     },
+    setUserType(){
+      this.userType = sessionStorage.getItem("userType");
+      this.userRealName = sessionStorage.getItem("userRealName");
+      if(this.userType === '0'){
+        this.userType = '管理员';
+      }else if(this.userType === '1'){
+        this.userType = '教务';
+      }else if(this.userType === '2'){
+        this.userType = '教师';
+      }else{
+        this.userType = '学生';
+      }
+    },
+    loginOut(){
+      sessionStorage.clear();
+      this.$message.success("登出成功");
+      this.$router.push('/');
+    }
   },
   computed: {
     breadCrumbList() {
@@ -190,5 +208,9 @@ export default defineComponent({
 /* icon图标也跟着变 */
 ::v-deep .el-submenu.is-active > .el-submenu__title i {
   color: #409eff !important;
+}
+.login{
+float: right;
+  margin-right: 20px;
 }
 </style>
