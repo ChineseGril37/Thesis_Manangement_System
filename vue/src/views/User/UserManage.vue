@@ -118,7 +118,7 @@ export default {
       })
       setTimeout(() => {
         that.tableLoading = false;
-      }, 200);
+      }, 500  );
     },
     load() {
       request.get('/user/page', {

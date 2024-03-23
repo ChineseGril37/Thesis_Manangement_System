@@ -100,7 +100,7 @@
             </el-menu-item>
             <el-menu-item index="/User/StudentManage">
               <i class="el-icon-circle-plus-outline"></i>
-              <span>添加组员</span>
+              <span>组员管理</span>
             </el-menu-item>
             <el-menu-item index="/User/TeacherList">
               <i class="el-icon-tickets"></i>
@@ -190,7 +190,9 @@ export default defineComponent({
     loginOut(){
       sessionStorage.clear();
       this.$message.success("登出成功");
-      this.$router.push('/');
+      setTimeout(() => {
+        this.$router.push('/');
+      }, 1000);
     }
   },
   computed: {

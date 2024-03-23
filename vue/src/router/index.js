@@ -6,7 +6,6 @@ import Thesis from "@/views/Thesis/Thesis.vue";
 import OralDefense from "@/views/OralDefense/OralDefense.vue";
 import Process from "@/views/Process/Process.vue";
 import About from "@/views/About/About.vue";
-import BeginView from "@/views/Home/BeginView.vue";
 
 
 Vue.use(VueRouter)
@@ -21,7 +20,8 @@ const routes = [
     component: () => import("@/views/Login/LoginView.vue"),
     meta: {
       title: '登录',
-      requireAuth:false
+      requireAuth:false,
+      roles: ['0','1','2','3']
     }
   },
   {
@@ -240,7 +240,7 @@ const routes = [
             name: 'StudentManage',
             component: () => import('@/views/User/StudentManage.vue'),
             meta:{
-              title:'学生管理',
+              title:'组员管理',
               requireAuth:true
             }
           },

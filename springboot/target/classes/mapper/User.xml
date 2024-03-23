@@ -5,8 +5,8 @@
 <mapper namespace="org.lengs.springboot.mapper.UserMapper">
     <insert id="addUer">
         <!-- 如果user表中找不到相同ID的用户则新建一个 -->
-        INSERT INTO User(userId, userType, userRealName, userName, password, sexual, accountChangeTime,accountCreateTime, phoneNum, email, ancestralPlace, politicalStatus, groupID, registerCode, userAge,userAcademy,userMajor,userClass)
-        VALUES(#{userId}, #{userType}, #{userRealName}, #{userName}, #{password}, #{sexual}, #{accountChangeTime},#{accountCreateTime},#{phoneNum}, #{email}, #{ancestralPlace}, #{politicalStatus}, #{groupID}, #{registerCode}, #{userAge}, #{userAcademy}, #{userMajor}, #{userClass})
+        INSERT INTO User(userId, userType, userRealName, userName, password, sexual, accountChangeTime,accountCreateTime, phoneNum, email, ancestralPlace, politicalStatus, groupID, userAge,userAcademy,userMajor,userClass)
+        VALUES(#{userId}, #{userType}, #{userRealName}, #{userName}, #{password}, #{sexual}, #{accountChangeTime},#{accountCreateTime},#{phoneNum}, #{email}, #{ancestralPlace}, #{politicalStatus}, #{groupID}, #{userAge}, #{userAcademy}, #{userMajor}, #{userClass})
             ON DUPLICATE KEY UPDATE
                 userId = VALUES(userId),
                 userType = VALUES(userType),
@@ -20,12 +20,32 @@
                 ancestralPlace = VALUES(ancestralPlace),
                 politicalStatus = VALUES(politicalStatus),
                 groupID = VALUES(groupID),
-                registerCode = VALUES(registerCode),
                 userAge = VALUES(userAge),
                 userAcademy = VALUES(userAcademy),
                 userMajor = VALUES(userMajor),
                 userClass = VALUES(userClass)
     </insert>
+    <update id="updateUser">
+        update User
+        set
+            userId = #{userId},
+            userType = #{userType},
+            userRealName = #{userRealName},
+            userName = #{userName},
+            password = #{password},
+            sexual = #{sexual},
+            accountChangeTime = #{accountChangeTime},
+            phoneNum = #{phoneNum},
+            email = #{email},
+            ancestralPlace = #{ancestralPlace},
+            politicalStatus = #{politicalStatus},
+            groupID = #{groupID},
+            userAge = #{userAge},
+            userAcademy = #{userAcademy},
+            userMajor = #{userMajor},
+            userClass = #{userClass}
+        where userId = #{userId};
+    </update>
     <delete id="deleteById">
         DELETE FROM User WHERE userId = #{userId}
     </delete>

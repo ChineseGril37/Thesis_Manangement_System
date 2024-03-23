@@ -4,21 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态">
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：session保存登录信息，全局路由守卫验证登录状态DEBUG(路由守卫在new Router之后触发了)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/mapper/User.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/mapper/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/IUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/IUserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/impl/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/impl/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Begin/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Login/temp.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/笔记.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +165,8 @@
       <workItem from="1710815570732" duration="33809000" />
       <workItem from="1710897672116" duration="3936000" />
       <workItem from="1710901648992" duration="35081000" />
-      <workItem from="1710985227452" duration="13069000" />
+      <workItem from="1710985227452" duration="21891000" />
+      <workItem from="1711081216165" duration="16260000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -210,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710950297628</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="前端：session保存登录信息，全局路由守卫验证登录状态DEBUG(路由守卫在new Router之后触发了)">
+      <option name="closed" value="true" />
+      <created>1711002865812</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711002865812</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +248,8 @@
     <MESSAGE value="后端：用户查询(修改)、数据库格式修改&#10;前端：教师管理-&gt;用户管理、学生列表查询、侧边栏高亮、教师列表" />
     <MESSAGE value="后端：LoginRequest实体类创建、Login功能实现&#10;前端：登录页面、app主路由包含LoginView和Home两个子路由、页面功能修改到Home子路由下、登录数据校验、验证码生成和核对" />
     <MESSAGE value="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端：Login功能后端Debug(明明是Get所有函数返回值都设置为了void)&#10;前端：登录页面验证码，登录功能实现，session保存登录信息，全局路由守卫验证登录状态" />
+    <MESSAGE value="前端：session保存登录信息，全局路由守卫验证登录状态DEBUG(路由守卫在new Router之后触发了)" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端：session保存登录信息，全局路由守卫验证登录状态DEBUG(路由守卫在new Router之后触发了)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

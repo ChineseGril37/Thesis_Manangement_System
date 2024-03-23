@@ -136,7 +136,10 @@ export default {
               sessionStorage.setItem("userType", this.confirmForm.userType)
               sessionStorage.setItem("userRealName", this.confirmForm.userRealName)
               sessionStorage.setItem("groupId", this.confirmForm.groupId)
-              this.$router.push("/Home")
+              this.$message.success("登录成功");
+              setTimeout(() => {
+                this.$router.push("/Home");
+              }, 1000);
             }
           }else {
             this.$message.error(res.msg)

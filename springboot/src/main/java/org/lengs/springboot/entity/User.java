@@ -16,7 +16,6 @@ public class User {
     private String politicalStatus;
     private String groupID;
     private Integer userAge;
-    private String registerCode;
     private String accountChangeTime;
     private String accountCreateTime;
     private String userAcademy;
