@@ -4,7 +4,11 @@
     <data-source name="thesis_management@localhost" uuid="4a530cd6-b8b5-4d7c-9a9f-88ef7bff14ff">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
       <user-name>root</user-name>
-      <schema-mapping />
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" negative="1" />
+        </introspection-scope>
+      </schema-mapping>
     </data-source>
   </component>
 </project>

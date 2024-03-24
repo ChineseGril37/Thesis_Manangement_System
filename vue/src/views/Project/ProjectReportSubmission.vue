@@ -26,24 +26,53 @@
           :header-cell-style="{'text-align':'center','background-color':'whitesmoke'}"
           stripe
           border>
-        <el-table-column prop="userId" label="课题名称" min-width="15%" ></el-table-column>
-        <el-table-column prop="userId" label="所属专业" min-width="10%"></el-table-column>
-        <el-table-column prop="userId" label="指导教师" min-width="10%"></el-table-column>
-        <el-table-column prop="userId" label="申报日期" min-width="10%"></el-table-column>
+        <el-table-column prop="userId" label="课题名称" min-width="15%" align="center"></el-table-column>
+        <el-table-column prop="userId" label="所属专业" min-width="10%" align="center"></el-table-column>
+        <el-table-column prop="userId" label="指导教师" min-width="10%" align="center"></el-table-column>
+        <el-table-column prop="userId" label="申报日期" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="userId" label="状态" min-width="10%"></el-table-column>
-        <el-table-column prop="userId" label="操作" min-width="10%"></el-table-column>
+        <el-table-column prop="userId" label="操作" min-width="10%"  align="center">
+          <el-button type="primary" size="middle" v-if="1" plain>填写</el-button>
+          <el-upload
+              class="upload-demo"
+              ref="upload"
+              action="/file/upload"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :file-list="fileList"
+              :auto-upload="false"
+              v-if="0">
+            <el-button slot="trigger" size="middle" type="primary">选取文件</el-button>
+          </el-upload>
+        </el-table-column>
       </el-table>
     </div>
   </div>
 </template>
 <script>
+import request from "@/utils/request";
+
 export default {
   name: "ProjectReportSubmission",
   data(){
     return{
-      tableData:[{}],
+      tableData:[],
+      tableLoading:false,
+
     }
   },
+  created() {
+
+  },
+  mounted() {
+  },
+  methods:{
+    fetchData() {
+      const that = this;
+      that.tableLoading = true;
+      request.get('')
+    },
+  }
 }
 </script>
 <style scoped>

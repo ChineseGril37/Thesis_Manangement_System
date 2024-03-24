@@ -1,21 +1,21 @@
 package org.lengs.springboot.controller;
-import org.lengs.springboot.common.Result;
-import org.lengs.springboot.controller.request.LoginRequest;
-import org.lengs.springboot.controller.request.UserPageRequest;
-import org.lengs.springboot.entity.User;
-import org.lengs.springboot.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Objects;
+import org.lengs.springboot.entity.User;
+import org.lengs.springboot.common.Result;
+import org.lengs.springboot.service.IUserService;
+
+import org.lengs.springboot.controller.request.LoginRequest;
+import org.lengs.springboot.controller.request.UserPageRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 
 @CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     @Autowired
     IUserService userService;
     @GetMapping("/list")
