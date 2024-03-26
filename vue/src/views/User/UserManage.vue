@@ -105,13 +105,14 @@ export default {
     // 获取表格数据
     // 这里最好把tableData换一个，这tableData是表格数据，给弹窗的应该是表格里面对应的行，要改不/OK
     fetchData() {
-      console.log(JSON.parse(JSON.stringify(this.tableDataRow)));
+      //  console.log(JSON.parse(JSON.stringify(this.tableDataRow)));
       const that = this;
       that.tableLoading = true;
       request.get('/user/page', {
         params: this.params
       }).then(res =>{
         if(res.code === '200'){
+          console.log(res.data)
           that.tableData = res.data.list
           that.total = res.data.total
         }

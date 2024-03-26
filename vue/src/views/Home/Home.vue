@@ -120,6 +120,10 @@
               <i class="el-icon-tickets"></i>
               <span>流程查看</span>
             </el-menu-item>
+            <el-menu-item index="/Process/ProcessDate">
+              <i class="el-icon-date"></i>
+              <span>截止日期</span>
+            </el-menu-item>
             <el-menu-item index="/Process/ProcessManage">
               <i class="el-icon-edit-outline"></i>
               <span>流程管理</span>

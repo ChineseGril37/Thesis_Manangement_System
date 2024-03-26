@@ -65,7 +65,7 @@ const routes = [
           meta:{
             title:'申报课题',
             requireAuth:true
-          }
+          },
         },{
           //填写开题报告(学生)
           path: 'ProjectReportSubmission',
@@ -282,7 +282,15 @@ const routes = [
               title:'流程管理',
               requireAuth:true
             }
-          },]
+          },{
+            path: 'ProcessDate',
+            name:'ProcessDate',
+            component:() => import('../views/Process/ProcessDate.vue'),
+            meta: {
+              title: '截止日期',
+              requireAuth: true
+            }
+          }]
       },
       {
         path: '/About',

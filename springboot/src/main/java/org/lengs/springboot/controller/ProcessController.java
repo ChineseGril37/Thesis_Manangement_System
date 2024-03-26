@@ -1,6 +1,7 @@
 package org.lengs.springboot.controller;
 
 import org.lengs.springboot.common.Result;
+import org.lengs.springboot.controller.request.ProcessRequest;
 import org.lengs.springboot.service.IProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,20 @@ public class ProcessController {
     @Autowired
     IProcessService processService;
 
-    @GetMapping("/list")
-    public Result listProcess(){
-        List<Process> processes = processService.listProcess();
-        return Result.success(processes);
-    }
-
     @GetMapping("/listBy")
-    public Result listByProcess(@RequestBody Process process){
-        List<Process> processes = processService.listProcess(process);
-        return Result.success();
+    public Result listByProcess(ProcessRequest processrequest){
+        System.out.println("processrequest="+processrequest);
+        List<Process> processes = processService.listByProcess(processrequest);
+        if(processes.isEmpty()){
+            return Result.error("查询结果为空");
+        }else {
+            return Result.success(processes);
+        }
     }
 }
+/*
+    ProcessRequest:
+    private Integer processID;
+    private String processName;
+    private Integer processCreateBy;
+*/
