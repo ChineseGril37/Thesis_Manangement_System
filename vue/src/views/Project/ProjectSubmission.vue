@@ -47,16 +47,20 @@
       <el-form
           class="formView"
           v-if="showForm"
+          :data="tableData"
       >
+        <el-input>
+
+        </el-input>
         <el-button size="middle" type="text" icon="el-icon-back" @click="closeView">返回</el-button>
+        <el-button size="middle" @click="test">测试</el-button>
       </el-form>
     </div>
   </div>
 </template>
 <script>
 import request from "@/utils/request";
-import moment from "moment";
-export default {//很神奇吧,怪
+export default {
   name: "ProjectSubmission",
   data(){
     return {
@@ -77,28 +81,17 @@ export default {//很神奇吧,怪
       let today = new Date()
       let dateBegin = new Date(res.data.submissionBegin)
       let dateEnd = new Date(res.data.submissionEnd)
-      if(today > dateBegin && today < dateEnd){
-        this.condition = false
-        console.log("在日期内,设置condition=" + this.condition)
-      }else {
-        this.condition = true
-        console.log("不在日期内,设置condition=" + this.condition)
-      }
+      this.condition = !(today > dateBegin && today < dateEnd);
     })
     const that = this;
     that.tableLoading = false;
     await request.get('/process/listBy',{params:that.params}).then(res =>{
       if (res.code === '200'){
         //如果查询到了
-        console.log("查询到了")
         that.tableData = res.data
         this.condition = true
-      }else {
-        console.log("没查到用户ID创建的流程，保持condition="+this.condition)
       }
     })
-    console.log("结束数据获取时condition=",this.condition)
-    console.log("condition数据类型=",this)
   },
   methods:{
     async fetchData() {
@@ -109,10 +102,10 @@ export default {//很神奇吧,怪
         let dateEnd = new Date(res.data.submissionEnd)
         if(today > dateBegin && today < dateEnd){
           this.condition = false
-          console.log("在日期内,设置condition=" + this.condition)
+          //console.log("在日期内,设置condition=" + this.condition)
         }else {
           this.condition = true
-          console.log("不在日期内,设置condition=" + this.condition)
+          //console.log("不在日期内,设置condition=" + this.condition)
         }
       })
       const that = this;
@@ -120,15 +113,11 @@ export default {//很神奇吧,怪
       await request.get('/process/listBy',{params:that.params}).then(res =>{
         if (res.code === '200'){
           //如果查询到了
-          console.log("查询到了")
           that.tableData = res.data
           this.condition = true
-        }else {
-          console.log("没查到用户ID创建的流程，保持condition="+this.condition)
         }
       })
-      console.log("结束数据获取时condition=",this.condition)
-      console.log("condition数据类型="+typeof this.condition)
+      await request.get('/user/list',{})
     },
     informationInput(){
       this.showForm = true;
@@ -138,10 +127,25 @@ export default {//很神奇吧,怪
       this.showForm = true;
       this.showTable = false;
     },
+    test(){
+      request.post('/process/createSubmission',this.tableData[0]).then( res =>{
+        if(res.code === '200'){
+          this.tableData[0].processSubmission=res.data
+          this.$message.success("this.tableData[0].processSubmission="+this.tableData[0].processSubmission)
+        }
+      })
+    },
+    submitProject(){
+      request.post('/process/createSubmission',this.tableData[0]).then( res =>{
+        if(res.code === '200'){
+          this.tableData[0].processSubmission=res.data
+        }
+      })
+    },
     closeView(){
       if(this.condition === false){
       }
-      this.showForm = false;;
+      this.showForm = false;
       this.showTable = true;
       this.fetchData()
     }

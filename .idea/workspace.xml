@@ -4,33 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：课题管理文件上传页面功能实现&#10;后端：课题创建和文件上传后端接受信息并将记录存入数据库">
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/DateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Date.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/DateMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IDateService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/DateService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Date.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessDate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：课题申报功能根据是否在截止日期和是否已经提交进行动态页面生成">
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessCreateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/SubmissionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Submission.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/UserPageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/UserPageRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/File.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/File.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/request/UserExistRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/笔记.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +30,8 @@
         <option value="JavaScript File" />
         <option value="Mybatis Mapper" />
         <option value="Vue Options API Component" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -128,7 +114,7 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="Spring Boot.SpringbootApplication">
     <configuration name="SpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="springboot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.lengs.springboot.SpringbootApplication" />
@@ -184,7 +170,7 @@
       <workItem from="1711162315438" duration="5782000" />
       <workItem from="1711255386600" duration="23822000" />
       <workItem from="1711326494684" duration="30185000" />
-      <workItem from="1711419547632" duration="6196000" />
+      <workItem from="1711419547632" duration="18210000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -258,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711271600038</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="前端：课题申报功能根据是否在截止日期和是否已经提交进行动态页面生成">
+      <option name="closed" value="true" />
+      <created>1711425876081</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711425876081</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +279,8 @@
     <MESSAGE value="前端：session保存登录信息，全局路由守卫验证登录状态DEBUG(路由守卫在new Router之后触发了)" />
     <MESSAGE value="前端：论文管理主要功能页面创建&#10;后端：论文管理数据库表建立&#10;手册：数据库表明细描述" />
     <MESSAGE value="前端：课题管理文件上传页面功能实现&#10;后端：课题创建和文件上传后端接受信息并将记录存入数据库" />
-    <option name="LAST_COMMIT_MESSAGE" value="前端：课题管理文件上传页面功能实现&#10;后端：课题创建和文件上传后端接受信息并将记录存入数据库" />
+    <MESSAGE value="前端：课题申报功能根据是否在截止日期和是否已经提交进行动态页面生成" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端：课题申报功能根据是否在截止日期和是否已经提交进行动态页面生成" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

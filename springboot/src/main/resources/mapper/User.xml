@@ -64,6 +64,9 @@
                      <if test="userId != null and userId != ''">
                          and userId like concat('%', #{ userId } , '%')
                      </if>
+                     <if test="groupID != null and groupID != ''">
+                         and groupID like concat('%', #{ groupID } , '%')
+                     </if>
                  </where>
     </select>
     <select id="login">

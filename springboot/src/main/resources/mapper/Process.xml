@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lengs.springboot.mapper.ProcessMapper">
-
     <select id="listByProcess" resultType="org.lengs.springboot.entity.Process">
         select * from Process
             <where>
@@ -15,4 +14,23 @@
                 </if>
             </where>
     </select>
+    <select id="listBySubmission" resultType="org.lengs.springboot.entity.Submission">
+        select * from Submission
+        <where>
+            <if test="processID != null and processID != ''">
+                processID = #{processID}
+            </if>
+            <if test="processCreateBy != null and processCreateBy != ''">
+                submissionID = #{submissionID}
+            </if>
+        </where>
+    </select>
+    <insert id="createProcess" >
+        insert into Process(processName,processCreateBy,processGroup,processChangeTime,processCreateTime,processDeadTime,processCondition)
+        values (#{processName},#{processCreateBy},#{processGroup},#{processChangeTime},#{processCreateTime},#{processDeadTime},#{processCondition});
+    </insert>
+    <insert id="createSubmission" useGeneratedKeys="true" keyProperty="submissionID">
+        insert into Submission(processID,submissionBase,submissionType,submissionBrief,submissionLanguage,submissionTeacherReview)
+        values (#{processID},#{submissionBase},#{submissionType},#{submissionBrief},#{submissionLanguage},#{submissionTeacherReview})
+    </insert>
 </mapper>
