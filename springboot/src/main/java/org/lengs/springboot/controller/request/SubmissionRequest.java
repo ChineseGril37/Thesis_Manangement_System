@@ -3,8 +3,9 @@ package org.lengs.springboot.controller.request;
 import lombok.Data;
 
 @Data
-public class SubmissionRequest extends ProcessRequest{
+public class    SubmissionRequest extends ProcessRequest{
     private Integer submissionID;
+    private Integer processID;
     private String submissionBase;
     private String submissionType;
     private String submissionBrief;

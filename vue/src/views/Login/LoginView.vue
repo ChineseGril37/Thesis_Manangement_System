@@ -123,7 +123,7 @@ export default {
         request.get('/user/login', {
           params:this.loginForm
         }).then( res=>{
-          console.log(JSON.parse(JSON.stringify(res)))
+          //console.log(JSON.parse(JSON.stringify(res)))
           if(res.code === '200'){
             if(res.data === null){
               this.$message.error('用户名或密码有误')
@@ -135,7 +135,8 @@ export default {
               sessionStorage.setItem("userId", this.confirmForm.userId)
               sessionStorage.setItem("userType", this.confirmForm.userType)
               sessionStorage.setItem("userRealName", this.confirmForm.userRealName)
-              sessionStorage.setItem("groupId", this.confirmForm.groupId)
+              sessionStorage.setItem("groupId", res.data.groupID)
+              sessionStorage.setItem("userMajor", res.data.userMajor)
               this.$message.success("登录成功");
               setTimeout(() => {
                 this.$router.push("/Home");

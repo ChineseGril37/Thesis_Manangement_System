@@ -6,7 +6,7 @@ public class Process {
     private Integer processID;
     private String processName;
     private Integer processCreateBy;
-    private Integer processGroup;
+    private Integer groupID;
     private String processChangeTime;
     private String processCreateTime;
     private String processDeadTime;

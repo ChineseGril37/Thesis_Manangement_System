@@ -3,7 +3,7 @@ package org.lengs.springboot.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.lengs.springboot.controller.request.LoginRequest;
-import org.lengs.springboot.controller.request.UserPageRequest;
+import org.lengs.springboot.controller.request.UserRequest;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.mapper.UserMapper;
 import org.lengs.springboot.service.IUserService;
@@ -23,9 +23,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Object page(UserPageRequest userPageRequest) {
-        PageHelper.startPage(userPageRequest.getPageNum(), userPageRequest.getPageSize());
-        List<User> users = userMapper.listByCondition(userPageRequest);
+    public Object page(UserRequest userRequest) {
+        PageHelper.startPage(userRequest.getPageNum(), userRequest.getPageSize());
+        List<User> users = userMapper.listByCondition(userRequest);
         return new PageInfo<>(users);
     }
 
@@ -45,5 +45,10 @@ public class UserService implements IUserService {
     @Override
     public User login(LoginRequest loginRequest) {
         return userMapper.login(loginRequest);
+    }
+
+    @Override
+    public User getGroup(Integer groupID) {
+        return userMapper.getGroup(groupID);
     }
 }

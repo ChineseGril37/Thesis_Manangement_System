@@ -4,13 +4,14 @@ import org.lengs.springboot.controller.request.ProcessCreateRequest;
 import org.lengs.springboot.controller.request.ProcessRequest;
 import org.lengs.springboot.controller.request.SubmissionRequest;
 import org.lengs.springboot.entity.Submission;
+import org.lengs.springboot.entity.Process;
 
 import java.util.List;
 
 public interface IProcessService {
     List<Process> listByProcess(ProcessRequest processrequest);
 
-    void createProcess(ProcessCreateRequest processCreateRequest);
+    void createProcess(Process process);
 
     Integer createSubmission(SubmissionRequest submissionRequest);
 

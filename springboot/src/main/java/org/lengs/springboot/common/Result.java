@@ -16,6 +16,7 @@ public class Result {
     }
     public  static Result success(Object data) {
         Result result = new Result();
+        result.setMsg("success");
         result.setCode(SUCCESS_CODE);
         result.setData(data);
         return result;

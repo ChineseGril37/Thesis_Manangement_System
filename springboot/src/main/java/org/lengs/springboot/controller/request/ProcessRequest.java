@@ -3,5 +3,5 @@ import lombok.Data;
 @Data
 public class ProcessRequest {
     private Integer processID;
-    private String processCreateBy  ;
+    private Integer processCreateBy;
 }

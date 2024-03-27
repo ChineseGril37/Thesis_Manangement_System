@@ -10,27 +10,19 @@
                     processID = #{processID}
                 </if>
                 <if test="processCreateBy != null and processCreateBy != ''">
-                    processCreateBy = #{processCreateBy}
+                    and processCreateBy = #{processCreateBy}
                 </if>
             </where>
     </select>
     <select id="listBySubmission" resultType="org.lengs.springboot.entity.Submission">
-        select * from Submission
-        <where>
-            <if test="processID != null and processID != ''">
-                processID = #{processID}
-            </if>
-            <if test="processCreateBy != null and processCreateBy != ''">
-                submissionID = #{submissionID}
-            </if>
-        </where>
+        select * from Submission where processID = #{ processID }
     </select>
     <insert id="createProcess" >
-        insert into Process(processName,processCreateBy,processGroup,processChangeTime,processCreateTime,processDeadTime,processCondition)
-        values (#{processName},#{processCreateBy},#{processGroup},#{processChangeTime},#{processCreateTime},#{processDeadTime},#{processCondition});
+        insert into Process(processName,processCreateBy,groupID,processCreateTime,processChangeTime,processDeadTime,processCondition,processSubmission,processReport,processMission,processMidcheck,processOral)
+        values (#{processName},#{processCreateBy},#{groupID},#{processCreateTime},#{processChangeTime},#{processDeadTime},#{processCondition},#{processSubmission},#{processReport},#{processMission},#{processMidcheck},#{processOral});
     </insert>
     <insert id="createSubmission" useGeneratedKeys="true" keyProperty="submissionID">
-        insert into Submission(processID,submissionBase,submissionType,submissionBrief,submissionLanguage,submissionTeacherReview)
-        values (#{processID},#{submissionBase},#{submissionType},#{submissionBrief},#{submissionLanguage},#{submissionTeacherReview})
+        insert into Submission(processID,submissionBase,submissionType,submissionBrief,submissionDirection,submissionLanguage,submissionTeacherReview,submissionExpertReview)
+        values (#{processID},#{submissionBase},#{submissionType},#{submissionBrief},#{submissionDirection},#{submissionLanguage},#{submissionTeacherReview},#{submissionExpertReview})
     </insert>
 </mapper>

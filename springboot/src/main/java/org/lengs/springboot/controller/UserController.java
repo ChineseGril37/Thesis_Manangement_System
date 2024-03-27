@@ -1,12 +1,14 @@
 package org.lengs.springboot.controller;
 import java.util.List;
 import java.util.Objects;
+
+import org.lengs.springboot.controller.request.UserRequest;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.common.Result;
 import org.lengs.springboot.service.IUserService;
 
 import org.lengs.springboot.controller.request.LoginRequest;
-import org.lengs.springboot.controller.request.UserPageRequest;
+import org.lengs.springboot.controller.request.UserRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +26,8 @@ public class UserController {
         return Result.success(users);
     }
     @GetMapping("/page")
-    public Result page(UserPageRequest userPageRequest){
-        return Result.success(userService.page(userPageRequest));
+    public Result page(UserRequest userRequest){
+        return Result.success(userService.page(userRequest));
     }
     @GetMapping("/login")
     public Result login(LoginRequest loginRequest){

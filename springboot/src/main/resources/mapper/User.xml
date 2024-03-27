@@ -72,4 +72,7 @@
     <select id="login">
         select * from User where userName = #{ userName } and password = #{ password }
     </select>
+    <select id="getGroup" resultType="org.lengs.springboot.entity.User">
+        select * from User userType = 2 and groupID = #{ groupID }
+    </select>
 </mapper>

@@ -8,6 +8,7 @@ import org.lengs.springboot.mapper.ProcessMapper;
 import org.lengs.springboot.service.IProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.lengs.springboot.entity.Process;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class ProcessService implements IProcessService {
     }
 
     @Override
-    public void createProcess(ProcessCreateRequest processCreateRequest) {
-        processMapper.createProcess(processCreateRequest);
+    public void createProcess(Process process) {
+        processMapper.createProcess(process);
     }
 
     @Override
