@@ -41,6 +41,12 @@ public class ProcessController {
         processService.createProcess(process);
         return Result.success();
     }
+    //
+    @PostMapping("/updateProcess")
+    public Result updateProcess(@RequestBody Process process){
+        processService.updateProcess(process);
+        return Result.success();
+    }
     //createSubmission在流程创建时生成课题申报
     @PostMapping("/createSubmission")
     public Result createSubmission(@RequestBody Submission submissionRequest){

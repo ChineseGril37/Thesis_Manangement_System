@@ -25,4 +25,6 @@ public interface ProcessMapper {
     void createReport(Report reportRequest);
 
     List<Process> listByProcess(ProcessRequest processRequest);
+
+    void updateProcess(Process process);
 }

@@ -23,4 +23,6 @@ public interface IProcessService {
     void createReport(Report reportRequest);
 
     List<Process> listByProcess(ProcessRequest processRequest);
+
+    void updateProcess(Process process);
 }

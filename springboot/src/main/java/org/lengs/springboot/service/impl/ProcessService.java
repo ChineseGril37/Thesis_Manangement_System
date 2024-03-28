@@ -30,6 +30,9 @@ public class ProcessService implements IProcessService {
     public List<Process> listByProcess(ProcessRequest processRequest) {return processMapper.listByProcess(processRequest);}
 
     @Override
+    public void updateProcess(Process process) {processMapper.updateProcess(process);}
+
+    @Override
     public void createSubmission(Submission submissionRequest) {
         processMapper.createSubmission(submissionRequest);
     }

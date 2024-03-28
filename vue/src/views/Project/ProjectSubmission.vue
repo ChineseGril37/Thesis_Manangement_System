@@ -35,7 +35,7 @@
       <el-dialog
           :title="dialogTitle"
           :visible.sync="showDialog"
-          width="30%">
+          width="45%">
         <el-row :gutter="15">
           <el-form :model="tableForm" :rules="rules" size="small" label-width="10px"
                    label-position="top" >
@@ -44,7 +44,7 @@
                 <el-col :span="24">
                   <el-form-item label="课题名称" porp="processName">
                     <el-input v-model="tableForm.processName" placeholder="课题名称" clearable
-                              prefix-icon='el-icon-edit-outline' :style="{width: '100%'}" :disabled="condition"></el-input>
+                              :style="{width: '100%'}" :disabled="condition"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -66,7 +66,7 @@
                 <el-col :span="24">
                   <el-form-item label="选题依据及课题简介" prop="submissionBrief">
                     <el-input v-model="tableForm.submissionBrief" type="textarea" placeholder="选题依据及课题简介"
-                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
+                              show-word-limit :autosize="{minRows: 6, maxRows: 6}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>

@@ -11,6 +11,32 @@
             submissionExpertReview = #{submissionExpertReview}
         where submissionID = #{submissionID}
     </update>
+    <update id="updateProcess">
+        update Process
+        set
+            <if test="processName != null and processName != ''">
+                processName = #{processName},
+            </if>
+            <if test="processDeadTime != null and processDeadTime != ''">
+                processDeadTime = #{processDeadTime},
+            </if>
+            <if test="processCondition != null and processCondition != ''">
+                processCondition = #{processCondition},
+            </if>
+            <if test="reportID != null and reportID != ''">
+                reportID = #{reportID},
+            </if>
+            <if test="missionID != null and missionID != ''">
+                missionID = #{missionID},
+            </if>
+            <if test="midcheckID != null and midcheckID != ''">
+                midcheckID = #{midcheckID},
+            </if>
+            <if test="oralID != null and oralID != ''">
+                oralID = #{oralID}
+            </if>
+        where processID = #{processID}
+    </update>
     <select id="listProcess" resultType="org.lengs.springboot.entity.Process">
         select * from Process
             <where>
@@ -26,13 +52,13 @@
         select * from Submission where submissionID = #{submissionID}
     </select>
     <select id="listReport" resultType="org.lengs.springboot.entity.Report">
-        select * form report
+        select * from Report
         <where>
-            <if test="processID != null and processID != ''">
-                processID = #{processID}
+            <if test="reportID != null and reportID != ''">
+                reportID = #{reportID}
             </if>
             <if test="groupID != null and groupID != ''">
-                groupID = #{groupID}
+                and groupID = #{groupID}
             </if>
         </where>
     </select>

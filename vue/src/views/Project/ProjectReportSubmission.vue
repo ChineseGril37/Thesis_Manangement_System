@@ -41,7 +41,7 @@
       <el-dialog
           :title="dialogTitle"
           :visible.sync="showDialog"
-          width="30%">
+          width="45%">
         <el-row :gutter="15">
           <el-form :model="tableForm" :rules="rules" size="small" label-width="10px"
                    label-position="top" >
@@ -50,54 +50,54 @@
                 <el-col :span="24">
                   <el-form-item label="课题名称" porp="processName">
                     <el-input v-model="tableForm.processName" placeholder="课题名称" clearable
-                              prefix-icon='el-icon-edit-outline' :style="{width: '100%'}" :disabled="true"></el-input>
+                              :style="{width: '100%'}" :disabled="true"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
                   <el-form-item class="item" label="研究目的" porp="processName">
-                    <el-input v-model="tableForm.processName" placeholder="研究目的" clearable
-                              prefix-icon='el-icon-edit-outline' :style="{width: '100%'}" :disabled="condition"></el-input>
+                    <el-input v-model="tableForm.reportMeaning" clearable
+                              :style="{width: '100%'}" :disabled="condition"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
                   <el-form-item label="研究现状" prop="submissionBrief">
-                    <el-input v-model="tableForm.submissionBrief" type="textarea" placeholder="研究现状"
+                    <el-input v-model="tableForm.reportSituation" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
                   <el-form-item label="研究目标" prop="submissionBrief">
-                    <el-input v-model="tableForm.submissionBrief" type="textarea" placeholder="研究目标"
+                    <el-input v-model="tableForm.reportAim" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
                   <el-form-item label="研究方案" prop="submissionBrief">
-                    <el-input v-model="tableForm.submissionBrief" type="textarea" placeholder="研究方案"
-                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
+                    <el-input v-model="tableForm.reportWay" type="textarea"
+                              show-word-limit :autosize="{minRows: 5, maxRows: 5}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="附件上传" prop="submissionFile">
+<!--                  <el-form-item label="附件上传" prop="submissionFile">-->
 <!--                    <el-upload ref="submissionFile" :file-list="fileList"-->
 <!--                               :action="submissionFileAction" :auto-upload="false"-->
 <!--                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
 <!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
 <!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
 <!--                    </el-upload>-->
-                  </el-form-item>
+<!--                  </el-form-item>-->
                 </el-col>
                 <el-col :span="24">
                   <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
-                    <el-input v-model="tableForm.submissionTeacherReview" type="text" :disabled="true"></el-input>
+                    <el-input v-model="tableForm.reportTeacherReview" type="text" :disabled="true"></el-input>
                   </el-form-item >
                 </el-col>
                 <el-col :span="24">
                   <el-form-item label="专业专家审核"  porp="submissionExpertReview">
-                    <el-input v-model="tableForm.submissionExpertReview" type="text" :disabled="true"></el-input>
+                    <el-input v-model="tableForm.reportExpertReview" type="text" :disabled="true"></el-input>
                   </el-form-item >
                 </el-col>
                 <el-col :span="3">
@@ -137,6 +137,28 @@ export default {
         processCreateBy:sessionStorage.getItem('userId'),
         processID:'',
       },
+      rules: {
+        reportMeaning: [{
+          required: true,
+          message: '研究目的',
+          trigger: 'change'
+        }],
+        reportSituation: [{
+          required: true,
+          message: '研究现状',
+          trigger: 'change'
+        }],
+        reportAim: [{
+          required: true,
+          message: '研究目标',
+          trigger: 'blur'
+        }],
+        reportWay: [{
+          required: true,
+          message: '研究方案',
+          trigger: 'blur'
+        }],
+      },
     }
   },
   created() {
@@ -163,14 +185,10 @@ export default {
         if (res.code === '200'){
           //console.log("查询到了数据")
           that.tableData = res.data
-          that.condition = true
-          console.log(res.data[0].processCondition)
-          if(res.data[0].processCondition === "课题申报审核通过"){
-            that.condition = false
-          }
+          that.condition = res.data[0].processCondition !== "课题申报审核通过";
           that.tableData.forEach((item) =>{
             item.userType=2
-            item.groupID=sessionStorage.getItem("groupId")
+            item.groupID=sessionStorage.getItem("groupID")
             item.userMajor=sessionStorage.getItem("userMajor")
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
@@ -196,23 +214,22 @@ export default {
     async processSubmit(){
       this.tableForm.processDeadTime = this.deadTime
       console.log(this.tableForm)
-      await request.post('/process/createSubmission',this.tableForm).then(res=>{
+      this.tableForm.groupID=sessionStorage.getItem("groupID")
+      await request.post('/process/createReport',this.tableForm).then(res=>{
         if(res.code === '200'){
-          this.tableForm.processSubmission = res.data
-          this.tableForm.submissionID = res.data
-          this.tableForm.processCreateBy = sessionStorage.getItem('userId')
-          this.tableForm.groupID=sessionStorage.getItem("groupId")
-          this.tableForm.processCondition= "课题申报等待审核";
+          this.tableForm.reportID = res.data
+          this.tableForm.processCondition= "开题报告等待审核";
         }
       })
-      await request.post('/process/createProcess',this.tableForm).then(res=>{
-        this.tableForm.processID = res.data
+      await request.post('/process/updateProcess',this.tableForm).then(res=>{
+        if(res.code === '200'){
+          this.tableForm.processID = res.data
+          this.$message.success("申报成功")
+        }else {
+          this.$message.error("申报失败")
+        }
       })
-      await request.post('/process/updateSubmission',this.tableForm).then(res=>{
-        console.log(this.tableForm)
-        this.$message.success("申报成功")
-      })
-      this.$refs.upload.submit();
+      //this.$refs.upload.submit();
       this.tableForm={}
       await this.fetchData();
       this.showDialog = false;
