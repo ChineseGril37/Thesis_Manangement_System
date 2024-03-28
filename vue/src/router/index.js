@@ -90,7 +90,7 @@ const routes = [
             title:'中期检查',
             requireAuth:true
           }
-        },]
+        }]
       },
       {
         path: '/Thesis',

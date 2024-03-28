@@ -75,4 +75,15 @@
     <select id="getGroup" resultType="org.lengs.springboot.entity.User">
         select * from User userType = 2 and groupID = #{ groupID }
     </select>
+    <select id="listGroup" resultType="org.lengs.springboot.entity.User">
+        select * from User
+        <where>
+            <if test="groupID != null and groupID != ''">
+                groupID = #{groupID}
+            </if>
+            <if test="userType != null and userType != ''">
+                and userType = #{userType}
+            </if>
+        </where>
+    </select>
 </mapper>

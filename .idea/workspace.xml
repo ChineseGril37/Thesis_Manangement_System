@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="后端：流程创建时同步创建流程中的第一步课题申报">
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：流程创建、课题申报前端实现&#10;后端：流程创建、课题申报后端实现">
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/FileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/GroupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Report.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/thesis_management.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/views/Project/SubmissionDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/common/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/common/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/FileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessCreateRequest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/SubmissionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/SubmissionRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/UserPageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/UserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/SubmissionRequest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Submission.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Submission.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" afterDir="false" />
@@ -22,13 +28,21 @@
       <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/mapper/User.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/common/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/common/Result.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/request/UserPageRequest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/mapper/UserMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/IUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/IUserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/impl/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/impl/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/StudentManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/StudentManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/StudentsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/StudentsList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/TeacherList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/TeacherList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +73,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -72,41 +86,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.SpringbootApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-20",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lengs/IdeaProjects/Thesis_Manangement_System/vue/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.serve.executor": "Run",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "E:\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SpringbootApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lengs/IdeaProjects/Thesis_Manangement_System/vue/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.serve.executor&quot;: &quot;Run&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Options API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Options API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.lengs.springboot.service" />
@@ -119,11 +133,11 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Project" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Begin" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Login" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\About" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\userManage" />
-      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\utils" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SpringbootApplication">
@@ -183,7 +197,9 @@
       <workItem from="1711255386600" duration="23822000" />
       <workItem from="1711326494684" duration="30185000" />
       <workItem from="1711419547632" duration="32502000" />
-      <workItem from="1711504371983" duration="18145000" />
+      <workItem from="1711504371983" duration="21492000" />
+      <workItem from="1711544039356" duration="7837000" />
+      <workItem from="1711590419934" duration="22054000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -273,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711451232364</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="前端：流程创建、课题申报前端实现&#10;后端：流程创建、课题申报后端实现">
+      <option name="closed" value="true" />
+      <created>1711522721810</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1711522721810</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +326,8 @@
     <MESSAGE value="前端：课题管理文件上传页面功能实现&#10;后端：课题创建和文件上传后端接受信息并将记录存入数据库" />
     <MESSAGE value="前端：课题申报功能根据是否在截止日期和是否已经提交进行动态页面生成" />
     <MESSAGE value="后端：流程创建时同步创建流程中的第一步课题申报" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端：流程创建时同步创建流程中的第一步课题申报" />
+    <MESSAGE value="前端：流程创建、课题申报前端实现&#10;后端：流程创建、课题申报后端实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端：流程创建、课题申报前端实现&#10;后端：流程创建、课题申报后端实现" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

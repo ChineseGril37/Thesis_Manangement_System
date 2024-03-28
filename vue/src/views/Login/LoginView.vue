@@ -3,22 +3,21 @@
   <div class="header">
     <div class="logo" onclick="location.href='/'">
       <img src="@/assets/logo_nobackground.png" alt="" style="width: 80px;height: 80px;position: relative;float: left;">
-      <span style="margin-left: 10px;margin-top:10px;font-size: 40px;float: left;">毕业论文(设计)管理系统</span>
+      <span style="margin-left: 10px;margin-top:10px;font-size: 25px;float: left;">毕业论文(设计)管理系统</span>
     </div>
   </div>
     <div class="main">
       <div class="Post">
         <el-table
             class="PostInside"
-            :data="postForm"
-        >
+            :data="postForm">
           <el-table-column prop="post" label="公告信息" min-width="10%"></el-table-column>
         </el-table>
       </div>
       <div class="Login">
         <div class="LoginMention">
-          <p style="font-size: 25px;margin-left: 190px">欢迎使用毕业论文(设计)管理程序</p>
-          <p style="font-size: 20px;margin-left: 340px">请登录</p>
+          <p style="font-size: 3vh;margin: 10%">欢迎使用毕业论文(设计)管理程序</p>
+          <p style="font-size: 2vh;margin-left: 25vh">请登录</p>
         </div>
         <div class="LoginInput">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="login-bok">
@@ -53,9 +52,6 @@
           </el-form>
         </div>
       </div>
-    </div>
-    <div class="foot">
-
     </div>
   </div>
 </template>
@@ -132,10 +128,10 @@ export default {
               this.confirmForm = res.data
               sessionStorage.setItem("isLogin", "true")
               //这边后面做一个提交，服务器验证，通过之后获得token
-              sessionStorage.setItem("userId", this.confirmForm.userId)
+              sessionStorage.setItem("userID", this.confirmForm.userId)
               sessionStorage.setItem("userType", this.confirmForm.userType)
               sessionStorage.setItem("userRealName", this.confirmForm.userRealName)
-              sessionStorage.setItem("groupId", res.data.groupID)
+              sessionStorage.setItem("groupID", res.data.groupID)
               sessionStorage.setItem("userMajor", res.data.userMajor)
               this.$message.success("登录成功");
               setTimeout(() => {
@@ -162,15 +158,13 @@ export default {
   background-attachment: fixed;
 }
 .header{
-  height: 120px;
-  line-height: 60px;
+  height: 10vh;
   width:100%;
   background-color: #e3f1ef;
 }
 .logo{
-  margin-left: 15%;
-  line-height: 60px;
-  padding-top: 14px;
+  margin-left: 10vh;
+  line-height: 7vh;
 }
 .main{
   min-height: calc(100vh - 240px);
@@ -178,12 +172,8 @@ export default {
   display:flex;
   padding-left: 15%;
 }
-.Post{
-  width: 50%;
-  min-height: calc(100vh - 240px);
-}
 .PostInside{
-  margin-top: 25%;
+  margin-top: 35%;
   margin-left: 15%;
   width: 60vh;
   height: 40vh;
@@ -192,15 +182,17 @@ export default {
 }
 .Login{
   width: 35%;
-  min-height: calc(100vh - 240px);
+  min-height: 60vh;
+  min-width: 30vh;
   background-color: rgb(0,0,0,0.1);
   border-radius:25px 25px 25px 25px;
   padding-top: 10%;
+  margin-left: 10vh;
 }
 .LoginInput{
   border:1px solid rgba(10, 4, 4, 0.09);
-  margin-right: 90px;
-  margin-left: 90px;
+  margin-right: 5%;
+  margin-left: 5%;
   padding: 80px;
   border-radius:25px 25px 25px 25px;
 }

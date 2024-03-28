@@ -30,9 +30,9 @@ export default {
   flex-direction:column;
   min-height: calc(25vh);
   width: calc(55vh);
-  margin-top: 45px;
-  margin-left: 55px;
-  background-color:floralwhite;
+  margin-top: 3vh;
+  margin-left: 3vh;
   border-radius:5px 5px 5px 5px;
+  box-shadow: 0 0 15px 15px rgba(153, 153, 153, 0.2 );
 }
 </style>

@@ -6,6 +6,7 @@ import lombok.Data;
 public class Submission {
     private Integer submissionID;
     private Integer processID;
+    private Integer groupID;
     private String submissionBase;
     private String submissionType;
     private String submissionBrief;

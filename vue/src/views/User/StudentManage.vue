@@ -8,7 +8,13 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh"></i><span>重置</span></el-button>
     </div>
     <!--  数据表单  -->
-    <el-table :data="tableData" :row-style="{ height:'80px'}" style="font-size: 15px" stripe>
+    <el-table
+        :data="tableData"
+        :row-style="{ height:'80px'}"
+        style="font-size: 15px"
+        :cell-style="cellStyle"
+        :header-cell-style="{'text-align':'center'}"
+        stripe>
       <el-table-column prop="userId" label="学号"  min-width="15%"></el-table-column>
       <el-table-column prop="userRealName" label="姓名" min-width="10%"></el-table-column>
       <el-table-column prop="userAge" label="年龄" min-width="10%"></el-table-column>
@@ -86,6 +92,10 @@ export default {
       //  点击翻页按键触发产生交互
       this.params.pageNum = pageNum
       this.load()
+    },
+    //设置表格内容居中
+    cellStyle({row, column, rowIndex, columnIndex}) {
+      return {'text-align': 'center'};
     }
   }
 }

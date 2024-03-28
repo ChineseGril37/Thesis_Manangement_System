@@ -2,6 +2,7 @@ package org.lengs.springboot.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.lengs.springboot.controller.request.GroupRequest;
 import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserRequest;
 import org.lengs.springboot.entity.User;
@@ -48,7 +49,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getGroup(Integer groupID) {
-        return userMapper.getGroup(groupID);
+    public List<User> listGroup(GroupRequest groupRequest) {
+        return userMapper.listGroup(groupRequest);
     }
 }

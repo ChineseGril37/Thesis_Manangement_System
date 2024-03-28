@@ -1,8 +1,9 @@
 package org.lengs.springboot.controller.request;
+
 import lombok.Data;
+
 @Data
-public class ProcessRequest {
-    private Integer userID;
-    private String userRealName;
+public class GroupRequest {
     private Integer groupID;
+    private Integer userType;
 }

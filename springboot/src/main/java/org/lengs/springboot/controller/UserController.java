@@ -2,6 +2,7 @@ package org.lengs.springboot.controller;
 import java.util.List;
 import java.util.Objects;
 
+import org.lengs.springboot.controller.request.GroupRequest;
 import org.lengs.springboot.controller.request.UserRequest;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.common.Result;
@@ -46,5 +47,14 @@ public class UserController {
     public Result delete(@RequestParam Integer userId){
         userService.deleteById(userId);
         return Result.success();
+    }
+    @GetMapping("/listGroup")
+    public Result listGroup(GroupRequest groupRequest){
+        List<User> users = userService.listGroup(groupRequest);
+        if(users.isEmpty()){
+            return Result.error("未查询到用户");
+        }else {
+            return Result.success(users);
+        }
     }
 }

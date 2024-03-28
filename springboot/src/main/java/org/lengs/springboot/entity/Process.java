@@ -11,9 +11,9 @@ public class Process {
     private String processCreateTime;
     private String processDeadTime;
     private String processCondition;
-    private Integer processSubmission;
-    private Integer processReport;
-    private Integer processMission;
-    private Integer processMidcheck;
-    private Integer processOral;
+    private Integer submissionID;
+    private Integer reportID;
+    private Integer missionID;
+    private Integer midcheckID;
+    private Integer oralID;
 }

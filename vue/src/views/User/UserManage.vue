@@ -15,7 +15,9 @@
         :data="tableData"
         :row-style="{ height:'80px'}"
         style="font-size: 15px"
-        stripe>
+        stripe
+        :cell-style="cellStyle"
+        :header-cell-style="{'text-align':'center'}">
       <el-table-column prop="userId" label="学号/教务号" min-width="10%"></el-table-column>
       <el-table-column prop="userRealName" label="姓名" min-width="8%"></el-table-column>
       <el-table-column prop="userAge" label="年龄" min-width="5%"></el-table-column>
@@ -182,6 +184,10 @@ export default {
       this.params.pageNum = pageNum
       this.load()
     },
+    //设置表格内容居中
+    cellStyle({row, column, rowIndex, columnIndex}) {
+      return {'text-align': 'center'};
+    }
   }
 }
 </script>

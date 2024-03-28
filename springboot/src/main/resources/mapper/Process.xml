@@ -3,7 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lengs.springboot.mapper.ProcessMapper">
-    <select id="listByProcess" resultType="org.lengs.springboot.entity.Process">
+    <update id="updateSubmission">
+        update Submission
+        set
+            processID = #{processID},
+            submissionTeacherReview = #{submissionTeacherReview},
+            submissionExpertReview = #{submissionExpertReview}
+        where submissionID = #{submissionID}
+    </update>
+    <select id="listProcess" resultType="org.lengs.springboot.entity.Process">
         select * from Process
             <where>
                 <if test="processID != null and processID != ''">
@@ -15,14 +23,40 @@
             </where>
     </select>
     <select id="listBySubmission" resultType="org.lengs.springboot.entity.Submission">
-        select * from Submission where processID = #{ processID }
+        select * from Submission where submissionID = #{submissionID}
     </select>
-    <insert id="createProcess" >
-        insert into Process(processName,processCreateBy,groupID,processCreateTime,processChangeTime,processDeadTime,processCondition,processSubmission,processReport,processMission,processMidcheck,processOral)
-        values (#{processName},#{processCreateBy},#{groupID},#{processCreateTime},#{processChangeTime},#{processDeadTime},#{processCondition},#{processSubmission},#{processReport},#{processMission},#{processMidcheck},#{processOral});
+    <select id="listReport" resultType="org.lengs.springboot.entity.Report">
+        select * form report
+        <where>
+            <if test="processID != null and processID != ''">
+                processID = #{processID}
+            </if>
+            <if test="groupID != null and groupID != ''">
+                groupID = #{groupID}
+            </if>
+        </where>
+    </select>
+    <select id="listByProcess" resultType="org.lengs.springboot.entity.Process">
+        select * from Process
+        <where>
+            <if test="userID != null and userID != ''">
+                userID like concat('%', #{userID} , '%'))
+            </if>
+            <if test="groupID != null and groupID != ''">
+                and groupID like concat('%', #{groupID} , '%'))
+            </if>
+        </where>
+    </select>
+    <insert id="createProcess">
+        insert into Process(processName,processCreateBy,groupID,processCreateTime,processChangeTime,processDeadTime,processCondition,submissionID)
+        values (#{processName},#{processCreateBy},#{groupID},#{processCreateTime},#{processChangeTime},#{processDeadTime},#{processCondition},#{submissionID});
     </insert>
     <insert id="createSubmission" useGeneratedKeys="true" keyProperty="submissionID">
-        insert into Submission(processID,submissionBase,submissionType,submissionBrief,submissionDirection,submissionLanguage,submissionTeacherReview,submissionExpertReview)
-        values (#{processID},#{submissionBase},#{submissionType},#{submissionBrief},#{submissionDirection},#{submissionLanguage},#{submissionTeacherReview},#{submissionExpertReview})
+        insert into Submission(submissionBase,groupID,submissionType,submissionBrief,submissionDirection,submissionLanguage,submissionTeacherReview,submissionExpertReview)
+        values (#{submissionBase},#{groupID},#{submissionType},#{submissionBrief},#{submissionDirection},#{submissionLanguage},#{submissionTeacherReview},#{submissionExpertReview})
+    </insert>
+    <insert id="createReport" useGeneratedKeys="true" keyProperty="reportID">
+        insert into Report(groupID,reportMeaning,reportSituation,reportAim,reportWay)
+        values (#{groupID},#{reportMeaning},#{reportSituation},#{reportAim},#{reportWay})
     </insert>
 </mapper>

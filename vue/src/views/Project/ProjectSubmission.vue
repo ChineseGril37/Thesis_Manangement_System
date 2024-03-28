@@ -35,63 +35,87 @@
       <el-dialog
           :title="dialogTitle"
           :visible.sync="showDialog"
-          width="70%">
-        <el-form :model="tableForm"
-                 style="padding-left: 80px;padding-right: 80px;font-size: 20px"
-                  lable-position="top">
-          <el-form-item class="item" label="课题名称" porp="processName">
-            <el-input v-model="tableForm.processName" autocomplete="off" :disabled="condition" style="width: 100%;"></el-input>
-          </el-form-item>
-          <el-form-item label="是否以实验、实习、工程实践和社会调查为基础" porp="submissionBase">
-            <el-select v-model="tableForm.submissionBase" :disabled="condition" placeholder="请选择" style="width: 100%;">
-              <el-option label="是" value = 1></el-option>
-              <el-option label="否" value = 0></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="课题类别" porp="submissionType">
-              <el-select v-model="tableForm.submissionType" :disabled="condition" placeholder="请选择" style="width: 100%;">
-                <el-option label="毕业设计" value = "毕业设计"></el-option>
-                <el-option label="毕业论文" value = "毕业论文"></el-option>
-              </el-select>
-          </el-form-item >
-          <el-form-item label="选题依据及课题简介" porp="submissionBrief">
-            <el-input v-model="tableForm.submissionBrief"
-                      type="textarea"
-                      :autosize="{ minRows: 6, maxRows: 6}"
-                      placeholder="请输入内容"
-                      :disabled="condition"
-                      clearable></el-input>
-          </el-form-item >
-          <el-form-item label="论文研究方向" porp="submissionDirection">
-            <el-input v-model="tableForm.submissionDirection" type="text" clearable :disabled="condition"></el-input>
-          </el-form-item >
-          <el-form-item label="撰写语种" porp="submissionDirection">
-            <el-input v-model="tableForm.submissionLanguage" type="text" clearable :disabled="condition"></el-input>
-          </el-form-item >
-          <el-form-item label="附件上传"  porp="submissionFile">
-            <el-upload
-                class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :before-remove="beforeRemove"
-                multiple
-                :limit="3"
-                :on-exceed="handleExceed"
-                :file-list="fileList">
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">请上传doc(x)文件，且不超过50MB</div>
-            </el-upload>
-          </el-form-item >
-          <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
-            <el-input v-model="tableForm.submissionTeacherReview" type="text" :disabled="true"></el-input>
-          </el-form-item >
-          <el-form-item label="专业专家审核"  porp="submissionExpertReview">
-            <el-input v-model="tableForm.submissionExpertReview" type="text" :disabled="true"></el-input>
-          </el-form-item >
-          <el-button type="primary" size="middle" plain :disabled="condition" @click="setCurrentTime();processSubmit()">确认</el-button>
-          <el-button plain size="middle" :disabled="condition" @click="closeDialog">取消</el-button>
-        </el-form>
+          width="30%">
+        <el-row :gutter="15">
+          <el-form :model="tableForm" :rules="rules" size="small" label-width="10px"
+                   label-position="top" >
+            <el-col>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item label="课题名称" porp="processName">
+                    <el-input v-model="tableForm.processName" placeholder="课题名称" clearable
+                              prefix-icon='el-icon-edit-outline' :style="{width: '100%'}" :disabled="condition"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="是否以实验、实习、工程实践和社会调查为基础" porp="submissionBase">
+                    <el-select v-model="tableForm.submissionBase" :disabled="condition" placeholder="请选择" :style="{width: '100%'}">
+                      <el-option label="是" value = 1></el-option>
+                      <el-option label="否" value = 0></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="课题类别" porp="submissionType">
+                    <el-select v-model="tableForm.submissionType" :disabled="condition" placeholder="请选择" style="width: 100%;">
+                      <el-option label="毕业设计" value = "毕业设计"></el-option>
+                      <el-option label="毕业论文" value = "毕业论文"></el-option>
+                    </el-select>
+                  </el-form-item >
+                </el-col>
+                <el-col :span="24">
+                  <el-form-item label="选题依据及课题简介" prop="submissionBrief">
+                    <el-input v-model="tableForm.submissionBrief" type="textarea" placeholder="选题依据及课题简介"
+                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
+                              :disabled="condition" :style="{width: '100%'}"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="24">
+                  <el-form-item label="论文研究方向" prop="submissionDirection">
+                    <el-input v-model="tableForm.submissionDirection" placeholder="论文研究方向" clearable
+                              :style="{width: '100%'}" :disabled="condition"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="6">
+                  <el-form-item label="撰写语种" prop="submissionLanguage">
+                    <el-input v-model="tableForm.submissionLanguage" placeholder="撰写语种" clearable
+                              :style="{width: '100%'}" :disabled="condition"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="24">
+                  <el-form-item label="附件上传" prop="submissionFile">
+                    <el-upload ref="submissionFile" :file-list="fileList"
+                               :action="submissionFileAction" :auto-upload="false"
+                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">
+                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>
+                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>
+                    </el-upload>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="24">
+                  <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
+                    <el-input v-model="tableForm.submissionTeacherReview" type="text" :disabled="true"></el-input>
+                  </el-form-item >
+                </el-col>
+                <el-col :span="24">
+                  <el-form-item label="专业专家审核"  porp="submissionExpertReview">
+                  <el-input v-model="tableForm.submissionExpertReview" type="text" :disabled="true"></el-input>
+                </el-form-item >
+                </el-col>
+                <el-col :span="3">
+                  <el-form-item label-width="5px" label="" prop="field114">
+                    <el-button type="primary" size="middle" plain :disabled="condition" @click="setCurrentTime();processSubmit()">确认</el-button>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="3">
+                  <el-form-item label-width="5px" label="" prop="field114">
+                    <el-button plain size="middle" :disabled="condition" @click="closeDialog">取消</el-button>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-form>
+        </el-row>
       </el-dialog>
     </div>
   </div>
@@ -104,15 +128,51 @@ export default {
   data(){
     return {
       tableData: [{}],
+      fileList:[],
       tableForm:{},
       showDialog:false,
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
+      formData: "",
       params:{
-        processCreateBy:sessionStorage.getItem('userId'),
+        processCreateBy:sessionStorage.getItem('userID'),
         processID:'',
       },
+      rules: {
+        processName: [{
+          required: true,
+          message: '课题名称',
+          trigger: 'blur'
+        }],
+        submissionBase: [{
+          required: true,
+          message: '是',
+          trigger: 'change'
+        }],
+        submissionType: [{
+          required: true,
+          message: '',
+          trigger: 'change'
+        }],
+        submissionBrief: [{
+          required: true,
+          message: '选题依据及课题简介',
+          trigger: 'blur'
+        }],
+        submissionDirection: [{
+          required: true,
+          message: '论文研究方向',
+          trigger: 'blur'
+        }],
+        submissionLanguage: [{
+          required: true,
+          message: '撰写语种',
+          trigger: 'blur'
+        }],
+      },
+      submissionFileAction: '/file/upload',
+      submissionFilefileList: [],
     }
   },
   created() {
@@ -126,33 +186,28 @@ export default {
         let today = new Date()
         let dateBegin = new Date(res.data.submissionBegin)
         let dateEnd = new Date(res.data.submissionEnd)
+        if(today < dateBegin || today > dateEnd){
+          this.condition = true
+        }
         //设置一下课题申报截止日期
-        let date = new Date(res.data.submissionEnd)
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let strDate = date.getDate();
-        let hour = date.getHours();
-        let minute = date.getMinutes();
-        let second = date.getSeconds();
-        month = month > 9 ? month : '0' + month
-        strDate = strDate > 9 ? strDate : '0' + strDate
-        hour = hour > 9 ? hour : '0' + hour
-        minute = minute > 9 ? minute : '0' + minute
-        second = second > 9 ? second : '0' + second
-        this.deadTime = year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second
+        this.deadTime = this.isoDateForMat(res.data.reportDeadline)
       })
-      await request.get('/process/listBy',{params:that.params}).then(res =>{
+      //获取当前学生的流程信息，如果没有则显示一条空信息，如果在申报期内显示提交否则显示查看
+      await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
-          //如果查询到了
-          console.log("查询到了数据")
-            that.tableData = res.data
-            that.condition = true
+          //console.log("查询到了数据")
+          that.tableData = res.data
+          that.condition = true
           that.tableData.forEach((item) =>{
             item.userType=2
-            item.groupID=sessionStorage.getItem("groupId")
+            item.groupID=sessionStorage.getItem("groupID")
             item.userMajor=sessionStorage.getItem("userMajor")
-            request.get('/user/page',{params:item}).then(res=>{
-              this.$set(item,"processGroup",res.data.list[0].userRealName)
+            request.get('/user/listGroup',{params:item}).then(res=>{
+              if(res.code === '200'){
+                this.$set(item,"processGroup",res.data[0].userRealName)
+              }else {
+                this.$set(item,"processGroup","查询失败")
+              }
             })
           })
         }
@@ -170,22 +225,42 @@ export default {
     },
     async processSubmit(){
       this.tableForm.processDeadTime = this.deadTime
+      this.tableForm.groupID = sessionStorage.getItem('groupID')
       console.log(this.tableForm)
       await request.post('/process/createSubmission',this.tableForm).then(res=>{
         if(res.code === '200'){
-          this.tableForm.processSubmission = res.data
-          this.tableForm.processCreateBy = sessionStorage.getItem('userId')
-          this.tableForm.groupID=sessionStorage.getItem("groupId")
+          this.tableForm.submissionID = res.data
+          this.tableForm.processCreateBy = sessionStorage.getItem('userID')
+          this.tableForm.groupID=sessionStorage.getItem("groupID")
           this.tableForm.processCondition= "课题申报等待审核";
+          console.log("2")
         }
       })
       await request.post('/process/createProcess',this.tableForm).then(res=>{
         this.$message.success("申报成功")
       })
+      //this.$refs.upload.submit();
       this.tableForm={}
-      this.fetchData();
+      await this.fetchData();
       this.showDialog = false;
-      console.log(this.tableForm.processDeadTime)
+    },
+    uploadFile (file) {
+      let formData = new FormData();
+      formData.append("file", this.fileList[0].raw);//拿到存在fileList的文件存放到formData中
+      //下面数据是我自己设置的数据,可自行添加数据到formData(使用键值对方式存储)
+      formData.append("title", this.title);
+      request().post("/file/upload", this.formData, {
+        "Content-Type": "multipart/form-data;charset=utf-8"
+      }).then(res => {
+        if (res.data === "200") {
+          this.$notify({
+            title: '成功',
+            message: '提交成功',
+            type: 'success',
+            duration: 1000
+          });
+        }
+      })
     },
     closeDialog(){
       this.tableForm={}
@@ -199,11 +274,11 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    handleExceed(files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-    },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${ file.name }？`);
+    },
+    delFile () {
+      this.fileList = [];
     },
     setCurrentTime() {
       //获取当前时间并打印
@@ -216,6 +291,21 @@ export default {
       this.tableForm.processCreateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
       this.tableForm.processChangeTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
       console.log(this.tableForm)
+    },
+    isoDateForMat(time) {
+      let date = new Date(time)
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let strDate = date.getDate();
+      let hour = date.getHours();
+      let minute = date.getMinutes();
+      let second = date.getSeconds();
+      month = month > 9 ? month : '0' + month
+      strDate = strDate > 9 ? strDate : '0' + strDate
+      hour = hour > 9 ? hour : '0' + hour
+      minute = minute > 9 ? minute : '0' + minute
+      second = second > 9 ? second : '0' + second
+      return (year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second);
     },
   }
 }

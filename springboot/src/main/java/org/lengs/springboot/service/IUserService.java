@@ -1,5 +1,6 @@
 package org.lengs.springboot.service;
 
+import org.lengs.springboot.controller.request.GroupRequest;
 import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserRequest;
 import org.lengs.springboot.entity.User;
@@ -19,5 +20,5 @@ public interface IUserService {
 
     User login(LoginRequest loginRequest);
 
-    User getGroup(Integer groupID);
+    List<User> listGroup(GroupRequest groupRequest);
 }

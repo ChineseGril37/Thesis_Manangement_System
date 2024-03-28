@@ -1,5 +1,6 @@
 package org.lengs.springboot.mapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.lengs.springboot.controller.request.GroupRequest;
 import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserRequest;
 import org.lengs.springboot.entity.User;
@@ -21,5 +22,6 @@ public interface UserMapper {
 
     void updateUser(User user);
 
-    User getGroup(Integer groupID);
+
+    List<User> listGroup(GroupRequest groupRequest);
 }
