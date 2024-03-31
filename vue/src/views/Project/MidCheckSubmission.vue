@@ -45,50 +45,37 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item class="item" label="研究目的" porp="processName">
-                    <el-input v-model="tableForm.reportMeaning" clearable
-                              :style="{width: '100%'}" :disabled="condition"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="研究现状" prop="submissionBrief">
-                    <el-input v-model="tableForm.reportSituation" type="textarea"
+                  <el-form-item class="item" label="阶段性总结" porp="midcheckSummary">
+                    <el-input v-model="tableForm.midcheckSummary" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="研究目标" prop="submissionBrief">
-                    <el-input v-model="tableForm.reportAim" type="textarea"
+                  <el-form-item label="存在的问题" prop="midcheckProblem">
+                    <el-input v-model="tableForm.midcheckProblem" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="研究方案" prop="submissionBrief">
-                    <el-input v-model="tableForm.reportWay" type="textarea"
-                              show-word-limit :autosize="{minRows: 5, maxRows: 5}"
-                              :disabled="condition" :style="{width: '100%'}"></el-input>
-                  </el-form-item>
+                  <!--                  <el-form-item label="附件上传" prop="submissionFile">-->
+                  <!--                    <el-upload ref="submissionFile" :file-list="fileList"-->
+                  <!--                               :action="submissionFileAction" :auto-upload="false"-->
+                  <!--                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
+                  <!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
+                  <!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
+                  <!--                    </el-upload>-->
+                  <!--                  </el-form-item>-->
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="附件上传" prop="submissionFile">
-                    <el-upload ref="submissionFile" :file-list="fileList"
-                               :action="submissionFileAction" :auto-upload="false"
-                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">
-                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>
-                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>
-                    </el-upload>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
-                    <el-input v-model="tableForm.reportTeacherReview" type="text" :disabled="true"></el-input>
+                  <el-form-item label="中期检查教师审核"  porp="midcheckTeacherReview">
+                    <el-input v-model="tableForm.midcheckTeacherReview" type="text" :disabled="true"></el-input>
                   </el-form-item >
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="专业专家审核"  porp="submissionExpertReview">
-                    <el-input v-model="tableForm.reportExpertReview" type="text" :disabled="true"></el-input>
+                  <el-form-item label="中期检查专家审核"  porp="midcheckExpertReview">
+                    <el-input v-model="tableForm.midcheckExpertReview" type="text" :disabled="true"></el-input>
                   </el-form-item >
                 </el-col>
                 <el-col :span="3">
@@ -125,30 +112,20 @@ export default {
       dialogTitle:"申报信息",
       formData: "",
       params:{
-        processCreateBy:sessionStorage.getItem('userId'),
+        processCreateBy:sessionStorage.getItem('userID'),
         processID:'',
       },
       rules: {
-        reportMeaning: [{
+        midcheckSummary: [{
           required: true,
-          message: '研究目的',
+          message: '阶段性总结',
           trigger: 'change'
         }],
-        reportSituation: [{
+        midcheckProblem: [{
           required: true,
           message: '研究现状',
           trigger: 'change'
-        }],
-        reportAim: [{
-          required: true,
-          message: '研究目标',
-          trigger: 'blur'
-        }],
-        reportWay: [{
-          required: true,
-          message: '研究方案',
-          trigger: 'blur'
-        }],
+        }]
       },
     }
   },
@@ -161,29 +138,25 @@ export default {
       //先判断是不是在提交时间内
       await request.get('/date/list').then( res =>{
         let today = new Date()
-        //因为提交的是开题报告，所以需要在课题申报之后，开题报告截止之前
-        let dateBegin = new Date(res.data.submissionEnd)
-        let dateEnd = new Date(res.data.reportDeadline)
+        //因为提交的是中期检查，所以需要在任务书截止之后，开题报告截止之前
+        let dateBegin = new Date(res.data.missionDeadline)
+        let dateEnd = new Date(res.data.midCheckDeadline)
         //如果不在的话，显示查看按钮
         if(today < dateBegin || today > dateEnd){
           this.condition = true
         }
-        //设置一下任务书截止日期
-        this.deadTime = this.isoDateForMat(res.data.missionDeadline)
+        //设置一下中期报告提交之后的论文初稿截止日期
+        this.deadTime = this.isoDateForMat(res.data.draftThesisDeadline)
       })
       //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
           //console.log("查询到了数据")
           that.tableData = res.data
-          that.condition = true
-          console.log(res.data[0].processCondition)
-          if(res.data[0].processCondition === "课题申报审核通过"){
-            that.condition = false
-          }
+          that.condition = res.data[0].processCondition !== "任务书审核通过";
           that.tableData.forEach((item) =>{
             item.userType=2
-            item.groupID=sessionStorage.getItem("groupId")
+            item.groupID=sessionStorage.getItem("groupID")
             item.userMajor=sessionStorage.getItem("userMajor")
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
@@ -198,31 +171,33 @@ export default {
     },
     async informationView(row){
       this.tableForm = row
-      await request.get('/process/listReport',{params:row}).then(res=>{
+      await request.get('/process/listMidCheck',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
+        console.log(res)
       })
       this.$set(this.tableForm, 'processName', row.processName);
       this.showDialog = true
     },
     async processSubmit(){
       this.tableForm.processDeadTime = this.deadTime
+      this.tableForm.groupID=sessionStorage.getItem("groupID")
       console.log(this.tableForm)
-      await request.post('/process/createReport',this.tableForm).then(res=>{
+      await request.post('/process/createMidCheck',this.tableForm).then(res=>{
         if(res.code === '200'){
-          this.tableForm.reportID = res.data
-          this.tableForm.processCondition= "课题申报等待审核";
+          this.tableForm.midcheckID = res.data
+          this.tableForm.processCondition= "中期检查等待审核";
         }
       })
-      await request.post('/process/createProcess',this.tableForm).then(res=>{
-        this.tableForm.processID = res.data
+      await request.post('/process/updateProcess',this.tableForm).then(res=>{
+        if(res.code === '200'){
+          this.$message.success("申报成功")
+        }else {
+          this.$message.error("申报失败")
+        }
       })
-      await request.post('/process/updateSubmission',this.tableForm).then(res=>{
-        console.log(this.tableForm)
-        this.$message.success("申报成功")
-      })
-      this.$refs.upload.submit();
+      //this.$refs.upload.submit();
       this.tableForm={}
       await this.fetchData();
       this.showDialog = false;

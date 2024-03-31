@@ -54,29 +54,30 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item class="item" label="课题目标" porp="processName">
-                    <el-input v-model="tableForm.missionGoal" clearable
-                              :style="{width: '100%'}" :disabled="condition"></el-input>
+                  <el-form-item class="item" label="课题目标" porp="missionGoal">
+                    <el-input v-model="tableForm.missionGoal" type="textarea"
+                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
+                              :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="课题任务内容" prop="submissionBrief">
+                  <el-form-item label="课题任务内容" prop="missionContent">
                     <el-input v-model="tableForm.missionContent" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="课题进度安排" prop="submissionBrief">
+                  <el-form-item label="课题进度安排" prop="missionPlan">
                     <el-input v-model="tableForm.missionPlan" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="参考文献" prop="submissionBrief">
+                  <el-form-item label="参考文献" prop="missionReferences">
                     <el-input v-model="tableForm.missionReferences" type="textarea"
-                              show-word-limit :autosize="{minRows: 5, maxRows: 5}"
+                              show-word-limit :autosize="{minRows: 2, maxRows: 2}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
@@ -138,24 +139,24 @@ export default {
         processID:'',
       },
       rules: {
-        reportMeaning: [{
+        missionGoal: [{
           required: true,
-          message: '研究目的',
+          message: '课题目标',
           trigger: 'change'
         }],
-        reportSituation: [{
+        missionContent: [{
           required: true,
-          message: '研究现状',
+          message: '课题任务内容',
           trigger: 'change'
         }],
-        reportAim: [{
+        missionPlan: [{
           required: true,
-          message: '研究目标',
+          message: '课题进度安排',
           trigger: 'blur'
         }],
-        reportWay: [{
+        missionReferences: [{
           required: true,
-          message: '研究方案',
+          message: '参考文献',
           trigger: 'blur'
         }],
       },
@@ -170,22 +171,22 @@ export default {
       //先判断是不是在提交时间内
       await request.get('/date/list').then( res =>{
         let today = new Date()
-        //因为提交的是开题报告，所以需要在课题申报之后，开题报告截止之前
-        let dateBegin = new Date(res.data.submissionEnd)
-        let dateEnd = new Date(res.data.reportDeadline)
+        //因为提交的是任务书，所以需要在开题报告之后，任务书截止之前
+        let dateBegin = new Date(res.data.reportDeadline)
+        let dateEnd = new Date(res.data.missionDeadline)
         //如果不在的话，显示查看按钮
         if(today < dateBegin || today > dateEnd){
           this.condition = true
         }
         //设置一下任务书截止日期
-        this.deadTime = this.isoDateForMat(res.data.missionDeadline)
+        this.deadTime = this.isoDateForMat(res.data.midCheckDeadline)
       })
       //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
           //console.log("查询到了数据")
           that.tableData = res.data
-          that.condition = res.data[0].processCondition !== "课题申报审核通过";
+          that.condition = res.data[0].processCondition !== "开题报告审核通过";
           that.tableData.forEach((item) =>{
             item.userType=2
             item.groupID=sessionStorage.getItem("groupID")
@@ -203,10 +204,11 @@ export default {
     },
     async informationView(row){
       this.tableForm = row
-      await request.get('/process/listReport',{params:row}).then(res=>{
+      await request.get('/process/listMission',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
+        console.log(res)
       })
       this.$set(this.tableForm, 'processName', row.processName);
       this.showDialog = true
@@ -215,15 +217,14 @@ export default {
       this.tableForm.processDeadTime = this.deadTime
       console.log(this.tableForm)
       this.tableForm.groupID=sessionStorage.getItem("groupID")
-      await request.post('/process/createReport',this.tableForm).then(res=>{
+      await request.post('/process/createMission',this.tableForm).then(res=>{
         if(res.code === '200'){
-          this.tableForm.reportID = res.data
-          this.tableForm.processCondition= "开题报告等待审核";
+          this.tableForm.missionID = res.data
+          this.tableForm.processCondition= "任务书等待审核";
         }
       })
       await request.post('/process/updateProcess',this.tableForm).then(res=>{
         if(res.code === '200'){
-          this.tableForm.processID = res.data
           this.$message.success("申报成功")
         }else {
           this.$message.error("申报失败")

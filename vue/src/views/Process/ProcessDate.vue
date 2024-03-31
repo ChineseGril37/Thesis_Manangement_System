@@ -170,31 +170,27 @@ export default {
   background-color:white;
   box-shadow: 0 0 5px 1px rgba(153, 153, 153, 0.5);
   border-radius:5px;
-  display:flex;
-  justify-content: center;
-  align-items:center;
 }
 .dateView{
   height: 90%;
-  width: 70%;
-  padding-top: 50px;
-  padding-left: 250px;
+  width: 90%;
+  padding-left: 15%;
 }
 .dateDiv{
   display:flex;
-  margin-top: 50px;
+  margin-top: 5%;
   font-size: 17px;
   text-align:center
 }
 .dateInfo{
+  margin-left: 2%;
+  margin-right: 2%;
   float: left;
-  width: 25%;
-  margin-left: 10px;
-  margin-right:60px;
+  width:30vh;
 }
 .buttonDiv{
-  margin-top: 10%;
-  margin-left: 35%;
+  margin-top: 3%;
+  padding-left: 35%;
 }
 ::v-deep .el-input__inner {
   box-shadow: 1px 1px 5px 1px  RGB(153, 153, 153, 0.1) inset;

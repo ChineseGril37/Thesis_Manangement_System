@@ -28,8 +28,8 @@ export default {
 .userinfo{
   float: left;
   flex-direction:column;
-  min-height: calc(25vh);
-  width: calc(55vh);
+  min-height: 25vh;
+  min-width: 75vh;
   margin-top: 3vh;
   margin-left: 3vh;
   border-radius:5px 5px 5px 5px;

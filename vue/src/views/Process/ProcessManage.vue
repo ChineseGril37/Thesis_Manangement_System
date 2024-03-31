@@ -15,8 +15,6 @@
       <!-- 搜索表单 -->
       <div style="margin-bottom: 20px">
         <el-input style="width: 240px" placeholder="请输入学号" v-model="searchData.userId"></el-input>
-        <el-input style="width: 240px;margin-left: 10px" placeholder="请输入姓名" v-model="searchData.userRealName"></el-input>
-        <el-input style="width: 240px;margin-left: 10px" placeholder="请输入小组号" v-model="searchData.userRealName"></el-input>
         <el-button style="margin-left: 5px" type="primary" @click="search"><i class="el-icon-search"></i><span>搜索</span></el-button>
         <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh"></i><span>重置</span></el-button>
       </div>
@@ -28,7 +26,6 @@
           stripe
           :cell-style="cellStyle"
           :header-cell-style="{'text-align':'center'}">
-        <el-table-column prop="processID" label="流程ID" min-width="5%"></el-table-column>
         <el-table-column prop="processName" label="课题名称" min-width="15%"></el-table-column>
         <el-table-column prop="processCreateBy" label="所属学生" min-width="5%"></el-table-column>
         <el-table-column prop="groupID" label="所属小组" min-width="10%"></el-table-column>
@@ -37,10 +34,21 @@
         <el-table-column prop="processCondition" label="流程状态" min-width="10%"></el-table-column>
         <el-table-column label="操作" min-width="5%">
         <template v-slot="scope">
-          <el-button size="middle" @click="editRow(scope.row);" style="font-size: 15px">审核</el-button>
+          <el-button size="middle" @click="Review(scope.row);" style="font-size: 15px">审核</el-button>
         </template>
       </el-table-column>
       </el-table>
+      <!-- 分页 -->
+      <div class="block">
+        <el-pagination
+            background
+            :current-page="params.pageNum"
+            :page-size="params.pageSize"
+            layout="prev, pager, next"
+            @current-change="handelCurrentChange"
+            :total="total">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -52,11 +60,20 @@ export default {
   data(){
     return{
       tableData:[],
+      tableForm:{},
+      tableLoading:false,
+      total: 0,
       searchData:{
         userId:undefined,
-        userRealName:undefined,
         groupID:undefined,
         userType:sessionStorage.getItem("userType")
+      },
+      params:{
+        pageNum: 1,
+        pageSize: 10,
+        userRealName: '',
+        userId: '',
+        userName:''
       },
     }
   },
@@ -64,14 +81,39 @@ export default {
     this.fetchData()
   },
   methods:{
+    async fetchData(){
+      if(this.searchData.userType === '2'){
+        this.searchData.groupID=sessionStorage.getItem('groupID')
+      }
+      console.log(this.searchData)
+      request.get('/process/listByProcess',{params:this.searchData}).then( res =>{
+        this.tableData = res.data
+      })
+    },
     //根据搜索内容自定义查询学生课题(学生姓名\学号)
     search(){
       //request.get('/')
     },
-    async fetchData(){
-      if(this.searchData.userType === '2'){
-        this.searchData.groupID=sessionStorage.getItem('groupId')
+    reset(){
+
+    },
+    Review(row){
+      this.tableForm.processID=row.processID
+      this.tableForm.processName=row.processName
+      switch (row.processCondition){
+        case "课题申报等待审核":this.tableForm.processCondition="课题申报审核通过";break
+        case "开题报告等待审核":this.tableForm.processCondition="开题报告审核通过";break
+        case "任务书等待审核":this.tableForm.processCondition="任务书审核通过";break
+        case "中期检查等待审核":this.tableForm.processCondition="中期检查审核通过"
       }
+      request.post('/process/updateProcess',this.tableForm).then(res=>{
+        this.$message.success("审核通过")
+      })
+    },
+    handelCurrentChange(pageNum){
+      //  点击翻页按键触发产生交互
+      this.params.pageNum = pageNum
+      this.load()
     },
     //设置表格内容居中
     cellStyle({row, column, rowIndex, columnIndex}) {
@@ -103,7 +145,7 @@ export default {
 }
 .submission{
   margin-top: 15px;
-  padding: 25px;
+  padding: 1%;
   height: calc(100vh - 265px);
   width: 100%;
   background-color:white;

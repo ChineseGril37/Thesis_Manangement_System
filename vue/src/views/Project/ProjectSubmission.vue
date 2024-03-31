@@ -82,16 +82,16 @@
                               :style="{width: '100%'}" :disabled="condition"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col :span="24">
-                  <el-form-item label="附件上传" prop="submissionFile">
-                    <el-upload ref="submissionFile" :file-list="fileList"
-                               :action="submissionFileAction" :auto-upload="false"
-                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">
-                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>
-                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>
-                    </el-upload>
-                  </el-form-item>
-                </el-col>
+<!--                <el-col :span="24">-->
+<!--                  <el-form-item label="附件上传" prop="submissionFile">-->
+<!--                    <el-upload ref="submissionFile" :file-list="fileList"-->
+<!--                               :action="submissionFileAction" :auto-upload="false"-->
+<!--                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
+<!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
+<!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
+<!--                    </el-upload>-->
+<!--                  </el-form-item>-->
+<!--                </el-col>-->
                 <el-col :span="24">
                   <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
                     <el-input v-model="tableForm.submissionTeacherReview" type="text" :disabled="true"></el-input>
@@ -104,7 +104,7 @@
                 </el-col>
                 <el-col :span="3">
                   <el-form-item label-width="5px" label="" prop="field114">
-                    <el-button type="primary" size="middle" plain :disabled="condition" @click="setCurrentTime();processSubmit()">确认</el-button>
+                    <el-button type="primary" size="middle" plain :disabled="condition" @click="processSubmit()">确认</el-button>
                   </el-form-item>
                 </el-col>
                 <el-col :span="3">
@@ -121,10 +121,12 @@
   </div>
 </template>
 <script>
+import {setCurrentTime,getJsonDateForMat} from "@/utils/common";
 import request from "@/utils/request";
-
+import SubmissionDialog from "@/components/SubmissionDialog.vue";
 export default {
   name: "ProjectSubmission",
+  components:{ SubmissionDialog },
   data(){
     return {
       tableData: [{}],
@@ -139,38 +141,6 @@ export default {
         processCreateBy:sessionStorage.getItem('userID'),
         processID:'',
       },
-      rules: {
-        processName: [{
-          required: true,
-          message: '课题名称',
-          trigger: 'blur'
-        }],
-        submissionBase: [{
-          required: true,
-          message: '是',
-          trigger: 'change'
-        }],
-        submissionType: [{
-          required: true,
-          message: '',
-          trigger: 'change'
-        }],
-        submissionBrief: [{
-          required: true,
-          message: '选题依据及课题简介',
-          trigger: 'blur'
-        }],
-        submissionDirection: [{
-          required: true,
-          message: '论文研究方向',
-          trigger: 'blur'
-        }],
-        submissionLanguage: [{
-          required: true,
-          message: '撰写语种',
-          trigger: 'blur'
-        }],
-      },
       submissionFileAction: '/file/upload',
       submissionFilefileList: [],
     }
@@ -181,6 +151,7 @@ export default {
   methods:{
     async fetchData() {
       const that = this;
+      console.log(setCurrentTime())
       //先判断是不是在提交时间内
       await request.get('/date/list').then( res =>{
         let today = new Date()
@@ -190,8 +161,9 @@ export default {
           this.condition = true
         }
         //设置一下课题申报截止日期
-        this.deadTime = this.isoDateForMat(res.data.reportDeadline)
+        this.deadTime = res.data.reportDeadline
       })
+      console.log(that.params)
       //获取当前学生的流程信息，如果没有则显示一条空信息，如果在申报期内显示提交否则显示查看
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
@@ -224,6 +196,8 @@ export default {
       this.showDialog = true
     },
     async processSubmit(){
+      this.tableForm.processCreateTime = setCurrentTime();
+      this.tableForm.processChangeTime = setCurrentTime();
       this.tableForm.processDeadTime = this.deadTime
       this.tableForm.groupID = sessionStorage.getItem('groupID')
       console.log(this.tableForm)
@@ -280,33 +254,33 @@ export default {
     delFile () {
       this.fileList = [];
     },
-    setCurrentTime() {
-      //获取当前时间并打印
-      let yy = new Date().getFullYear();
-      let mm = new Date().getMonth() + 1;
-      let dd = new Date().getDate();
-      let hh = new Date().getHours();
-      let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
-      let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds();
-      this.tableForm.processCreateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-      this.tableForm.processChangeTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-      console.log(this.tableForm)
-    },
-    isoDateForMat(time) {
-      let date = new Date(time)
-      let year = date.getFullYear();
-      let month = date.getMonth() + 1;
-      let strDate = date.getDate();
-      let hour = date.getHours();
-      let minute = date.getMinutes();
-      let second = date.getSeconds();
-      month = month > 9 ? month : '0' + month
-      strDate = strDate > 9 ? strDate : '0' + strDate
-      hour = hour > 9 ? hour : '0' + hour
-      minute = minute > 9 ? minute : '0' + minute
-      second = second > 9 ? second : '0' + second
-      return (year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second);
-    },
+    // setCurrentTime() {
+    //   //获取当前时间并打印
+    //   let yy = new Date().getFullYear();
+    //   let mm = new Date().getMonth() + 1;
+    //   let dd = new Date().getDate();
+    //   let hh = new Date().getHours();
+    //   let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
+    //   let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds();
+    //   this.tableForm.processCreateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
+    //   this.tableForm.processChangeTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
+    //   console.log(this.tableForm)
+    // },
+    // isoDateForMat(time) {
+    //   let date = new Date(time)
+    //   let year = date.getFullYear();
+    //   let month = date.getMonth() + 1;
+    //   let strDate = date.getDate();
+    //   let hour = date.getHours();
+    //   let minute = date.getMinutes();
+    //   let second = date.getSeconds();
+    //   month = month > 9 ? month : '0' + month
+    //   strDate = strDate > 9 ? strDate : '0' + strDate
+    //   hour = hour > 9 ? hour : '0' + hour
+    //   minute = minute > 9 ? minute : '0' + minute
+    //   second = second > 9 ? second : '0' + second
+    //   return (year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second);
+    // },
   }
 }
 </script>

@@ -5,18 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：课题申报、开题报告填写功能实现;流程管理页面搭建&#10;后端：流程管理后端功能实现">
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/MidCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Mission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/components/MidCheckDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/utils/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Thesis_Manangement_System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Thesis_Manangement_System.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/thesis_management.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/thesis_management.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Process/ProcessDate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessDate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/SubmissionDialog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/角色和功能设计.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/角色和功能设计.mmd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,11 +45,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Empty Mind Map" />
-        <option value="JavaScript File" />
         <option value="Mybatis Mapper" />
         <option value="Interface" />
         <option value="Class" />
         <option value="Vue Options API Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -47,13 +65,14 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2dc8lzTiDzTswNNDeyyEgLbKKn4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -86,7 +105,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\IntelliJ IDEA 2023.3.6\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -114,7 +133,7 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\userManage" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringbootApplication">
+  <component name="RunManager" selected="npm.serve">
     <configuration name="SpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="springboot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.lengs.springboot.SpringbootApplication" />
@@ -132,11 +151,15 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="npm.serve" />
+      <item itemvalue="Spring Boot.SpringbootApplication" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-5bc9ecd2" />
+        <option value="jdk-20.0.2-azul-20.0.2-4caba194b151-eb49e076" />
       </set>
     </attachedChunks>
   </component>
@@ -174,6 +197,15 @@
       <workItem from="1711504371983" duration="21492000" />
       <workItem from="1711544039356" duration="7837000" />
       <workItem from="1711590419934" duration="28080000" />
+      <workItem from="1711668469838" duration="3418000" />
+      <workItem from="1711672307536" duration="242000" />
+      <workItem from="1711672562819" duration="14047000" />
+      <workItem from="1711716431121" duration="1241000" />
+      <workItem from="1711724395776" duration="1279000" />
+      <workItem from="1711754768726" duration="4926000" />
+      <workItem from="1711807960473" duration="2835000" />
+      <workItem from="1711856690314" duration="44000" />
+      <workItem from="1711857028578" duration="7478000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -284,6 +316,12 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="includedJSSourcePackages">
+      <set>
+        <option value="element-ui" />
+        <option value="vue" />
+      </set>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

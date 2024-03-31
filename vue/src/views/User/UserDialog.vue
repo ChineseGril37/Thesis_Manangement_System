@@ -1,8 +1,6 @@
 <template>
   <!-- 编辑用户表单弹窗 -->
-  <transition name="dialog-fade">
     <el-dialog
-        v-if="showDialog"
         :title="dialogTitle"
         :visible.sync="showDialog"
         class="UserDialog"
@@ -78,7 +76,6 @@
         <el-button @click="setCurrentTime();closeDialog(0)">取 消</el-button>
       </div>
     </el-dialog>
-  </transition>
 </template>
 <script>
 import request from "@/utils/request";

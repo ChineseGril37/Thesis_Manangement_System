@@ -1,7 +1,7 @@
 import axios from "axios";
 const request = axios.create({
     //是baseURL不是baseUrl！！！！！！！！！！
-    baseURL: 'http://192.168.50.211:9090/' , //全局统一加上了前缀,所有接口都会加上前缀,页面里写接口不要加
+    baseURL: 'http://localhost:9090/' , //全局统一加上了前缀,所有接口都会加上前缀,页面里写接口不要加
     timeout: 5000
 })
 

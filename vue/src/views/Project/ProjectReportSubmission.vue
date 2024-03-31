@@ -134,7 +134,7 @@ export default {
       dialogTitle:"申报信息",
       formData: "",
       params:{
-        processCreateBy:sessionStorage.getItem('userId'),
+        processCreateBy:sessionStorage.getItem('userID'),
         processID:'',
       },
       rules: {
@@ -180,6 +180,7 @@ export default {
         //设置一下任务书截止日期
         this.deadTime = this.isoDateForMat(res.data.missionDeadline)
       })
+      console.log(that.params)
       //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){

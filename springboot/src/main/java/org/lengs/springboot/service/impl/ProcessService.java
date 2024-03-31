@@ -1,13 +1,12 @@
 package org.lengs.springboot.service.impl;
 
 import org.lengs.springboot.controller.request.ProcessRequest;
-import org.lengs.springboot.entity.Report;
-import org.lengs.springboot.entity.Submission;
+import org.lengs.springboot.entity.*;
+import org.lengs.springboot.entity.Process;
 import org.lengs.springboot.mapper.ProcessMapper;
 import org.lengs.springboot.service.IProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.lengs.springboot.entity.Process;
 
 import java.util.List;
 
@@ -31,6 +30,31 @@ public class ProcessService implements IProcessService {
 
     @Override
     public void updateProcess(Process process) {processMapper.updateProcess(process);}
+
+    @Override
+    public List<Mission> listMission(Mission mission) {
+        return processMapper.listMission(mission);
+    }
+
+    @Override
+    public void createMission(Mission mission) {
+        processMapper.createMission(mission);
+    }
+
+    @Override
+    public void updateMission(Mission mission) {
+        processMapper.updateMission(mission);
+    }
+
+    @Override
+    public List<MidCheck> listMidCheck(MidCheck midCheck) {
+        return processMapper.listMidCheck(midCheck);
+    }
+
+    @Override
+    public void createMidCheck(MidCheck midCheck) {
+        processMapper.createMidCheck(midCheck);
+    }
 
     @Override
     public void createSubmission(Submission submissionRequest) {

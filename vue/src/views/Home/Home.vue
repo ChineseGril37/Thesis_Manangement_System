@@ -41,6 +41,46 @@
               <span>填写中期检查</span>
             </el-menu-item>
           </el-submenu>
+          <el-submenu index="/User">
+            <template slot="title">
+              <i class="el-icon-user"></i>
+              <span>人员管理</span>
+            </template>
+            <el-menu-item index="/User/StudentList">
+              <i class="el-icon-tickets"></i>
+              <span>学生列表</span>
+            </el-menu-item>
+            <el-menu-item index="/User/StudentManage">
+              <i class="el-icon-circle-plus-outline"></i>
+              <span>组员管理</span>
+            </el-menu-item>
+            <el-menu-item index="/User/TeacherList">
+              <i class="el-icon-tickets"></i>
+              <span>教师列表</span>
+            </el-menu-item>
+            <el-menu-item index="/User/UserManage">
+              <i class="el-icon-edit-outline"></i>
+              <span>信息修改</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="/Process">
+            <template slot="title">
+              <i class="el-icon-files"></i>
+              <span>流程管理</span>
+            </template>
+            <el-menu-item index="/Process/ProcessView">
+              <i class="el-icon-tickets"></i>
+              <span>流程查看</span>
+            </el-menu-item>
+            <el-menu-item index="/Process/ProcessDate">
+              <i class="el-icon-date"></i>
+              <span>截止日期</span>
+            </el-menu-item>
+            <el-menu-item index="/Process/ProcessManage">
+              <i class="el-icon-edit-outline"></i>
+              <span>流程管理</span>
+            </el-menu-item>
+          </el-submenu>
           <el-submenu index="/Thesis">
             <template slot="title">
               <i class="el-icon-folder-opened"></i>
@@ -87,46 +127,6 @@
             <el-menu-item index="/OralDefense/OralDefenseMaterial">
               <i class="el-icon-document-add"></i>
               <span>材料提交</span>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="/User">
-            <template slot="title">
-              <i class="el-icon-user"></i>
-              <span>人员管理</span>
-            </template>
-            <el-menu-item index="/User/StudentList">
-              <i class="el-icon-tickets"></i>
-              <span>学生列表</span>
-            </el-menu-item>
-            <el-menu-item index="/User/StudentManage">
-              <i class="el-icon-circle-plus-outline"></i>
-              <span>组员管理</span>
-            </el-menu-item>
-            <el-menu-item index="/User/TeacherList">
-              <i class="el-icon-tickets"></i>
-              <span>教师列表</span>
-            </el-menu-item>
-            <el-menu-item index="/User/UserManage">
-              <i class="el-icon-edit-outline"></i>
-              <span>信息修改</span>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="/Process">
-            <template slot="title">
-              <i class="el-icon-files"></i>
-              <span>流程管理</span>
-            </template>
-            <el-menu-item index="/Process/ProcessView">
-              <i class="el-icon-tickets"></i>
-              <span>流程查看</span>
-            </el-menu-item>
-            <el-menu-item index="/Process/ProcessDate">
-              <i class="el-icon-date"></i>
-              <span>截止日期</span>
-            </el-menu-item>
-            <el-menu-item index="/Process/ProcessManage">
-              <i class="el-icon-edit-outline"></i>
-              <span>流程管理</span>
             </el-menu-item>
           </el-submenu>
           <el-submenu index="/About">
