@@ -3,7 +3,7 @@
       class="submissionDialog"
       :title="dialogTitle"
       :visible.sync="showSubmissionDialog"
-      @close="closeSubDialog"
+      @close="closeDialog"
   >
       <el-row :gutter="15">
         <el-form :model="submissionData"
@@ -104,7 +104,7 @@
               </el-col>
               <el-col :span="3">
                 <el-form-item label-width="5px" label="" prop="field114">
-                  <el-button plain size="middle" :disabled="condition" @click="closeSubDialog()">取消</el-button>
+                  <el-button plain size="middle" :disabled="condition" @click="closeDialog()">取消</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -115,6 +115,7 @@
 </template>
 <script>
 import {setCurrentTime} from "@/utils/common";
+import request from "@/utils/request";
 
 export default {
   name: "SubmissionDialog",
@@ -153,8 +154,31 @@ export default {
     }
   },
   methods:{
-    setCurrentTime,
-    closeSubDialog(){
+    async processSubmit(){
+      this.tableForm.processCreateTime = setCurrentTime();
+      this.tableForm.processChangeTime = setCurrentTime();
+      this.tableForm.processDeadTime = this.deadTime
+      this.tableForm.groupID = sessionStorage.getItem('groupID')
+      console.log(this.tableForm)
+      await request.post('/process/createSubmission',this.tableForm).then(res=>{
+        if(res.code === '200'){
+          this.tableForm.submissionID = res.data
+          this.tableForm.processCreateBy = sessionStorage.getItem('userID')
+          this.tableForm.groupID=sessionStorage.getItem("groupID")
+          this.tableForm.processCondition= "课题申报等待审核";
+          console.log("2")
+        }
+      })
+      await request.post('/process/createProcess',this.tableForm).then(res=>{
+        this.$message.success("申报成功")
+      })
+      //this.$refs.upload.submit();
+      this.tableForm={}
+      await this.fetchData();
+      this.showSubmissionDialog = false;
+    },
+    closeDialog(){
+      console.log("closeDialog调用")
       this.$refs["submissionData"].resetFields();
       this.fetchData();
       this.showDialog = false;
