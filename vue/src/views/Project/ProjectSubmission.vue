@@ -32,91 +32,13 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog
-          :title="dialogTitle"
-          :visible.sync="showDialog"
-          width="45%">
-        <el-row :gutter="15">
-          <el-form :model="tableForm" :rules="rules" size="small" label-width="10px"
-                   label-position="top" >
-            <el-col>
-              <el-row>
-                <el-col :span="24">
-                  <el-form-item label="课题名称" porp="processName">
-                    <el-input v-model="tableForm.processName" placeholder="课题名称" clearable
-                              :style="{width: '100%'}" :disabled="condition"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                  <el-form-item label="是否以实验、实习、工程实践和社会调查为基础" porp="submissionBase">
-                    <el-select v-model="tableForm.submissionBase" :disabled="condition" placeholder="请选择" :style="{width: '100%'}">
-                      <el-option label="是" value = 1></el-option>
-                      <el-option label="否" value = 0></el-option>
-                    </el-select>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                  <el-form-item label="课题类别" porp="submissionType">
-                    <el-select v-model="tableForm.submissionType" :disabled="condition" placeholder="请选择" style="width: 100%;">
-                      <el-option label="毕业设计" value = "毕业设计"></el-option>
-                      <el-option label="毕业论文" value = "毕业论文"></el-option>
-                    </el-select>
-                  </el-form-item >
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="选题依据及课题简介" prop="submissionBrief">
-                    <el-input v-model="tableForm.submissionBrief" type="textarea" placeholder="选题依据及课题简介"
-                              show-word-limit :autosize="{minRows: 6, maxRows: 6}"
-                              :disabled="condition" :style="{width: '100%'}"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="论文研究方向" prop="submissionDirection">
-                    <el-input v-model="tableForm.submissionDirection" placeholder="论文研究方向" clearable
-                              :style="{width: '100%'}" :disabled="condition"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="6">
-                  <el-form-item label="撰写语种" prop="submissionLanguage">
-                    <el-input v-model="tableForm.submissionLanguage" placeholder="撰写语种" clearable
-                              :style="{width: '100%'}" :disabled="condition"></el-input>
-                  </el-form-item>
-                </el-col>
-<!--                <el-col :span="24">-->
-<!--                  <el-form-item label="附件上传" prop="submissionFile">-->
-<!--                    <el-upload ref="submissionFile" :file-list="fileList"-->
-<!--                               :action="submissionFileAction" :auto-upload="false"-->
-<!--                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
-<!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
-<!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
-<!--                    </el-upload>-->
-<!--                  </el-form-item>-->
-<!--                </el-col>-->
-                <el-col :span="24">
-                  <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
-                    <el-input v-model="tableForm.submissionTeacherReview" type="text" :disabled="true"></el-input>
-                  </el-form-item >
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="专业专家审核"  porp="submissionExpertReview">
-                  <el-input v-model="tableForm.submissionExpertReview" type="text" :disabled="true"></el-input>
-                </el-form-item >
-                </el-col>
-                <el-col :span="3">
-                  <el-form-item label-width="5px" label="" prop="field114">
-                    <el-button type="primary" size="middle" plain :disabled="condition" @click="processSubmit()">确认</el-button>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="3">
-                  <el-form-item label-width="5px" label="" prop="field114">
-                    <el-button plain size="middle" :disabled="condition" @click="closeDialog">取消</el-button>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </el-col>
-          </el-form>
-        </el-row>
-      </el-dialog>
+      <SubmissionDialog
+          v-if="showSubmissionDialog"
+          ref="SubmissionDialog"
+          :dialog-title="dialogTitle"
+          :submissionInputData="tableForm"
+          @closeDialog="closeDialog"
+      ></SubmissionDialog>
     </div>
   </div>
 </template>
@@ -124,15 +46,16 @@
 import {setCurrentTime,getJsonDateForMat} from "@/utils/common";
 import request from "@/utils/request";
 import SubmissionDialog from "@/components/SubmissionDialog.vue";
+import UserDialog from "@/views/User/UserDialog.vue";
 export default {
   name: "ProjectSubmission",
-  components:{ SubmissionDialog },
+  components:{UserDialog, SubmissionDialog },
   data(){
     return {
       tableData: [{}],
       fileList:[],
       tableForm:{},
-      showDialog:false,
+      showSubmissionDialog:false,
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
@@ -151,7 +74,6 @@ export default {
   methods:{
     async fetchData() {
       const that = this;
-      console.log(setCurrentTime())
       //先判断是不是在提交时间内
       await request.get('/date/list').then( res =>{
         let today = new Date()
@@ -163,7 +85,6 @@ export default {
         //设置一下课题申报截止日期
         this.deadTime = res.data.reportDeadline
       })
-      console.log(that.params)
       //获取当前学生的流程信息，如果没有则显示一条空信息，如果在申报期内显示提交否则显示查看
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
@@ -193,30 +114,10 @@ export default {
         }
       })
       this.$set(this.tableForm, 'processName', row.processName);
-      this.showDialog = true
-    },
-    async processSubmit(){
-      this.tableForm.processCreateTime = setCurrentTime();
-      this.tableForm.processChangeTime = setCurrentTime();
-      this.tableForm.processDeadTime = this.deadTime
-      this.tableForm.groupID = sessionStorage.getItem('groupID')
-      console.log(this.tableForm)
-      await request.post('/process/createSubmission',this.tableForm).then(res=>{
-        if(res.code === '200'){
-          this.tableForm.submissionID = res.data
-          this.tableForm.processCreateBy = sessionStorage.getItem('userID')
-          this.tableForm.groupID=sessionStorage.getItem("groupID")
-          this.tableForm.processCondition= "课题申报等待审核";
-          console.log("2")
-        }
-      })
-      await request.post('/process/createProcess',this.tableForm).then(res=>{
-        this.$message.success("申报成功")
-      })
-      //this.$refs.upload.submit();
-      this.tableForm={}
-      await this.fetchData();
-      this.showDialog = false;
+      this.showSubmissionDialog = true
+      this.$nextTick(() => {
+        this.$refs["SubmissionDialog"].showSubmissionDialog = true;
+      });
     },
     uploadFile (file) {
       let formData = new FormData();
@@ -253,34 +154,7 @@ export default {
     },
     delFile () {
       this.fileList = [];
-    },
-    // setCurrentTime() {
-    //   //获取当前时间并打印
-    //   let yy = new Date().getFullYear();
-    //   let mm = new Date().getMonth() + 1;
-    //   let dd = new Date().getDate();
-    //   let hh = new Date().getHours();
-    //   let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
-    //   let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds();
-    //   this.tableForm.processCreateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-    //   this.tableForm.processChangeTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-    //   console.log(this.tableForm)
-    // },
-    // isoDateForMat(time) {
-    //   let date = new Date(time)
-    //   let year = date.getFullYear();
-    //   let month = date.getMonth() + 1;
-    //   let strDate = date.getDate();
-    //   let hour = date.getHours();
-    //   let minute = date.getMinutes();
-    //   let second = date.getSeconds();
-    //   month = month > 9 ? month : '0' + month
-    //   strDate = strDate > 9 ? strDate : '0' + strDate
-    //   hour = hour > 9 ? hour : '0' + hour
-    //   minute = minute > 9 ? minute : '0' + minute
-    //   second = second > 9 ? second : '0' + second
-    //   return (year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second);
-    // },
+    }
   }
 }
 </script>
