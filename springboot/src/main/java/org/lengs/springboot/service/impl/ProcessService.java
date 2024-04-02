@@ -57,6 +57,12 @@ public class ProcessService implements IProcessService {
     }
 
     @Override
+    public void updateReport(Report report) { processMapper.updateReport(report); }
+
+    @Override
+    public void updateMidCheck(MidCheck midCheck) { processMapper.updateMidCheck(midCheck); }
+
+    @Override
     public void createSubmission(Submission submissionRequest) {
         processMapper.createSubmission(submissionRequest);
     }

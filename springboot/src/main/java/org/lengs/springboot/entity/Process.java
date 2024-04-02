@@ -5,6 +5,7 @@ import lombok.Data;
 public class Process {
     private Integer processID;
     private String processName;
+    private String processMajor;
     private Integer processCreateBy;
     private Integer groupID;
     private String processChangeTime;

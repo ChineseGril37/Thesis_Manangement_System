@@ -11,14 +11,12 @@
                  ref="submissionData"
                  label-width="10px"
                  label-position="top" >
-          <el-col>
             <el-row>
               <el-col :span="24">
                 <el-form-item label="课题名称" porp="processName">
                   <el-input v-model="submissionData.processName"
                             placeholder="课题名称"
-                            clearable
-                            :style="{width: '100%'}"
+                            style="width: 100%;"
                             :disabled="condition"></el-input>
                 </el-form-item>
               </el-col>
@@ -49,28 +47,28 @@
                   <el-input v-model="submissionData.submissionBrief"
                             type="textarea"
                             placeholder="选题依据及课题简介"
-                            show-word-limit
                             :autosize="{minRows: 6, maxRows: 6}"
                             :disabled="condition"
-                            :style="{width: '100%'}"></el-input>
+                            :style="{width: '100%'}"
+                            show-word-limit></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="24">
                 <el-form-item label="论文研究方向" prop="submissionDirection">
                   <el-input v-model="submissionData.submissionDirection"
                             placeholder="论文研究方向"
-                            clearable
                             style="width: 100%;"
-                            :disabled="condition"></el-input>
+                            :disabled="condition"
+                            clearable></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :span="6">
+              <el-col :span="24">
                 <el-form-item label="撰写语种" prop="submissionLanguage">
                   <el-input v-model="submissionData.submissionLanguage"
                             placeholder="撰写语种"
-                            clearable
-                            :style="{width: '100%'}"
-                            :disabled="condition"></el-input>
+                            :disabled="condition"
+                            style="width: 100%;"
+                            clearable></el-input>
                 </el-form-item>
               </el-col>
 <!--              <el-col :span="24">-->
@@ -85,30 +83,37 @@
 <!--              </el-col>-->
               <el-col :span="24">
                 <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
-                  <el-input v-model="submissionData.submissionTeacherReview"
-                            type="text"
-                            :disabled="true"></el-input>
+                  <el-select v-model="submissionData.submissionTeacherReview"
+                             :disabled="disableTeacher"
+                             placeholder="请选择"
+                             style="width: 100%;">
+                    <el-option label="审核通过" value = 1></el-option>
+                    <el-option label="审核驳回" value = 2></el-option>
+                  </el-select>
                 </el-form-item >
               </el-col>
               <el-col :span="24">
                 <el-form-item label="专业专家审核"  porp="submissionExpertReview">
-                  <el-input v-model="submissionData.submissionExpertReview"
-                            type="text"
-                            :disabled="true"></el-input>
+                  <el-select v-model="submissionData.submissionExpertReview"
+                             :disabled="disableManager"
+                             placeholder="请选择"
+                             style="width: 100%;">
+                    <el-option label="审核通过" value = 1></el-option>
+                    <el-option label="审核驳回" value = 2></el-option>
+                  </el-select>
                 </el-form-item >
               </el-col>
-              <el-col :span="3">
-                <el-form-item label-width="5px" label="" prop="field114">
-                  <el-button type="primary" size="middle" plain :disabled="condition" @click="processSubmit()">确认</el-button>
+              <el-col :span="2">
+                <el-form-item label-width="5px" prop="confirmButton">
+                  <el-button type="primary" size="middle" plain :disabled="conditionInfo" @click="processSubmit()">确认</el-button>
                 </el-form-item>
               </el-col>
-              <el-col :span="3">
-                <el-form-item label-width="5px" label="" prop="field114">
-                  <el-button plain size="middle" :disabled="condition" @click="closeDialog()">取消</el-button>
+              <el-col :span="2">
+                <el-form-item label-width="5px" prop="cancelButton">
+                  <el-button plain size="middle" :disabled="conditionInfo" @click="closeDialog()">取消</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
-          </el-col>
         </el-form>
       </el-row>
     </el-dialog>
@@ -120,6 +125,9 @@ import request from "@/utils/request";
 export default {
   name: "SubmissionDialog",
   props:{
+    deadTime:{
+      type: String
+    },
     condition:{
       type: Boolean,
       default: true
@@ -140,9 +148,15 @@ export default {
     },
 
   },
+  created(){
+    this.checkType();
+  },
   data(){
     return{
       submissionData:JSON.parse(JSON.stringify(this.submissionInputData)),
+      disableTeacher:true,
+      disableManager:true,
+      conditionInfo:this.condition,
       rules: {
         processName: [{required: true,message: '课题名称',trigger: 'blur'}],
         submissionBase: [{required: true,message: '课题依据',trigger: 'change'}],
@@ -154,34 +168,65 @@ export default {
     }
   },
   methods:{
+    checkType(){
+      if(this.submissionData.submissionTeacherReview === 1){
+        this.submissionData.submissionTeacherReview = '审核通过'
+      } else if(this.submissionData.submissionTeacherReview === 2){
+        this.submissionData.submissionTeacherReview = '审核驳回'
+      }
+      if(this.submissionData.submissionExpertReview === 1){
+        this.submissionData.submissionExpertReview = '审核通过'
+      } else if(this.submissionData.submissionTeacherReview === 2){
+        this.submissionData.submissionExpertReview = '审核驳回'
+      }
+      if(this.submissionData.submissionTeacherReview === null && this.submissionData.groupID === sessionStorage.getItem('groupID') && sessionStorage.getItem('userType') === '2'){
+        this.disableTeacher = false
+        this.conditionInfo = false
+      }
+      if(this.submissionData.submissionExpertReview === null && (sessionStorage.getItem('userType') === '1' || sessionStorage.getItem('userType') === '0')){
+        this.disableManager = false
+        this.conditionInfo = false
+      }
+    },
     async processSubmit(){
-      this.tableForm.processCreateTime = setCurrentTime();
-      this.tableForm.processChangeTime = setCurrentTime();
-      this.tableForm.processDeadTime = this.deadTime
-      this.tableForm.groupID = sessionStorage.getItem('groupID')
-      console.log(this.tableForm)
-      await request.post('/process/createSubmission',this.tableForm).then(res=>{
-        if(res.code === '200'){
-          this.tableForm.submissionID = res.data
-          this.tableForm.processCreateBy = sessionStorage.getItem('userID')
-          this.tableForm.groupID=sessionStorage.getItem("groupID")
-          this.tableForm.processCondition= "课题申报等待审核";
-          console.log("2")
+      //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新submission创建
+      if(!this.disableTeacher || !this.disableManager){
+        this.submissionData.processCondition = "课题申报审核通过"
+        console.log(this.submissionData)
+        await request.post('/process/updateSubmission',this.submissionData)
+        if((this.reportData.submissionTeacherReview === '审核通过' || this.reportData.submissionTeacherReview === 1) && (this.reportData.submissionExpertReview === '审核通过' || this.reportData.submissionExpertReview === '审核通过')){
+          await request.post('/process/updateProcess',this.submissionData)
+          this.reportData.processCondition = "开题报告审核通过"
         }
-      })
-      await request.post('/process/createProcess',this.tableForm).then(res=>{
-        this.$message.success("申报成功")
-      })
-      //this.$refs.upload.submit();
-      this.tableForm={}
-      await this.fetchData();
-      this.showSubmissionDialog = false;
+        this.$message.success("审核提交成功")
+      }
+      else {
+        //
+        this.submissionData.processCreateTime = setCurrentTime();
+        this.submissionData.processChangeTime = setCurrentTime();
+        this.submissionData.processDeadTime = this.deadTime
+        this.submissionData.groupID = sessionStorage.getItem('groupID')
+        await request.post('/process/createSubmission',this.submissionData).then(res=>{
+          if(res.code === '200'){
+            this.submissionData.submissionID = res.data
+            this.submissionData.processCreateBy = sessionStorage.getItem('userID')
+            this.submissionData.groupID=sessionStorage.getItem("groupID")
+            this.submissionData.processMajor= sessionStorage.getItem("userMajor")
+            this.submissionData.processCondition= "课题申报等待审核";
+            console.log(this.submissionData)
+          }
+        })
+        await request.post('/process/createProcess',this.submissionData).then(res=>{
+          this.$message.success("课题申报成功")
+        })
+      }
+      this.closeDialog()
     },
     closeDialog(){
-      console.log("closeDialog调用")
-      this.$refs["submissionData"].resetFields();
-      this.fetchData();
-      this.showDialog = false;
+      this.$refs["submissionData"].resetFields()
+      this.showSubmissionDialog = false;
+      this.$emit("showSubmissionDialog",false)
+      this.$emit("closeDialog");
     },
   }
 }

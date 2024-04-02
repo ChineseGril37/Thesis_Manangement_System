@@ -36,4 +36,8 @@ public interface ProcessMapper {
     List<MidCheck> listMidCheck(MidCheck midCheck);
 
     void createMidCheck(MidCheck midCheck);
+
+    void updateReport(Report report);
+
+    void updateMidCheck(MidCheck midCheck);
 }

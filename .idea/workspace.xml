@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：课题申报、开题报告填写功能实现;流程管理页面搭建&#10;后端：流程管理后端功能实现">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：课题申报弹窗独立">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Submission.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Submission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/ProcessMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +192,8 @@
       <workItem from="1711856690314" duration="44000" />
       <workItem from="1711857028578" duration="7478000" />
       <workItem from="1711942914659" duration="599000" />
-      <workItem from="1711943650940" duration="1734000" />
+      <workItem from="1711943650940" duration="20636000" />
+      <workItem from="1712025698280" duration="1153000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -289,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711621890117</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="前端：课题申报弹窗独立">
+      <option name="closed" value="true" />
+      <created>1711955806607</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1711955806607</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +344,8 @@
     <MESSAGE value="后端：流程创建时同步创建流程中的第一步课题申报" />
     <MESSAGE value="前端：流程创建、课题申报前端实现&#10;后端：流程创建、课题申报后端实现" />
     <MESSAGE value="前端：课题申报、开题报告填写功能实现;流程管理页面搭建&#10;后端：流程管理后端功能实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="前端：课题申报、开题报告填写功能实现;流程管理页面搭建&#10;后端：流程管理后端功能实现" />
+    <MESSAGE value="前端：课题申报弹窗独立" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端：课题申报弹窗独立" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -38,128 +38,38 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog
-          :title="dialogTitle"
-          :visible.sync="showDialog"
-          width="45%">
-        <el-row :gutter="15">
-          <el-form :model="tableForm" :rules="rules" size="small" label-width="10px"
-                   label-position="top" >
-            <el-col>
-              <el-row>
-                <el-col :span="24">
-                  <el-form-item label="课题名称" porp="processName">
-                    <el-input v-model="tableForm.processName" placeholder="课题名称" clearable
-                              :style="{width: '100%'}" :disabled="true"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item class="item" label="课题目标" porp="missionGoal">
-                    <el-input v-model="tableForm.missionGoal" type="textarea"
-                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
-                              :disabled="condition" :style="{width: '100%'}"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="课题任务内容" prop="missionContent">
-                    <el-input v-model="tableForm.missionContent" type="textarea"
-                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
-                              :disabled="condition" :style="{width: '100%'}"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="课题进度安排" prop="missionPlan">
-                    <el-input v-model="tableForm.missionPlan" type="textarea"
-                              show-word-limit :autosize="{minRows: 4, maxRows: 4}"
-                              :disabled="condition" :style="{width: '100%'}"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="参考文献" prop="missionReferences">
-                    <el-input v-model="tableForm.missionReferences" type="textarea"
-                              show-word-limit :autosize="{minRows: 2, maxRows: 2}"
-                              :disabled="condition" :style="{width: '100%'}"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24">
-                  <!--                  <el-form-item label="附件上传" prop="submissionFile">-->
-                  <!--                    <el-upload ref="submissionFile" :file-list="fileList"-->
-                  <!--                               :action="submissionFileAction" :auto-upload="false"-->
-                  <!--                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
-                  <!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
-                  <!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
-                  <!--                    </el-upload>-->
-                  <!--                  </el-form-item>-->
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="任务书教师审核"  porp="submissionTeacherReview">
-                    <el-input v-model="tableForm.missionTeacherReview" type="text" :disabled="true"></el-input>
-                  </el-form-item >
-                </el-col>
-                <el-col :span="24">
-                  <el-form-item label="任务书专家审核"  porp="submissionExpertReview">
-                    <el-input v-model="tableForm.missionExpertReview" type="text" :disabled="true"></el-input>
-                  </el-form-item >
-                </el-col>
-                <el-col :span="3">
-                  <el-form-item label-width="5px" label="" prop="field114">
-                    <el-button type="primary" size="middle" plain :disabled="condition" @click="setCurrentTime();processSubmit()">确认</el-button>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="3">
-                  <el-form-item label-width="5px" label="" prop="field114">
-                    <el-button plain size="middle" :disabled="condition" @click="closeDialog">取消</el-button>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </el-col>
-          </el-form>
-        </el-row>
-      </el-dialog>
+      <MissionDialog
+          v-if="showMissionDialog"
+          ref="MissionDialog"
+          :reportInputData="tableForm"
+          :dialog-title="dialogTitle"
+          :condition="condition"
+          :deadTime="deadTime"
+          @closeDialog="closeDialog"
+      ></MissionDialog>
     </div>
   </div>
 </template>
 <script>
 import request from "@/utils/request";
+import MissionDialog from "@/components/MissionDialog.vue";
 
 export default {
   name: "MissionReportSubmission",
+  components:{MissionDialog },
   data(){
     return {
       tableData: [{}],
-      fileList:[],
       tableForm:{},
-      showDialog:false,
+      showMissionDialog:false,
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
-      formData: "",
       params:{
         processCreateBy:sessionStorage.getItem('userID'),
-        processID:'',
+        processID:''
       },
-      rules: {
-        missionGoal: [{
-          required: true,
-          message: '课题目标',
-          trigger: 'change'
-        }],
-        missionContent: [{
-          required: true,
-          message: '课题任务内容',
-          trigger: 'change'
-        }],
-        missionPlan: [{
-          required: true,
-          message: '课题进度安排',
-          trigger: 'blur'
-        }],
-        missionReferences: [{
-          required: true,
-          message: '参考文献',
-          trigger: 'blur'
-        }],
-      },
+
     }
   },
   created() {
@@ -170,6 +80,8 @@ export default {
       const that = this;
       //先判断是不是在提交时间内
       await request.get('/date/list').then( res =>{
+        //设置一下任务书截止日期
+        this.deadTime = res.data.midCheckDeadline
         let today = new Date()
         //因为提交的是任务书，所以需要在开题报告之后，任务书截止之前
         let dateBegin = new Date(res.data.reportDeadline)
@@ -178,8 +90,6 @@ export default {
         if(today < dateBegin || today > dateEnd){
           this.condition = true
         }
-        //设置一下任务书截止日期
-        this.deadTime = this.isoDateForMat(res.data.midCheckDeadline)
       })
       //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
@@ -189,8 +99,6 @@ export default {
           that.condition = res.data[0].processCondition !== "开题报告审核通过";
           that.tableData.forEach((item) =>{
             item.userType=2
-            item.groupID=sessionStorage.getItem("groupID")
-            item.userMajor=sessionStorage.getItem("userMajor")
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
                 this.$set(item,"processGroup",res.data[0].userRealName)
@@ -204,14 +112,22 @@ export default {
     },
     async informationView(row){
       this.tableForm = row
+      this.tableForm.deadTime = this.deadTime
       await request.get('/process/listMission',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
-        console.log(res)
       })
+      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
       this.$set(this.tableForm, 'processName', row.processName);
-      this.showDialog = true
+      this.showMissionDialog = true
+      this.$nextTick(() => {
+        this.$refs["MissionDialog"].showMissionDialog = true;
+      });
+    },
+    closeDialog(){
+      this.fetchData();
+      this.showMissionDialog = false
     },
     async processSubmit(){
       this.tableForm.processDeadTime = this.deadTime
@@ -234,69 +150,6 @@ export default {
       this.tableForm={}
       await this.fetchData();
       this.showDialog = false;
-    },
-    uploadFile (file) {
-      let formData = new FormData();
-      formData.append("file", this.fileList[0].raw);//拿到存在fileList的文件存放到formData中
-      //下面数据是我自己设置的数据,可自行添加数据到formData(使用键值对方式存储)
-      formData.append("title", this.title);
-      request().post("/file/upload", this.formData, {
-        "Content-Type": "multipart/form-data;charset=utf-8"
-      }).then(res => {
-        if (res.data === "200") {
-          this.$notify({
-            title: '成功',
-            message: '提交成功',
-            type: 'success',
-            duration: 1000
-          });
-        }
-      })
-    },
-    closeDialog(){
-      this.tableForm={}
-      this.tableData=[{}]
-      this.fetchData();
-      this.showDialog = false;
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${ file.name }？`);
-    },
-    delFile () {
-      this.fileList = [];
-    },
-    setCurrentTime() {
-      //获取当前时间并打印
-      let yy = new Date().getFullYear();
-      let mm = new Date().getMonth() + 1;
-      let dd = new Date().getDate();
-      let hh = new Date().getHours();
-      let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
-      let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds();
-      this.tableForm.processCreateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-      this.tableForm.processChangeTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-      console.log(this.tableForm)
-    },
-    isoDateForMat(time) {
-      let date = new Date(time)
-      let year = date.getFullYear();
-      let month = date.getMonth() + 1;
-      let strDate = date.getDate();
-      let hour = date.getHours();
-      let minute = date.getMinutes();
-      let second = date.getSeconds();
-      month = month > 9 ? month : '0' + month
-      strDate = strDate > 9 ? strDate : '0' + strDate
-      hour = hour > 9 ? hour : '0' + hour
-      minute = minute > 9 ? minute : '0' + minute
-      second = second > 9 ? second : '0' + second
-      return (year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second);
     },
   }
 }

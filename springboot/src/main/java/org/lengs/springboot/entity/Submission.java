@@ -12,6 +12,6 @@ public class Submission {
     private String submissionBrief;
     private String submissionDirection;
     private String submissionLanguage;
-    private Boolean submissionTeacherReview;
-    private Boolean submissionExpertReview;
+    private Integer submissionTeacherReview;
+    private Integer submissionExpertReview;
 }

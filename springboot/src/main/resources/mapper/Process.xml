@@ -3,6 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lengs.springboot.mapper.ProcessMapper">
+    <!--创建SQL-->
+    <insert id="createProcess">
+        insert into Process(processName,processCreateBy,groupID,processMajor,processCreateTime,processChangeTime,processDeadTime,processCondition,submissionID)
+        values (#{processName},#{processCreateBy},#{groupID},#{processMajor},#{processCreateTime},#{processChangeTime},#{processDeadTime},#{processCondition},#{submissionID});
+    </insert>
+    <insert id="createSubmission" useGeneratedKeys="true" keyProperty="submissionID">
+        insert into Submission(submissionBase,groupID,submissionType,submissionBrief,submissionDirection,submissionLanguage,submissionTeacherReview,submissionExpertReview)
+        values (#{submissionBase},#{groupID},#{submissionType},#{submissionBrief},#{submissionDirection},#{submissionLanguage},#{submissionTeacherReview},#{submissionExpertReview})
+    </insert>
+    <insert id="createReport" useGeneratedKeys="true" keyProperty="reportID">
+        insert into Report(groupID,reportMeaning,reportSituation,reportAim,reportWay)
+        values (#{groupID},#{reportMeaning},#{reportSituation},#{reportAim},#{reportWay})
+    </insert>
+    <insert id="createMission" useGeneratedKeys="true" keyProperty="missionID">
+        insert into Mission(groupID,missionGoal,missionContent,missionPlan,missionReferences)
+        values (#{groupID},#{missionGoal},#{missionContent},#{missionPlan},#{missionReferences})
+    </insert>
+    <insert id="createMidCheck" useGeneratedKeys="true" keyProperty="midcheckID">
+        insert into MidCheck(groupID,midcheckSummary,midcheckProblem)
+        values (#{groupID},#{midcheckSummary},#{midcheckProblem})
+    </insert>
+    <!--查询SQL-->
     <select id="listProcess" resultType="org.lengs.springboot.entity.Process">
         select * from Process where processCreateBy = #{processCreateBy}
         <if test="processID != null and processID != ''">
@@ -56,6 +78,36 @@
             </if>
         </where>;
     </select>
+    <!--更新SQL-->
+    <update id="updateProcess">
+        update Process
+        set
+        <if test="processDeadTime != null and processDeadTime != ''">
+            processDeadTime = #{processDeadTime},
+        </if>
+        <if test="processCondition != null and processCondition != ''">
+            processCondition = #{processCondition},
+        </if>
+        <if test="reportID != null and reportID != ''">
+            reportID = #{reportID},
+        </if>
+        <if test="processMajor != null and processMajor != ''">
+            processMajor = #{processMajor},
+        </if>
+        <if test="missionID != null and missionID != ''">
+            missionID = #{missionID},
+        </if>
+        <if test="midcheckID != null and midcheckID != ''">
+            midcheckID = #{midcheckID},
+        </if>
+        <if test="oralID != null and oralID != ''">
+            oralID = #{oralID},
+        </if>
+        <if test="processName != null and processName != ''">
+            processName = #{processName}
+        </if>
+        where processID = #{processID};
+    </update>
     <update id="updateSubmission">
         update Submission
         set
@@ -67,31 +119,16 @@
             </if>
         where submissionID = #{submissionID};
     </update>
-    <update id="updateProcess">
-        update Process
+    <update id="updateReport">
+        update Report
         set
-            <if test="processDeadTime != null and processDeadTime != ''">
-                processDeadTime = #{processDeadTime},
-            </if>
-            <if test="processCondition != null and processCondition != ''">
-                processCondition = #{processCondition},
-            </if>
-            <if test="reportID != null and reportID != ''">
-                reportID = #{reportID},
-            </if>
-            <if test="missionID != null and missionID != ''">
-                missionID = #{missionID},
-            </if>
-            <if test="midcheckID != null and midcheckID != ''">
-                midcheckID = #{midcheckID},
-            </if>
-            <if test="oralID != null and oralID != ''">
-                oralID = #{oralID},
-            </if>
-            <if test="processName != null and processName != ''">
-                processName = #{processName}
-            </if>
-        where processID = #{processID};
+        <if test="reportTeacherReview != null and reportTeacherReview != ''">
+            reportTeacherReview = #{reportTeacherReview}
+        </if>
+        <if test="reportExpertReview != null and reportExpertReview != ''">
+            reportExpertReview = #{reportExpertReview}
+        </if>
+        where reportID = #{reportID};
     </update>
     <update id="updateMission">
         update Mission
@@ -102,26 +139,17 @@
             <if test="missionExpertReview != null and missionExpertReview != ''">
                 missionExpertReview = #{missionExpertReview}
             </if>
-        where missionID = #{missionID}
+        where missionID = #{missionID};
     </update>
-    <insert id="createProcess">
-        insert into Process(processName,processCreateBy,groupID,processCreateTime,processChangeTime,processDeadTime,processCondition,submissionID)
-        values (#{processName},#{processCreateBy},#{groupID},#{processCreateTime},#{processChangeTime},#{processDeadTime},#{processCondition},#{submissionID});
-    </insert>
-    <insert id="createSubmission" useGeneratedKeys="true" keyProperty="submissionID">
-        insert into Submission(submissionBase,groupID,submissionType,submissionBrief,submissionDirection,submissionLanguage,submissionTeacherReview,submissionExpertReview)
-        values (#{submissionBase},#{groupID},#{submissionType},#{submissionBrief},#{submissionDirection},#{submissionLanguage},#{submissionTeacherReview},#{submissionExpertReview})
-    </insert>
-    <insert id="createReport" useGeneratedKeys="true" keyProperty="reportID">
-        insert into Report(groupID,reportMeaning,reportSituation,reportAim,reportWay)
-        values (#{groupID},#{reportMeaning},#{reportSituation},#{reportAim},#{reportWay})
-    </insert>
-    <insert id="createMission" useGeneratedKeys="true" keyProperty="missionID">
-        insert into Mission(groupID,missionGoal,missionContent,missionPlan,missionReferences)
-        values (#{groupID},#{missionGoal},#{missionContent},#{missionPlan},#{missionReferences})
-    </insert>
-    <insert id="createMidCheck" useGeneratedKeys="true" keyProperty="midcheckID">
-        insert into MidCheck(groupID,midcheckSummary,midcheckProblem)
-        values (#{groupID},#{midcheckSummary},#{midcheckProblem})
-    </insert>
+    <update id="updateMidCheck">
+        update MidCheck
+        set
+        <if test="midcheckTeacherReview != null and midcheckTeacherReview != ''">
+            midcheckTeacherReview = #{midcheckTeacherReview}
+        </if>
+        <if test="midcheckExpertReview != null and midcheckExpertReview != ''">
+            midcheckExpertReview = #{midcheckExpertReview}
+        </if>
+        where missionID = #{missionID};
+    </update>
 </mapper>

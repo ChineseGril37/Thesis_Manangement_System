@@ -80,7 +80,7 @@
                 </el-col>
                 <el-col :span="3">
                   <el-form-item label-width="5px" label="" prop="field114">
-                    <el-button type="primary" size="middle" plain :disabled="condition" @click="setCurrentTime();processSubmit()">确认</el-button>
+                    <el-button type="primary" size="middle" plain :disabled="condition" @click="processSubmit()">确认</el-button>
                   </el-form-item>
                 </el-col>
                 <el-col :span="3">

@@ -19,9 +19,9 @@
           :header-cell-style="{'text-align':'center','background-color':'whitesmoke'}"
           stripe
           border>
-        <el-table-column prop="processID" label="序号" min-width="5%" align="center"></el-table-column>
+        <el-table-column prop="processID" label="流程序号" min-width="5%" align="center"></el-table-column>
         <el-table-column prop="processName" label="课题名称" min-width="15%" align="center"></el-table-column>
-        <el-table-column prop="userMajor" label="所属专业" min-width="10%" align="center"></el-table-column>
+        <el-table-column prop="processMajor" label="所属专业" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="processGroup" label="指导教师" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="processCreateTime" label="申报日期" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="processCondition" label="状态" min-width="10%" align="center"></el-table-column>
@@ -35,37 +35,32 @@
       <SubmissionDialog
           v-if="showSubmissionDialog"
           ref="SubmissionDialog"
-          :dialog-title="dialogTitle"
           :submissionInputData="tableForm"
+          :dialog-title="dialogTitle"
+          :condition="condition"
+          :deadTime="deadTime"
           @closeDialog="closeDialog"
       ></SubmissionDialog>
     </div>
   </div>
 </template>
 <script>
-import {setCurrentTime,getJsonDateForMat} from "@/utils/common";
 import request from "@/utils/request";
 import SubmissionDialog from "@/components/SubmissionDialog.vue";
-import UserDialog from "@/views/User/UserDialog.vue";
 export default {
   name: "ProjectSubmission",
-  components:{UserDialog, SubmissionDialog },
+  components:{ SubmissionDialog },
   data(){
     return {
       tableData: [{}],
-      fileList:[],
       tableForm:{},
       showSubmissionDialog:false,
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
-      formData: "",
       params:{
         processCreateBy:sessionStorage.getItem('userID'),
-        processID:'',
       },
-      submissionFileAction: '/file/upload',
-      submissionFilefileList: [],
     }
   },
   created() {
@@ -75,26 +70,27 @@ export default {
     async fetchData() {
       const that = this;
       //先判断是不是在提交时间内
-      await request.get('/date/list').then( res =>{
+      await request.get('/date/list').then( res=> {
+        //设置好提交后的下一个流程(开题报告)截止日期
+        this.deadTime = res.data.reportDeadline
         let today = new Date()
         let dateBegin = new Date(res.data.submissionBegin)
         let dateEnd = new Date(res.data.submissionEnd)
+        //如果当前日期不在课题申报的开始和截止日期，将condition设置为true，只有false才能进行申报
         if(today < dateBegin || today > dateEnd){
           this.condition = true
         }
-        //设置一下课题申报截止日期
-        this.deadTime = res.data.reportDeadline
       })
-      //获取当前学生的流程信息，如果没有则显示一条空信息，如果在申报期内显示提交否则显示查看
+      //获取当前学生的流程信息，如果没有则默认显示一条空信息，如果在申报期内显示提交否则显示查看
+      //params中存储信息：从登录session中读取的userID,去查询同一userID的process流程信息列表
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
-          //console.log("查询到了数据")
-          that.tableData = res.data
+          //console.log("如果查询到了数据")
           that.condition = true
+          that.tableData = res.data
+          //遍历刚才读取的到tableData中的每一条process信息，设置userType为2=教师,每条item查询process绑定小组所属的教师名称
           that.tableData.forEach((item) =>{
             item.userType=2
-            item.groupID=sessionStorage.getItem("groupID")
-            item.userMajor=sessionStorage.getItem("userMajor")
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
                 this.$set(item,"processGroup",res.data[0].userRealName)
@@ -107,53 +103,28 @@ export default {
       })
     },
     async informationView(row){
+      // row存储单条process信息，用row中保存的submissionID去查询申报信息，
+      // 因为后台返回的是列表但我们ID对应的有且只有一条，所以使用data[0]给tableForm赋值
+      // 给tableForm加一个fetchData里读出的下一流程deadTime，便于课程申报后更新截止日期
       this.tableForm = row
+      this.tableForm.deadTime = this.deadTime
+      //这里可以直接用row或者赋值后的tableForm，其实只需要这条process中的submissionID
       await request.get('/process/listSubmission',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
       })
+      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
       this.$set(this.tableForm, 'processName', row.processName);
+      //开启弹窗
       this.showSubmissionDialog = true
       this.$nextTick(() => {
         this.$refs["SubmissionDialog"].showSubmissionDialog = true;
       });
     },
-    uploadFile (file) {
-      let formData = new FormData();
-      formData.append("file", this.fileList[0].raw);//拿到存在fileList的文件存放到formData中
-      //下面数据是我自己设置的数据,可自行添加数据到formData(使用键值对方式存储)
-      formData.append("title", this.title);
-      request().post("/file/upload", this.formData, {
-        "Content-Type": "multipart/form-data;charset=utf-8"
-      }).then(res => {
-        if (res.data === "200") {
-          this.$notify({
-            title: '成功',
-            message: '提交成功',
-            type: 'success',
-            duration: 1000
-          });
-        }
-      })
-    },
     closeDialog(){
-      this.tableForm={}
-      this.tableData=[{}]
       this.fetchData();
-      this.showDialog = false;
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${ file.name }？`);
-    },
-    delFile () {
-      this.fileList = [];
+      this.showSubmissionDialog = false
     }
   }
 }
