@@ -30,23 +30,16 @@
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="课题任务内容" prop="midCheckContent">
-                <el-input v-model="midCheckData.midCheckContent" type="textarea"
+              <el-form-item class="item" label="阶段性总结" porp="midCheckSummary">
+                <el-input v-model="midCheckData.midCheckSummary" type="textarea"
                           show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                           :disabled="condition" :style="{width: '100%'}"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="课题进度安排" prop="midCheckPlan">
-                <el-input v-model="midCheckData.midCheckPlan" type="textarea"
+              <el-form-item label="存在的问题" prop="midCheckProblem">
+                <el-input v-model="midCheckData.midCheckProblem" type="textarea"
                           show-word-limit :autosize="{minRows: 4, maxRows: 4}"
-                          :disabled="condition" :style="{width: '100%'}"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="参考文献" prop="midCheckReferences">
-                <el-input v-model="midCheckData.midCheckReferences" type="textarea"
-                          show-word-limit :autosize="{minRows: 2, maxRows: 2}"
                           :disabled="condition" :style="{width: '100%'}"></el-input>
               </el-form-item>
             </el-col>
@@ -92,7 +85,6 @@
                 <el-button plain size="middle" :disabled="conditionInfo" @click="closeDialog()">取消</el-button>
               </el-form-item>
             </el-col>
-
           </el-row>
         </el-col>
       </el-form>
@@ -184,14 +176,14 @@ export default {
             (this.midCheckData.midCheckTeacherReview === '审核通过' || this.midCheckData.midCheckTeacherReview === 1)
             &&
             (this.midCheckData.midCheckExpertReview === '审核通过' || this.midCheckData.midCheckExpertReview === 1)){
-          this.midCheckData.processCondition = "开题报告审核通过"
+          this.midCheckData.processCondition = "中期检查审核通过"
           await request.post('/process/updateProcess',this.midCheckData)
         }else if(
             //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
             (this.midCheckData.midCheckTeacherReview === '审核驳回' || this.midCheckData.midCheckTeacherReview === 2)
             ||
             (this.midCheckData.midCheckExpertReview === '审核驳回' || this.midCheckData.midCheckExpertReview === 2)){
-          this.midCheckData.processCondition = "开题报告审核驳回"
+          this.midCheckData.processCondition = "中期检查审核驳回"
           await request.post('/process/updateProcess',this.midCheckData)
         }
         this.$message.success("审核提交成功")
@@ -203,16 +195,16 @@ export default {
         await request.post('/process/createMidCheck',this.midCheckData).then(res=>{
           if(res.code === '200'){
             this.midCheckData.midCheckID = res.data
-            this.midCheckData.processCondition= "开题报告等待审核";
+            this.midCheckData.processCondition= "中期检查等待审核";
           }
         })
-        await request.post('/process/updateProcess',this.midCheckData)
-        this.$message.success("开题报告申报成功")
+        await request.post('/process/updateProcess',this.midCheckData).then(res=>{
+          this.$message.success("中期检查申报成功")
+        })
       }
       this.closeDialog()
     },
     closeDialog(){
-      console.log("closeDialog被调用")
       this.$refs["midCheckData"].resetFields();
       this.showMidCheckDialog = false;
       this.$emit("showMidCheckDialog",false)

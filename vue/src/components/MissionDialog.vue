@@ -223,7 +223,6 @@ export default {
       this.closeDialog()
     },
     closeDialog(){
-      console.log("closeDialog被调用")
       this.$refs["missionData"].resetFields();
       this.showMissionDialog = false;
       this.$emit("showMissionDialog",false)

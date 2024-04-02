@@ -70,10 +70,7 @@ export default {
       },
       params:{
         pageNum: 1,
-        pageSize: 10,
-        userRealName: '',
-        userId: '',
-        userName:''
+        pageSize: 10
       },
     }
   },
@@ -95,20 +92,9 @@ export default {
       //request.get('/')
     },
     reset(){
-
     },
     Review(row){
-      this.tableForm.processID=row.processID
-      this.tableForm.processName=row.processName
-      switch (row.processCondition){
-        case "课题申报等待审核":this.tableForm.processCondition="课题申报审核通过";break
-        case "开题报告等待审核":this.tableForm.processCondition="开题报告审核通过";break
-        case "任务书等待审核":this.tableForm.processCondition="任务书审核通过";break
-        case "中期检查等待审核":this.tableForm.processCondition="中期检查审核通过"
-      }
-      request.post('/process/updateProcess',this.tableForm).then(res=>{
-        this.$message.success("审核通过")
-      })
+
     },
     handelCurrentChange(pageNum){
       //  点击翻页按键触发产生交互

@@ -54,6 +54,9 @@
             <if test="groupID != null and groupID != ''">
                 and groupID like concat('%', #{groupID} , '%')
             </if>
+            <if test="userRealName != null and userRealName != ''">
+
+            </if>
         </where>;
     </select>
     <select id="listMission">

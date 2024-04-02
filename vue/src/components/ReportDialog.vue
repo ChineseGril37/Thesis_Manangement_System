@@ -222,7 +222,6 @@ export default {
       this.closeDialog()
     },
     closeDialog(){
-      console.log("closeDialog被调用")
       this.$refs["reportData"].resetFields();
       this.showReportDialog = false;
       this.$emit("showReportDialog",false)

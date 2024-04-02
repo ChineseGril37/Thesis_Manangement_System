@@ -7,12 +7,12 @@
     <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：审核逻辑创建&#10;前后端：中期检查变量名规范为midCheck(原midcheck)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/MidCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/MidCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/components/MidCheckDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/MidCheckDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" afterDir="false" />
     </list>
@@ -189,7 +189,7 @@
       <workItem from="1711942914659" duration="599000" />
       <workItem from="1711943650940" duration="20636000" />
       <workItem from="1712025698280" duration="19054000" />
-      <workItem from="1712066116174" duration="860000" />
+      <workItem from="1712066116174" duration="5826000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -311,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712027084932</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="前端：审核逻辑创建&#10;前后端：中期检查变量名规范为midCheck(原midcheck)">
+      <option name="closed" value="true" />
+      <created>1712066988855</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1712066988856</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

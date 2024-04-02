@@ -114,6 +114,7 @@ export default {
       })
       //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
       this.$set(this.tableForm, 'processName', row.processName);
+      //开启弹窗
       this.showMissionDialog = true
       this.$nextTick(() => {
         this.$refs["MissionDialog"].showMissionDialog = true;
