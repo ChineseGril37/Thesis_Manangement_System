@@ -165,8 +165,8 @@ export default {
     checkType(){
       if(this.reportData.reportTeacherReview === 1){
         this.reportData.reportTeacherReview = '审核通过'
-      } else if(this.reportData.submissionTeacherReview === 2){
-        this.reportData.submissionTeacherReview = '审核驳回'
+      } else if(this.reportData.reportTeacherReview === 2){
+        this.reportData.reportTeacherReview = '审核驳回'
       }
       if(this.reportData.reportExpertReview === 1){
         this.reportData.reportExpertReview = '审核通过'
@@ -183,13 +183,25 @@ export default {
       }
     },
     async processSubmit(){
-      //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新report创建并更新流程进度
-      if(!this.disableTeacher || !this.disableManager){
+      //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新report创建
+      //如果教师审核和专家审核不为空(且用户类型不为学生)
+      if((!this.disableTeacher || !this.disableManager) && sessionStorage.getItem('userType') !== '3'){
+        //先提交审核内容到相关的过程中
         await request.post('/process/updateReport',this.reportData)
-        //如果教师和专家都审核通过，更新流程状态
-        if((this.reportData.reportTeacherReview === '审核通过' || this.reportData.reportTeacherReview === 1) && (this.reportData.reportExpertReview === '审核通过' || this.reportData.reportExpertReview === '审核通过')){
-          await request.post('/process/updateProcess',this.reportData)
+        //如果教师审核与专家审核都为审核通过，更新流程进度为当前流程审核通过
+        if(
+            (this.reportData.reportTeacherReview === '审核通过' || this.reportData.reportTeacherReview === 1)
+            &&
+            (this.reportData.reportExpertReview === '审核通过' || this.reportData.reportExpertReview === 1)){
           this.reportData.processCondition = "开题报告审核通过"
+          await request.post('/process/updateProcess',this.reportData)
+        }else if(
+            //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
+            (this.reportData.reportTeacherReview === '审核驳回' || this.reportData.reportTeacherReview === 2)
+            ||
+            (this.reportData.reportExpertReview === '审核驳回' || this.reportData.reportExpertReview === 2)){
+          this.reportData.processCondition = "开题报告审核驳回"
+          await request.post('/process/updateProcess',this.reportData)
         }
         this.$message.success("审核提交成功")
       }

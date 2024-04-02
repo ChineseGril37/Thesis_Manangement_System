@@ -190,13 +190,24 @@ export default {
     },
     async processSubmit(){
       //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新submission创建
-      if(!this.disableTeacher || !this.disableManager){
-        this.submissionData.processCondition = "课题申报审核通过"
-        console.log(this.submissionData)
+      //如果教师审核和专家审核不为空(且用户类型不为学生)
+      if((!this.disableTeacher || !this.disableManager) && sessionStorage.getItem('userType') !== '3'){
+        //先提交审核内容到相关的过程中
         await request.post('/process/updateSubmission',this.submissionData)
-        if((this.reportData.submissionTeacherReview === '审核通过' || this.reportData.submissionTeacherReview === 1) && (this.reportData.submissionExpertReview === '审核通过' || this.reportData.submissionExpertReview === '审核通过')){
+        //如果教师审核与专家审核都为审核通过，更新流程进度为当前流程审核通过
+        if(
+            (this.submissionData.submissionTeacherReview === '审核通过' || this.submissionData.submissionTeacherReview === 1)
+            &&
+            (this.submissionData.submissionExpertReview === '审核通过' || this.submissionData.submissionExpertReview === 1)){
+          this.submissionData.processCondition = "开题报告审核通过"
           await request.post('/process/updateProcess',this.submissionData)
-          this.reportData.processCondition = "开题报告审核通过"
+        }else if(
+            //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
+            (this.submissionData.submissionTeacherReview === '审核驳回' || this.submissionData.submissionTeacherReview === 2)
+            ||
+            (this.submissionData.submissionExpertReview === '审核驳回' || this.submissionData.submissionExpertReview === 2)){
+          this.submissionData.processCondition = "开题报告审核驳回"
+          await request.post('/process/updateProcess',this.submissionData)
         }
         this.$message.success("审核提交成功")
       }

@@ -45,15 +45,15 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item class="item" label="阶段性总结" porp="midcheckSummary">
-                    <el-input v-model="tableForm.midcheckSummary" type="textarea"
+                  <el-form-item class="item" label="阶段性总结" porp="midCheckSummary">
+                    <el-input v-model="tableForm.midCheckSummary" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="存在的问题" prop="midcheckProblem">
-                    <el-input v-model="tableForm.midcheckProblem" type="textarea"
+                  <el-form-item label="存在的问题" prop="midCheckProblem">
+                    <el-input v-model="tableForm.midCheckProblem" type="textarea"
                               show-word-limit :autosize="{minRows: 4, maxRows: 4}"
                               :disabled="condition" :style="{width: '100%'}"></el-input>
                   </el-form-item>
@@ -69,13 +69,13 @@
                   <!--                  </el-form-item>-->
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="中期检查教师审核"  porp="midcheckTeacherReview">
-                    <el-input v-model="tableForm.midcheckTeacherReview" type="text" :disabled="true"></el-input>
+                  <el-form-item label="中期检查教师审核"  porp="midCheckTeacherReview">
+                    <el-input v-model="tableForm.midCheckTeacherReview" type="text" :disabled="true"></el-input>
                   </el-form-item >
                 </el-col>
                 <el-col :span="24">
-                  <el-form-item label="中期检查专家审核"  porp="midcheckExpertReview">
-                    <el-input v-model="tableForm.midcheckExpertReview" type="text" :disabled="true"></el-input>
+                  <el-form-item label="中期检查专家审核"  porp="midCheckExpertReview">
+                    <el-input v-model="tableForm.midCheckExpertReview" type="text" :disabled="true"></el-input>
                   </el-form-item >
                 </el-col>
                 <el-col :span="3">
@@ -116,12 +116,12 @@ export default {
         processID:'',
       },
       rules: {
-        midcheckSummary: [{
+        midCheckSummary: [{
           required: true,
           message: '阶段性总结',
           trigger: 'change'
         }],
-        midcheckProblem: [{
+        midCheckProblem: [{
           required: true,
           message: '研究现状',
           trigger: 'change'
@@ -186,7 +186,7 @@ export default {
       console.log(this.tableForm)
       await request.post('/process/createMidCheck',this.tableForm).then(res=>{
         if(res.code === '200'){
-          this.tableForm.midcheckID = res.data
+          this.tableForm.midCheckID = res.data
           this.tableForm.processCondition= "中期检查等待审核";
         }
       })

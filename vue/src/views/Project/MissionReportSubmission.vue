@@ -4,16 +4,10 @@
       <svg width="60" height="60" viewBox="0 0 48 48" fill="none" style="margin-top:30px;float: left;"><path d="M6 24c0-9.941 8.059-18 18-18s18 8.059 18 18-8.059 18-18 18S6 33.941 6 24zM24 28V14M24 30v4" stroke="#4E5969" stroke-width="2"/></svg>
       <div style="padding-top: 15px">
         <p class="mentionInfo">
-          1、学生根据课题情况填写开题报告信息，填写完成后点“暂存”或者“提交”按钮，即可保存开题报告信息到系统中。
+          1、学生根据课题情况填写任务书信息，填写完成后点“暂存”或者“提交”按钮，即可保存任务信息到系统中。
         </p>
         <p class="mentionInfo">
-          2、开题报告提交后需等待指导教师的审核，待指导教师审核通过后即可完成开题报告操作。
-        </p>
-        <p class="mentionInfo">
-          3、学生的开题报告内容需在开题报告时间范围内填写。
-        </p>
-        <p class="mentionInfo">
-          4、 如果您的开题报告中有大量的数学公式，请以图片形式上传，或者请以附件形式上传您的开题报告到系统中。
+          2、学生填写的任务书内容需在填写任务书的时间范围内填写。
         </p>
       </div>
     </div>
@@ -27,7 +21,7 @@
           border>
         <el-table-column prop="processID" label="序号" min-width="5%" align="center"></el-table-column>
         <el-table-column prop="processName" label="课题名称" min-width="15%" align="center"></el-table-column>
-        <el-table-column prop="userMajor" label="所属专业" min-width="10%" align="center"></el-table-column>
+        <el-table-column prop="processMajor" label="所属专业" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="processGroup" label="指导教师" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="processCreateTime" label="申报日期" min-width="10%" align="center"></el-table-column>
         <el-table-column prop="processCondition" label="状态" min-width="10%" align="center"></el-table-column>
@@ -128,28 +122,6 @@ export default {
     closeDialog(){
       this.fetchData();
       this.showMissionDialog = false
-    },
-    async processSubmit(){
-      this.tableForm.processDeadTime = this.deadTime
-      console.log(this.tableForm)
-      this.tableForm.groupID=sessionStorage.getItem("groupID")
-      await request.post('/process/createMission',this.tableForm).then(res=>{
-        if(res.code === '200'){
-          this.tableForm.missionID = res.data
-          this.tableForm.processCondition= "任务书等待审核";
-        }
-      })
-      await request.post('/process/updateProcess',this.tableForm).then(res=>{
-        if(res.code === '200'){
-          this.$message.success("申报成功")
-        }else {
-          this.$message.error("申报失败")
-        }
-      })
-      //this.$refs.upload.submit();
-      this.tableForm={}
-      await this.fetchData();
-      this.showDialog = false;
     },
   }
 }

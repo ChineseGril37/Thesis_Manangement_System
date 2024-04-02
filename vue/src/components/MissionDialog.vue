@@ -51,10 +51,10 @@
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <!--                  <el-form-item label="附件上传" prop="submissionFile">-->
-              <!--                    <el-upload ref="submissionFile" :file-list="fileList"-->
-              <!--                               :action="submissionFileAction" :auto-upload="false"-->
-              <!--                               :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
+              <!--                  <el-form-item label="附件上传" prop="missionFile">-->
+              <!--                    <el-upload ref="missionFile" :file-list="fileList"-->
+              <!--                               :action="missionFileAction" :auto-upload="false"-->
+              <!--                               :before-upload="missionFileBeforeUpload" accept=".doc,.docx">-->
               <!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
               <!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
               <!--                    </el-upload>-->
@@ -72,7 +72,7 @@
               </el-form-item >
             </el-col>
             <el-col :span="24">
-              <el-form-item label="专业专家审核" porp="submissionExpertReview">
+              <el-form-item label="专业专家审核" porp="missionExpertReview">
                 <el-select v-model="missionData.missionExpertReview"
                            :disabled="disableManager"
                            placeholder="请选择"
@@ -164,33 +164,45 @@ export default {
   },
   methods:{
     checkType(){
-      if(this.missionData.reportTeacherReview === 1){
-        this.missionData.reportTeacherReview = '审核通过'
-      } else if(this.missionData.submissionTeacherReview === 2){
-        this.missionData.submissionTeacherReview = '审核驳回'
+      if(this.missionData.missionTeacherReview === 1){
+        this.missionData.missionTeacherReview = '审核通过'
+      } else if(this.missionData.missionTeacherReview === 2){
+        this.missionData.missionTeacherReview = '审核驳回'
       }
-      if(this.missionData.reportExpertReview === 1){
-        this.missionData.reportExpertReview = '审核通过'
-      } else if(this.missionData.reportExpertReview === 2){
-        this.missionData.reportExpertReview = '审核驳回'
+      if(this.missionData.missionExpertReview === 1){
+        this.missionData.missionExpertReview = '审核通过'
+      } else if(this.missionData.missionExpertReview === 2){
+        this.missionData.missionExpertReview = '审核驳回'
       }
-      if(this.missionData.reportTeacherReview === null && this.missionData.groupID === sessionStorage.getItem('groupID') && sessionStorage.getItem('userType') === '2'){
+      if(this.missionData.missionTeacherReview === null && this.missionData.groupID === sessionStorage.getItem('groupID') && sessionStorage.getItem('userType') === '2'){
         this.disableTeacher = false
         this.conditionInfo = false
       }
-      if(this.missionData.reportExpertReview === null && (sessionStorage.getItem('userType') === '1' || sessionStorage.getItem('userType') === '0')){
+      if(this.missionData.missionExpertReview === null && (sessionStorage.getItem('userType') === '1' || sessionStorage.getItem('userType') === '0')){
         this.disableManager = false
         this.conditionInfo = false
       }
     },
     async processSubmit(){
-      //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新report创建并更新流程进度
-      if(!this.disableTeacher || !this.disableManager){
-        await request.post('/process/updateReport',this.missionData)
-        //如果教师和专家都审核通过，更新流程状态
-        if((this.missionData.reportTeacherReview === '审核通过' || this.missionData.reportTeacherReview === 1) && (this.missionData.reportExpertReview === '审核通过' || this.missionData.reportExpertReview === '审核通过')){
-          await request.post('/process/updateProcess',this.missionData)
+      //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新mission创建
+      //如果教师审核和专家审核不为空(且用户类型不为学生)
+      if((!this.disableTeacher || !this.disableManager) && sessionStorage.getItem('userType') !== '3'){
+        //先提交审核内容到相关的过程中
+        await request.post('/process/updateMission',this.missionData)
+        //如果教师审核与专家审核都为审核通过，更新流程进度为当前流程审核通过
+        if(
+            (this.missionData.missionTeacherReview === '审核通过' || this.missionData.missionTeacherReview === 1)
+            &&
+            (this.missionData.missionExpertReview === '审核通过' || this.missionData.missionExpertReview === 1)){
           this.missionData.processCondition = "开题报告审核通过"
+          await request.post('/process/updateProcess',this.missionData)
+        }else if(
+            //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
+            (this.missionData.missionTeacherReview === '审核驳回' || this.missionData.missionTeacherReview === 2)
+            ||
+            (this.missionData.missionExpertReview === '审核驳回' || this.missionData.missionExpertReview === 2)){
+          this.missionData.processCondition = "开题报告审核驳回"
+          await request.post('/process/updateProcess',this.missionData)
         }
         this.$message.success("审核提交成功")
       }
@@ -198,9 +210,9 @@ export default {
         this.missionData.processChangeTime = setCurrentTime();
         this.missionData.processDeadTime = this.deadTime
         this.missionData.groupID = sessionStorage.getItem('groupID')
-        await request.post('/process/createReport',this.missionData).then(res=>{
+        await request.post('/process/createMission',this.missionData).then(res=>{
           if(res.code === '200'){
-            this.missionData.reportID = res.data
+            this.missionData.missionID = res.data
             this.missionData.processCondition= "开题报告等待审核";
           }
         })
@@ -213,8 +225,8 @@ export default {
     closeDialog(){
       console.log("closeDialog被调用")
       this.$refs["missionData"].resetFields();
-      this.showReportDialog = false;
-      this.$emit("showReportDialog",false)
+      this.showMissionDialog = false;
+      this.$emit("showMissionDialog",false)
       this.$emit("closeDialog");
     },
   }

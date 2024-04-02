@@ -101,7 +101,7 @@ public class ProcessController {
     @PostMapping("/createMidCheck")
     public Result createMidCheck(@RequestBody MidCheck midCheck){
         processService.createMidCheck(midCheck);
-        return Result.success(midCheck.getMidcheckID());
+        return Result.success(midCheck.getMidCheckID());
     }
     //更新Process流程信息
     @PostMapping("/updateProcess")
