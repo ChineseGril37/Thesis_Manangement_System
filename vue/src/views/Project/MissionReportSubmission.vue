@@ -53,7 +53,7 @@ export default {
   components:{MissionDialog },
   data(){
     return {
-      tableData: [{}],
+      tableData: [],
       tableForm:{},
       showMissionDialog:false,
       condition:false,
@@ -101,6 +101,8 @@ export default {
               }
             })
           })
+        }else {
+          that.tableData.push({})
         }
       })
     },

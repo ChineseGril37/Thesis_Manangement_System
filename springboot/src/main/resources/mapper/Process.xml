@@ -34,6 +34,17 @@
     <select id="listBySubmission" resultType="org.lengs.springboot.entity.Submission">
         select * from Submission where submissionID = #{submissionID}
     </select>
+    <select id="listByProcess" resultType="org.lengs.springboot.entity.Process">
+        select * from Process
+        <where>
+            <if test="userID != null and userID != ''">
+                processCreateBy like concat('%', #{userID} , '%')
+            </if>
+            <if test="groupID != null and groupID != ''">
+                and groupID = #{groupID}
+            </if>
+        </where>
+    </select>
     <select id="listReport" resultType="org.lengs.springboot.entity.Report">
         select * from Report
         <where>
@@ -44,20 +55,6 @@
                 and groupID = #{groupID}
             </if>
         </where>
-    </select>
-    <select id="listByProcess" resultType="org.lengs.springboot.entity.Process">
-        select * from Process
-        <where>
-            <if test="userID != null and userID != ''">
-                processCreateBy like concat('%', #{userID} , '%')
-            </if>
-            <if test="groupID != null and groupID != ''">
-                and groupID like concat('%', #{groupID} , '%')
-            </if>
-            <if test="userRealName != null and userRealName != ''">
-
-            </if>
-        </where>;
     </select>
     <select id="listMission">
         select * from Mission
@@ -114,45 +111,29 @@
     <update id="updateSubmission">
         update Submission
         set
-            <if test="submissionTeacherReview != null and submissionTeacherReview != ''">
-                submissionTeacherReview = #{submissionTeacherReview}
-            </if>
-            <if test="submissionExpertReview != null and submissionExpertReview != ''">
-                submissionExpertReview = #{submissionExpertReview}
-            </if>
+            submissionTeacherReview = #{submissionTeacherReview},
+            submissionExpertReview = #{submissionExpertReview}
         where submissionID = #{submissionID};
     </update>
     <update id="updateReport">
         update Report
         set
-        <if test="reportTeacherReview != null and reportTeacherReview != ''">
-            reportTeacherReview = #{reportTeacherReview}
-        </if>
-        <if test="reportExpertReview != null and reportExpertReview != ''">
+            reportTeacherReview = #{reportTeacherReview},
             reportExpertReview = #{reportExpertReview}
-        </if>
         where reportID = #{reportID};
     </update>
     <update id="updateMission">
         update Mission
         set
-            <if test="missionTeacherReview != null and missionTeacherReview != ''">
-                missionTeacherReview = #{missionTeacherReview}
-            </if>
-            <if test="missionExpertReview != null and missionExpertReview != ''">
+                missionTeacherReview = #{missionTeacherReview},
                 missionExpertReview = #{missionExpertReview}
-            </if>
         where missionID = #{missionID};
     </update>
     <update id="updateMidCheck">
         update MidCheck
         set
-        <if test="midCheckTeacherReview != null and midCheckTeacherReview != ''">
-            midCheckTeacherReview = #{midCheckTeacherReview}
-        </if>
-        <if test="midCheckExpertReview != null and midCheckExpertReview != ''">
+            midCheckTeacherReview = #{midCheckTeacherReview},
             midCheckExpertReview = #{midCheckExpertReview}
-        </if>
         where missionID = #{missionID};
     </update>
 </mapper>

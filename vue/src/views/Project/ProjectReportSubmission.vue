@@ -59,15 +59,15 @@ export default {
   components:{ReportDialog },
   data(){
     return {
-      tableData: [{}],
+      tableData: [],
       tableForm:{},
       showReportDialog:false,
+      //condition负责判断弹窗内是否需要禁止输入和提交,row.condition负责当前行的按钮显示
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
       params:{
         processCreateBy:sessionStorage.getItem('userID'),
-        processID:'',
       },
     }
   },
@@ -92,12 +92,18 @@ export default {
       })
       //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
+        let judge = true
         if (res.code === '200'){
           //console.log("查询到了数据")
+          that.condition = true
           that.tableData = res.data
           //如果状态为"课题申报审核通过",condition为假，显示提交按钮;否则显示查看按钮
           that.condition = res.data[0].processCondition !== "课题申报审核通过";
           that.tableData.forEach((item) =>{
+            if(item.processCondition !== '课题申报审核驳回'){
+              judge = false
+            }
+            item.condition = true
             item.userType=2
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
@@ -107,6 +113,8 @@ export default {
               }
             })
           })
+        }if(judge){
+          that.tableData.push({condition:this.condition})
         }
       })
     },

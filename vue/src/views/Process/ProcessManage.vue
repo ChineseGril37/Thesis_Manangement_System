@@ -14,7 +14,7 @@
     <div class="submission">
       <!-- 搜索表单 -->
       <div style="margin-bottom: 20px">
-        <el-input style="width: 240px" placeholder="请输入学号" v-model="searchData.userId"></el-input>
+        <el-input style="width: 240px" placeholder="请输入学号" v-model="params.userID"></el-input>
         <el-button style="margin-left: 5px" type="primary" @click="search"><i class="el-icon-search"></i><span>搜索</span></el-button>
         <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh"></i><span>重置</span></el-button>
       </div>
@@ -49,26 +49,69 @@
             :total="total">
         </el-pagination>
       </div>
+      <!--四种弹窗审核开始-->
+      <SubmissionDialog
+          v-if="showSubmissionDialog"
+          ref="SubmissionDialog"
+          :submissionInputData="tableForm"
+          :dialog-title="dialogTitle"
+          :condition="condition"
+          @closeDialog="closeDialog"
+      ></SubmissionDialog>
+      <ReportDialog
+          v-if="showReportDialog"
+          ref="ReportDialog"
+          :reportInputData="tableForm"
+          :dialog-title="dialogTitle"
+          :condition="condition"
+          @closeDialog="closeDialog"
+      ></ReportDialog>
+      <MissionDialog
+          v-if="showMissionDialog"
+          ref="MissionDialog"
+          :reportInputData="tableForm"
+          :dialog-title="dialogTitle"
+          :condition="condition"
+          @closeDialog="closeDialog"
+      ></MissionDialog>
+      <MidCheckDialog
+          v-if="showMidCheckDialog"
+          ref="MidCheckDialog"
+          :midCheckInputData="tableForm"
+          :dialog-title="dialogTitle"
+          :condition="condition"
+          @closeDialog="closeDialog"
+      ></MidCheckDialog>
+      <!--四种弹窗审核结束-->
     </div>
   </div>
 </template>
 <script>
 import request from "@/utils/request";
+import MidCheckDialog from "@/components/MidCheckDialog.vue";
+import SubmissionDialog from "@/components/SubmissionDialog.vue";
+import ReportDialog from "@/components/ReportDialog.vue";
+import MissionDialog from "@/components/MissionDialog.vue";
 
 export default {
   name: "ProcessManage",
+  components:{SubmissionDialog,ReportDialog,MissionDialog,MidCheckDialog},
   data(){
     return{
+      total: 0,
       tableData:[],
       tableForm:{},
       tableLoading:false,
-      total: 0,
-      searchData:{
-        userId:undefined,
-        groupID:undefined,
-        userType:sessionStorage.getItem("userType")
-      },
+      condition:true,
+      showSubmissionDialog:false,
+      showReportDialog:false,
+      showMissionDialog:false,
+      showMidCheckDialog:false,
+      dialogTitle:"审核信息",
       params:{
+        userID:undefined,
+        groupID:undefined,
+        userType:sessionStorage.getItem("userType"),
         pageNum: 1,
         pageSize: 10
       },
@@ -78,23 +121,108 @@ export default {
     this.fetchData()
   },
   methods:{
-    async fetchData(){
-      if(this.searchData.userType === '2'){
-        this.searchData.groupID=sessionStorage.getItem('groupID')
+    fetchData(){
+      this.tableLoading = true;
+      if(this.params.userType === '2'){
+        this.params.groupID=sessionStorage.getItem('groupID')
       }
-      console.log(this.searchData)
-      request.get('/process/listByProcess',{params:this.searchData}).then( res =>{
-        this.tableData = res.data
+      request.get('/process/listByProcess',{params:this.params}).then( res =>{
+        this.tableData = res.data.list
       })
+      setTimeout(() => {
+        this.tableLoading = false;
+      }, 400  );
     },
     //根据搜索内容自定义查询学生课题(学生姓名\学号)
     search(){
-      //request.get('/')
+      this.tableLoading = true;
+      request.get('/process/listByProcess',{params:this.params}).then( res=>{
+        if(res.code === '200'){
+          this.tableData = res.data.list
+          this.total = res.data.total
+        }else {
+          this.tableData = []
+          this.total = 1
+        }
+      })
+      setTimeout(() => {
+        this.tableLoading = false;
+      }, 300  );
     },
     reset(){
+      this.params={
+        pageNum: 1,
+        pageSize: 10,
+        userID:undefined,
+        groupID:undefined,
+        userType:sessionStorage.getItem("userType")
+      }
+      this.fetchData()
     },
-    Review(row){
-
+    async Review(row){
+      switch (row.processCondition){
+        case '课题申报等待审核':{
+          //这里可以直接用row或者赋值后的tableForm，其实只需要这条process中的submissionID
+          await request.get('/process/listSubmission',{params:row}).then(res=>{
+            if(res.code === "200"){
+              //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
+              this.tableForm = res.data[0]
+              this.tableForm.processID = row.processID
+              this.tableForm.processName=row.processName
+            }
+          })
+          //开启弹窗
+          this.showSubmissionDialog = true
+          this.$nextTick(() => {
+            this.$refs["SubmissionDialog"].showSubmissionDialog = true;
+          });}
+          break;
+        case '开题报告等待审核':{
+          await request.get('/process/listReport',{params:row}).then(res=>{
+          if(res.code === "200"){
+            this.tableForm = res.data[0]
+          }
+        })
+          //开启弹窗
+          this.showReportDialog = true
+          this.$nextTick(() => {
+            this.$refs["ReportDialog"].showReportDialog = true;
+          })}
+          break;
+        case '任务书等待审核':{
+          await request.get('/process/listMission',{params:row}).then(res=>{
+            if(res.code === "200"){
+              this.tableForm = res.data[0]
+            }
+          })
+          //开启弹窗
+          this.showMissionDialog = true
+          this.$nextTick(() => {
+            this.$refs["MissionDialog"].showMissionDialog = true;
+          });
+        }break;
+        case '中期检查等待审核':{
+          await request.get('/process/listMidCheck',{params:row}).then(res=>{
+            if(res.code === "200"){
+              this.tableForm = res.data[0]
+            }
+          })
+          //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
+          //开启弹窗
+          this.showMidCheckDialog = true
+          this.$nextTick(() => {
+            this.$refs["MidCheckDialog"].showMidCheckDialog = true;
+          });
+        }break;
+        default:this.$message.error("当前流程暂不需要审核！")
+      }
+    },
+    closeDialog(){
+      this.fetchData();
+      this.showSubmissionDialog = false
+      this.showReportDialog = false
+      this.showMissionDialog = false
+      this.showMidCheckDialog = false
     },
     handelCurrentChange(pageNum){
       //  点击翻页按键触发产生交互

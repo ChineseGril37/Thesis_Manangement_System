@@ -4,5 +4,4 @@ import lombok.Data;
 public class ProcessRequest extends BaseRequest{
     private Integer userID;
     private Integer groupID;
-    private String userRealName;
 }

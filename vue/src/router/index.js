@@ -248,7 +248,7 @@ const routes = [
             //学生管理(教务)
             path: 'UserDialog',
             name: 'UserDialog',
-            component: () => import('@/views/User/UserDialog.vue'),
+            component: () => import('@/components/UserDialog.vue'),
             meta:{
               title:'用户管理弹窗',
               requireAuth:true

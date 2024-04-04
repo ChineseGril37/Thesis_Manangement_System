@@ -73,7 +73,7 @@
 
 <script>
 import request from "@/utils/request";
-import UserDialog from "@/views/User/UserDialog.vue";
+import UserDialog from "@/components/UserDialog.vue";
 export default {
   name: "UserManage",
   components:{ UserDialog },

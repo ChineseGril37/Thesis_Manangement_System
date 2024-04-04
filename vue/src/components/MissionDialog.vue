@@ -194,14 +194,14 @@ export default {
             (this.missionData.missionTeacherReview === '审核通过' || this.missionData.missionTeacherReview === 1)
             &&
             (this.missionData.missionExpertReview === '审核通过' || this.missionData.missionExpertReview === 1)){
-          this.missionData.processCondition = "开题报告审核通过"
+          this.missionData.processCondition = "任务书审核通过"
           await request.post('/process/updateProcess',this.missionData)
         }else if(
             //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
             (this.missionData.missionTeacherReview === '审核驳回' || this.missionData.missionTeacherReview === 2)
             ||
             (this.missionData.missionExpertReview === '审核驳回' || this.missionData.missionExpertReview === 2)){
-          this.missionData.processCondition = "开题报告审核驳回"
+          this.missionData.processCondition = "任务书审核驳回"
           await request.post('/process/updateProcess',this.missionData)
         }
         this.$message.success("审核提交成功")
@@ -213,11 +213,11 @@ export default {
         await request.post('/process/createMission',this.missionData).then(res=>{
           if(res.code === '200'){
             this.missionData.missionID = res.data
-            this.missionData.processCondition= "开题报告等待审核";
+            this.missionData.processCondition= "任务书等待审核";
           }
         })
         await request.post('/process/updateProcess',this.missionData).then(res=>{
-          this.$message.success("开题报告申报成功")
+          this.$message.success("任务书申报成功")
         })
       }
       this.closeDialog()

@@ -27,20 +27,20 @@
         <el-table-column prop="processCondition" label="状态" min-width="10%" align="center"></el-table-column>
         <el-table-column  label="操作" min-width="10%" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" size="middle" v-if="condition === true" @click="informationView(scope.row)" plain>查看</el-button>
+            <el-button type="primary" size="middle" v-if="scope.row.condition" @click="informationView(scope.row)" plain>查看</el-button>
             <el-button type="primary" size="middle" v-else @click="informationView(scope.row)" plain>提交</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <SubmissionDialog
-          v-if="showSubmissionDialog"
-          ref="SubmissionDialog"
-          :submissionInputData="tableForm"
-          :dialog-title="dialogTitle"
-          :condition="condition"
-          :deadTime="deadTime"
-          @closeDialog="closeDialog"
-      ></SubmissionDialog>
+        <SubmissionDialog
+            v-if="showSubmissionDialog"
+            ref="SubmissionDialog"
+            :submissionInputData="tableForm"
+            :dialog-title="dialogTitle"
+            :condition="condition"
+            :deadTime="deadTime"
+            @closeDialog="closeDialog"
+        ></SubmissionDialog>
     </div>
   </div>
 </template>
@@ -52,9 +52,10 @@ export default {
   components:{ SubmissionDialog },
   data(){
     return {
-      tableData: [{}],
+      tableData: [],
       tableForm:{},
       showSubmissionDialog:false,
+      //condition负责判断弹窗内是否需要禁止输入和提交,row.condition负责当前行的按钮显示
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
@@ -84,13 +85,20 @@ export default {
       //获取当前学生的流程信息，如果没有则默认显示一条空信息，如果在申报期内显示提交否则显示查看
       //params中存储信息：从登录session中读取的userID,去查询同一userID的process流程信息列表
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
+        let judge = true
         if (res.code === '200'){
           //console.log("如果查询到了数据")
           that.condition = true
           that.tableData = res.data
           //遍历刚才读取的到tableData中的每一条process信息，设置userType为2=教师,每条item查询process绑定小组所属的教师名称
           that.tableData.forEach((item) =>{
+            if(item.processCondition !== '课题申报审核驳回'){
+              judge = false
+            }
+            //每一个能查到的tableData都统统改成true显示查看，无论是什么状态反正都已经提交了
+            item.condition = true
             item.userType=2
+            //通过每个流程的小组ID查询指导老师的姓名
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
                 this.$set(item,"processGroup",res.data[0].userRealName)
@@ -99,6 +107,9 @@ export default {
               }
             })
           })
+        }
+        if(judge){
+            that.tableData.push({})
         }
       })
     },
@@ -116,6 +127,7 @@ export default {
       })
       //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
       this.$set(this.tableForm, 'processName', row.processName);
+      console.log(this.tableForm)
       //开启弹窗
       this.showSubmissionDialog = true
       this.$nextTick(() => {
@@ -124,6 +136,7 @@ export default {
     },
     closeDialog(){
       this.fetchData();
+      this.tableData = []
       this.showSubmissionDialog = false
     }
   }

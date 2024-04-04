@@ -15,6 +15,6 @@ public class Process {
     private Integer submissionID;
     private Integer reportID;
     private Integer missionID;
-    private Integer midcheckID;
+    private Integer midCheckID;
     private Integer oralID;
 }

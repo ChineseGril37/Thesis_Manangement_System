@@ -1,4 +1,5 @@
 package org.lengs.springboot.controller;
+import com.github.pagehelper.PageInfo;
 import org.lengs.springboot.common.Result;
 import org.lengs.springboot.controller.request.ProcessRequest;
 import org.lengs.springboot.entity.*;
@@ -27,13 +28,7 @@ public class ProcessController {
     }
     @GetMapping("/listByProcess")
     public Result listByProcess(ProcessRequest processRequest){
-        List<Process> processes = processService.listByProcess(processRequest);
-        System.out.println("processes=" + processes);
-        if(processes.isEmpty()){
-            return Result.error("查询结果为空");
-        }else {
-            return Result.success(processes);
-        }
+        return Result.success(processService.listByProcess(processRequest));
     }
     //listSubmission负责查询课题申报进程
     @GetMapping("/listSubmission")
@@ -101,7 +96,7 @@ public class ProcessController {
     @PostMapping("/createMidCheck")
     public Result createMidCheck(@RequestBody MidCheck midCheck){
         processService.createMidCheck(midCheck);
-        return Result.success(midCheck.getMidcheckID());
+        return Result.success(midCheck.getMidCheckID());
     }
     //更新Process流程信息
     @PostMapping("/updateProcess")

@@ -50,7 +50,7 @@ export default {
   components:{MidCheckDialog},
   data(){
     return {
-      tableData: [{}],
+      tableData: [],
       tableForm:{},
       showMidCheckDialog:false,
       condition:false,
@@ -96,6 +96,8 @@ export default {
               }
             })
           })
+        }else {
+          that.tableData.push({})
         }
       })
     },

@@ -1,5 +1,7 @@
 package org.lengs.springboot.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.lengs.springboot.controller.request.ProcessRequest;
 import org.lengs.springboot.entity.*;
 import org.lengs.springboot.entity.Process;
@@ -26,7 +28,11 @@ public class ProcessService implements IProcessService {
     }
 
     @Override
-    public List<Process> listByProcess(ProcessRequest processRequest) {return processMapper.listByProcess(processRequest);}
+    public PageInfo<Process> listByProcess(ProcessRequest processRequest) {
+        PageHelper.startPage(processRequest.getPageNum(), processRequest.getPageSize());
+        List<Process> processes = processMapper.listByProcess(processRequest);
+        return new PageInfo<>(processes);
+    }
 
     @Override
     public void updateProcess(Process process) {processMapper.updateProcess(process);}
