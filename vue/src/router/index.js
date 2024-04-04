@@ -7,9 +7,7 @@ import OralDefense from "@/views/OralDefense/OralDefense.vue";
 import Process from "@/views/Process/Process.vue";
 import About from "@/views/About/About.vue";
 
-
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',          // 路径
@@ -21,7 +19,6 @@ const routes = [
     meta: {
       title: '登录',
       requireAuth:false,
-      roles: ['0','1','2','3']
     }
   },
   {
@@ -39,7 +36,7 @@ const routes = [
     component: () => import("@/views/Home/Home.vue"),
     meta: {
       title: '首页',
-      requireAuth:true
+      requireAuth:true,
     },
     children:[
       {
@@ -334,6 +331,5 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
-
 
 export default router

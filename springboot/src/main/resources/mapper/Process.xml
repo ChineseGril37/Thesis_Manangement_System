@@ -111,6 +111,22 @@
     <update id="updateSubmission">
         update Submission
         set
+            <if test="submissionBase != null and submissionBase != ''">
+                submissionBase = #{submissionBase},
+            </if>
+            <if test="submissionType != null and submissionType != ''">
+                submissionType = #{submissionType},
+            </if>
+            <if test="submissionBrief != null and submissionBrief != ''">
+                submissionBrief = #{submissionBrief},
+            </if>
+            <if test="submissionDirection != null and submissionDirection != ''">
+                submissionDirection = #{submissionDirection},
+            </if>
+            <if test="submissionLanguage != null and submissionLanguage != ''">
+                submissionLanguage = #{submissionLanguage},
+            </if>
+
             submissionTeacherReview = #{submissionTeacherReview},
             submissionExpertReview = #{submissionExpertReview}
         where submissionID = #{submissionID};
@@ -118,6 +134,18 @@
     <update id="updateReport">
         update Report
         set
+            <if test="reportMeaning != null and reportMeaning != ''">
+                reportMeaning = #{reportMeaning},
+            </if>
+            <if test="reportAim != null and reportAim != ''">
+                reportAim = #{reportAim},
+            </if>
+            <if test="reportSituation != null and reportSituation != ''">
+                reportSituation = #{reportSituation},
+            </if>
+            <if test="reportWay != null and reportWay != ''">
+                reportWay = #{reportWay},
+            </if>
             reportTeacherReview = #{reportTeacherReview},
             reportExpertReview = #{reportExpertReview}
         where reportID = #{reportID};
@@ -125,6 +153,18 @@
     <update id="updateMission">
         update Mission
         set
+            <if test="missionGoal != null and missionGoal != ''">
+                missionGoal = #{missionGoal},
+            </if>
+            <if test="missionContent != null and missionContent != ''">
+                missionContent = #{missionContent},
+            </if>
+            <if test="missionPlan != null and missionPlan != ''">
+                missionPlan = #{missionPlan},
+            </if>
+            <if test="missionReferences != null and missionReferences != ''">
+                missionReferences = #{missionReferences},
+            </if>
                 missionTeacherReview = #{missionTeacherReview},
                 missionExpertReview = #{missionExpertReview}
         where missionID = #{missionID};
@@ -132,8 +172,14 @@
     <update id="updateMidCheck">
         update MidCheck
         set
+            <if test="midCheckSummary != null and midCheckSummary != ''">
+                midCheckSummary = #{midCheckSummary},
+            </if>
+            <if test="midCheckProblem != null and midCheckProblem != ''">
+                midCheckProblem = #{midCheckProblem},
+            </if>
             midCheckTeacherReview = #{midCheckTeacherReview},
             midCheckExpertReview = #{midCheckExpertReview}
-        where missionID = #{missionID};
+        where midCheckID = #{midCheckID};
     </update>
 </mapper>

@@ -241,8 +241,22 @@ export default {
           await request.post('/process/updateProcess',this.submissionData)
         }
         this.$message.success("审核提交成功")
-      }
-      else {
+      }else if(this.submissionData.processCondition === '课题申报审核驳回'){
+        this.submissionData.submissionTeacherReview = 0
+        this.submissionData.submissionExpertReview = 0
+        this.submissionData.processDeadTime = this.deadTime
+        this.submissionData.processChangeTime = setCurrentTime();
+        this.submissionData.groupID = sessionStorage.getItem('groupID')
+        await request.post('/process/updateSubmission',this.submissionData).then(res=>{
+          if(res.code === '200'){
+            this.submissionData.reportID = res.data
+            this.submissionData.processCondition= "课题申报等待审核";
+          }
+        })
+        await request.post('/process/updateProcess',this.submissionData).then(res=>{
+          this.$message.success("课题申报更新成功")
+        })
+      } else {
         //
         this.submissionData.processCreateTime = setCurrentTime();
         this.submissionData.processChangeTime = setCurrentTime();

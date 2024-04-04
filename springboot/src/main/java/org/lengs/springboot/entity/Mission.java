@@ -10,6 +10,6 @@ public class Mission {
     private String missionContent;
     private String missionPlan;
     private String missionReferences;
-    private Boolean missionTeacherReview;
-    private Boolean missionExpertReview;
+    private Integer missionTeacherReview;
+    private Integer missionExpertReview;
 }

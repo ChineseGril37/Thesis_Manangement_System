@@ -27,15 +27,15 @@
         <el-table-column prop="processCondition" label="状态" min-width="10%" align="center"></el-table-column>
         <el-table-column  label="操作" min-width="10%" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" size="middle" v-if="condition === true" @click="informationView(scope.row)" plain>查看</el-button>
-            <el-button type="primary" size="middle" v-else @click="informationView(scope.row)" plain>提交</el-button>
+            <el-button type="primary" size="middle" v-if="scope.row.condition" @click="informationView(scope.row)" plain>查看</el-button>
+            <el-button type="primary" size="middle" v-else @click="informationSubmit(scope.row)" plain>提交</el-button>
           </template>
         </el-table-column>
       </el-table>
       <MissionDialog
           v-if="showMissionDialog"
           ref="MissionDialog"
-          :reportInputData="tableForm"
+          :missionInputData="tableForm"
           :dialog-title="dialogTitle"
           :condition="condition"
           :deadTime="deadTime"
@@ -53,15 +53,17 @@ export default {
   components:{MissionDialog },
   data(){
     return {
+      //tableData内容：process表格信息，每行process还会加一个condition给按钮提供查看还是提交的判断信息
       tableData: [],
+      //tableForm内容：负责读取当前行的processName和ID传入弹窗
       tableForm:{},
       showMissionDialog:false,
+      //condition负责判断弹窗内是否需要禁止输入和提交,row.condition负责当前行的按钮显示
       condition:false,
       deadTime:'',
       dialogTitle:"申报信息",
       params:{
         processCreateBy:sessionStorage.getItem('userID'),
-        processID:''
       },
 
     }
@@ -85,12 +87,13 @@ export default {
           this.condition = true
         }
       })
-      //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
+      //只有两种状态可以显示提交:(1)有一条"课题申报审核通过"，(2)当前流程全都是审核驳回
+      //获取当前学生的流程信息，如果没有则默认空信息，如果在申报期内显示提交否则显示查看
+      //params中存储信息：从登录session中读取的userID,去查询同一userID的process流程信息列表
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
           //console.log("查询到了数据")
           that.tableData = res.data
-          that.condition = res.data[0].processCondition !== "开题报告审核通过";
           that.tableData.forEach((item) =>{
             item.userType=2
             request.get('/user/listGroup',{params:item}).then(res=>{
@@ -100,22 +103,46 @@ export default {
                 this.$set(item,"processGroup","查询失败")
               }
             })
+            //对每个行的数据进行状态判断，决定显示'提交'或'查看'按钮
+            //只有流程状态为'课题申报审核通过'或'开题报告审核驳回'才能提交申请
+            item.condition = item.processCondition !== '开题报告审核通过' && item.processCondition !== '任务书审核驳回';
           })
-        }else {
-          that.tableData.push({})
         }
       })
     },
-    async informationView(row){
-      this.tableForm = row
-      this.tableForm.deadTime = this.deadTime
+    async informationSubmit(row){
+      // row存储单条process信息，用row中保存的reportID去查询申报信息，
+      // 因为后台返回的是列表但我们ID对应的有且只有一条，所以使用data[0]给tableForm赋值
+      // 给tableForm加一个fetchData里读出的下一流程deadTime，便于课程申报后更新截止日期
       await request.get('/process/listMission',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
       })
-      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
+      //因为弹窗里需要展示课题名称，所以把row里的process信息赋给tableForm传进弹窗
+      this.condition = false
+      this.tableForm.deadTime = this.deadTime
       this.$set(this.tableForm, 'processName', row.processName);
+      this.$set(this.tableForm, 'processID', row.processID);
+      this.$set(this.tableForm, 'processCondition', row.processCondition);
+      //开启弹窗
+      this.showMissionDialog = true
+      this.$nextTick(() => {
+        this.$refs["MissionDialog"].showMissionDialog = true;
+      });
+    },
+    async informationView(row){
+      await request.get('/process/listMission',{params:row}).then(res=>{
+        if(res.code === "200"){
+          this.tableForm = res.data[0]
+        }
+      })
+      //因为弹窗里需要展示课题名称，所以把row里的process信息赋给tableForm传进弹窗
+      this.condition = true
+      this.tableForm.deadTime = this.deadTime
+      this.$set(this.tableForm, 'processName', row.processName);
+      this.$set(this.tableForm, 'processID', row.processID);
+      this.$set(this.tableForm, 'processCondition', row.processCondition);
       //开启弹窗
       this.showMissionDialog = true
       this.$nextTick(() => {

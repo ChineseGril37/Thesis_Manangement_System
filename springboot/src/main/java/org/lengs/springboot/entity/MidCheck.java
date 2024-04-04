@@ -8,6 +8,6 @@ public class MidCheck {
     private Integer groupID;
     private String midCheckSummary;
     private String midCheckProblem;
-    private Boolean midCheckTeacherReview;
-    private Boolean midCheckExpertReview;
+    private Integer midCheckTeacherReview;
+    private Integer midCheckExpertReview;
 }

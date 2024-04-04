@@ -235,9 +235,24 @@ export default {
         }
         this.$message.success("审核提交成功")
       }
-      else {
-        this.reportData.processChangeTime = setCurrentTime();
+      else if(this.reportData.processCondition === '开题报告审核驳回'){
+        this.reportData.reportTeacherReview = 0
+        this.reportData.reportExpertReview = 0
         this.reportData.processDeadTime = this.deadTime
+        this.reportData.processChangeTime = setCurrentTime();
+        this.reportData.groupID = sessionStorage.getItem('groupID')
+        await request.post('/process/updateReport',this.reportData).then(res=>{
+          if(res.code === '200'){
+            this.reportData.reportID = res.data
+            this.reportData.processCondition= "开题报告等待审核";
+          }
+        })
+        await request.post('/process/updateProcess',this.reportData).then(res=>{
+          this.$message.success("开题报告更新成功")
+        })
+      }else{
+        this.reportData.processDeadTime = this.deadTime
+        this.reportData.processChangeTime = setCurrentTime();
         this.reportData.groupID = sessionStorage.getItem('groupID')
         await request.post('/process/createReport',this.reportData).then(res=>{
           if(res.code === '200'){

@@ -69,7 +69,7 @@
       <MissionDialog
           v-if="showMissionDialog"
           ref="MissionDialog"
-          :reportInputData="tableForm"
+          :missionInputData="tableForm"
           :dialog-title="dialogTitle"
           :condition="condition"
           @closeDialog="closeDialog"

@@ -59,11 +59,13 @@ export default {
   components:{ReportDialog },
   data(){
     return {
+      //tableData内容：process表格信息，每行process还会加一个condition给按钮提供查看还是提交的判断信息
       tableData: [],
+      //tableForm内容：负责读取当前行的processName和ID传入弹窗
       tableForm:{},
       showReportDialog:false,
       //condition负责判断弹窗内是否需要禁止输入和提交,row.condition负责当前行的按钮显示
-      condition:false,
+      condition:true,
       deadTime:'',
       dialogTitle:"申报信息",
       params:{
@@ -79,8 +81,6 @@ export default {
       const that = this;
       //先判断是不是在提交时间内
       await request.get('/date/list').then( res =>{
-        //设置好提交后的下一个流程(任务书)截止日期
-        this.deadTime = res.data.missionDeadline
         //因为提交的是开题报告，所以需要在课题申报之后，开题报告截止之前
         let today = new Date()
         let dateBegin = new Date(res.data.submissionEnd)
@@ -89,23 +89,17 @@ export default {
         if(today < dateBegin || today > dateEnd){
           this.condition = true
         }
+        //设置好提交后的下一个流程(任务书)截止日期
+        this.deadTime = res.data.missionDeadline
       })
-      //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
+      //只有两种状态可以显示提交:(1)有一条"课题申报审核通过"，(2)当前流程全都是审核驳回
+      //获取当前学生的流程信息，如果没有则默认空信息，如果在申报期内显示提交否则显示查看
+      //params中存储信息：从登录session中读取的userID,去查询同一userID的process流程信息列表
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
         if (res.code === '200'){
-          let judge = true
           //console.log("查询到了数据")
-          that.condition = true
           that.tableData = res.data
-          //如果状态为"课题申报审核通过",condition为假，显示提交按钮;否则显示查看按钮
-          that.condition = res.data[0].processCondition !== "课题申报审核通过";
           that.tableData.forEach((item) =>{
-            if(item.processCondition !== '课题申报审核驳回'){
-              item.condition = false
-              judge = false
-            }else {
-              item.condition = true
-            }
             item.userType=2
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
@@ -114,11 +108,10 @@ export default {
                 this.$set(item,"processGroup","查询失败")
               }
             })
+            //对每个行的数据进行状态判断，决定显示'提交'或'查看'按钮
+            //只有流程状态为'课题申报审核通过'或'开题报告审核驳回'才能提交申请
+            item.condition = item.processCondition !== '课题申报审核通过' && item.processCondition !== '开题报告审核驳回';
           })
-          if(judge){
-            that.condition = false
-            that.tableData.push({})
-          }
         }
       })
     },
@@ -126,15 +119,17 @@ export default {
       // row存储单条process信息，用row中保存的reportID去查询申报信息，
       // 因为后台返回的是列表但我们ID对应的有且只有一条，所以使用data[0]给tableForm赋值
       // 给tableForm加一个fetchData里读出的下一流程deadTime，便于课程申报后更新截止日期
-      this.tableForm = row
-      this.tableForm.deadTime = this.deadTime
       await request.get('/process/listReport',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
       })
-      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
+      //因为弹窗里需要展示课题名称，所以把row里的process信息赋给tableForm传进弹窗
+      this.condition = false
+      this.tableForm.deadTime = this.deadTime
       this.$set(this.tableForm, 'processName', row.processName);
+      this.$set(this.tableForm, 'processID', row.processID);
+      this.$set(this.tableForm, 'processCondition', row.processCondition);
       //开启弹窗
       this.showReportDialog = true
       this.$nextTick(() => {
@@ -142,16 +137,17 @@ export default {
       });
     },
     async informationView(row){
+      //因为弹窗里需要展示课题名称，所以把row里的process信息赋给tableForm传进弹窗
       this.condition = true
-      this.tableForm = row
       this.tableForm.deadTime = this.deadTime
+      this.$set(this.tableForm, 'processName', row.processName);
+      this.$set(this.tableForm, 'processID', row.processID);
+      this.$set(this.tableForm, 'processCondition', row.processCondition);
       await request.get('/process/listReport',{params:row}).then(res=>{
         if(res.code === "200"){
           this.tableForm = res.data[0]
         }
       })
-      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
-      this.$set(this.tableForm, 'processName', row.processName);
       //开启弹窗
       this.showReportDialog = true
       this.$nextTick(() => {
