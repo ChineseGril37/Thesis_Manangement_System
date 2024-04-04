@@ -123,6 +123,7 @@ export default {
       });
     },
     closeDialog(){
+      this.tableData = []
       this.fetchData();
       this.showMissionDialog = false
     },

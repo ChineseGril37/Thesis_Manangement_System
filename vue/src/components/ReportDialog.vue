@@ -163,43 +163,73 @@ export default {
   },
   methods:{
     checkType(){
-      if(this.reportData.reportTeacherReview === 1){
-        this.reportData.reportTeacherReview = '审核通过'
-      } else if(this.reportData.reportTeacherReview === 2){
-        this.reportData.reportTeacherReview = '审核驳回'
+      switch (this.reportData.reportTeacherReview){
+        case 1:this.reportData.reportTeacherReview = '审核通过';break;
+        case 2:this.reportData.reportTeacherReview = '审核驳回';break;
+        default:this.reportData.reportTeacherReview = '等待审核'
       }
-      if(this.reportData.reportExpertReview === 1){
-        this.reportData.reportExpertReview = '审核通过'
-      } else if(this.reportData.reportExpertReview === 2){
-        this.reportData.reportExpertReview = '审核驳回'
+      switch (this.reportData.reportExpertReview){
+        case 1:this.reportData.reportExpertReview = '审核通过';break;
+        case 2:this.reportData.reportExpertReview = '审核驳回';break;
+        default:this.reportData.reportExpertReview = '等待审核'
       }
-      if(this.reportData.reportTeacherReview === null && this.reportData.groupID === sessionStorage.getItem('groupID') && sessionStorage.getItem('userType') === '2'){
+      //如果教师还未审核，且当前用户为这一流程所属小组教师
+      if(
+          this.reportData.reportTeacherReview === '等待审核'
+          &&
+          parseInt(sessionStorage.getItem('groupID'))
+          &&
+          sessionStorage.getItem('userType') === '2'
+      ){
         this.disableTeacher = false
         this.conditionInfo = false
       }
-      if(this.reportData.reportExpertReview === null && (sessionStorage.getItem('userType') === '1' || sessionStorage.getItem('userType') === '0')){
+      //如果专家还未审核，且当前用户为教务或者管理员
+      if(
+          this.reportData.reportExpertReview === '等待审核'
+          &&
+          (
+              sessionStorage.getItem('userType') === '1'
+              ||
+              sessionStorage.getItem('userType') === '0'
+          )
+      ){
         this.disableManager = false
         this.conditionInfo = false
       }
     },
     async processSubmit(){
+      //先把刚才为了提示用户显示转换的审核状态转换回数字
+      switch (this.reportData.reportTeacherReview){
+        case '1':
+        case '审核通过':this.reportData.reportTeacherReview = 1;break;
+        case '2':
+        case '审核驳回':this.reportData.reportTeacherReview = 2;break;
+        default:this.reportData.reportTeacherReview = 0;
+      }
+      switch (this.reportData.reportExpertReview){
+        case '1':
+        case '审核通过':this.reportData.reportExpertReview = 1;break;
+        case '2':
+        case '审核驳回':this.reportData.reportExpertReview = 2;break;
+        default:this.reportData.reportExpertReview = 0;
+      }
       //如果是小组教师或者教务\管理员，那这个页面处于审核流程，update审核流程,否则是学生在进行新report创建
       //如果教师审核和专家审核不为空(且用户类型不为学生)
       if((!this.disableTeacher || !this.disableManager) && sessionStorage.getItem('userType') !== '3'){
         //先提交审核内容到相关的过程中
         await request.post('/process/updateReport',this.reportData)
         //如果教师审核与专家审核都为审核通过，更新流程进度为当前流程审核通过
-        if(
-            (this.reportData.reportTeacherReview === '审核通过' || this.reportData.reportTeacherReview === 1)
+        if(this.reportData.reportTeacherReview === 1
             &&
-            (this.reportData.reportExpertReview === '审核通过' || this.reportData.reportExpertReview === 1)){
+            this.reportData.reportExpertReview === 1){
           this.reportData.processCondition = "开题报告审核通过"
           await request.post('/process/updateProcess',this.reportData)
         }else if(
             //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
-            (this.reportData.reportTeacherReview === '审核驳回' || this.reportData.reportTeacherReview === 2)
+            this.reportData.reportTeacherReview === 2
             ||
-            (this.reportData.reportExpertReview === '审核驳回' || this.reportData.reportExpertReview === 2)){
+            this.reportData.reportExpertReview === 2){
           this.reportData.processCondition = "开题报告审核驳回"
           await request.post('/process/updateProcess',this.reportData)
         }

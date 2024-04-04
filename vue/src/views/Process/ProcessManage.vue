@@ -181,6 +181,8 @@ export default {
           await request.get('/process/listReport',{params:row}).then(res=>{
           if(res.code === "200"){
             this.tableForm = res.data[0]
+            this.tableForm.processID = row.processID
+            this.tableForm.processName=row.processName
           }
         })
           //开启弹窗
@@ -193,6 +195,8 @@ export default {
           await request.get('/process/listMission',{params:row}).then(res=>{
             if(res.code === "200"){
               this.tableForm = res.data[0]
+              this.tableForm.processID = row.processID
+              this.tableForm.processName=row.processName
             }
           })
           //开启弹窗
@@ -205,6 +209,8 @@ export default {
           await request.get('/process/listMidCheck',{params:row}).then(res=>{
             if(res.code === "200"){
               this.tableForm = res.data[0]
+              this.tableForm.processID = row.processID
+              this.tableForm.processName=row.processName
             }
           })
           //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗

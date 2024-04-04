@@ -171,14 +171,14 @@ export default {
   methods:{
     checkType(){
       switch (this.submissionData.submissionTeacherReview){
-        case 1:this.submissionData.submissionExpertReview = '审核通过';break;
+        case 1:this.submissionData.submissionTeacherReview = '审核通过';break;
         case 2:this.submissionData.submissionTeacherReview = '审核驳回';break;
-        default:this.submissionData.submissionTeacherReview = '等待审核';
+        default:this.submissionData.submissionTeacherReview = '等待审核'
       }
       switch (this.submissionData.submissionExpertReview){
         case 1:this.submissionData.submissionExpertReview = '审核通过';break;
         case 2:this.submissionData.submissionExpertReview = '审核驳回';break;
-        default:this.submissionData.submissionExpertReview = '等待审核';
+        default:this.submissionData.submissionExpertReview = '等待审核'
       }
       //如果教师还未审核，且当前用户为这一流程所属小组教师
       if(
@@ -206,7 +206,6 @@ export default {
       }
     },
     async processSubmit(){
-      console.log(this.submissionData)
       //先把刚才为了提示用户显示转换的审核状态转换回数字
       switch (this.submissionData.submissionTeacherReview){
         case '1':
@@ -228,17 +227,17 @@ export default {
         //先提交审核内容到相关的过程中
         await request.post('/process/updateSubmission',this.submissionData)
         //如果教师审核与专家审核都为审核通过，更新流程进度为当前流程审核通过
-        if(this.submissionData.submissionTeacherReview === '1'
+        if(this.submissionData.submissionTeacherReview === 1
             &&
-            this.submissionData.submissionExpertReview === '1'){
-          this.submissionData.processCondition = "开题报告审核通过"
+            this.submissionData.submissionExpertReview === 1){
+          this.submissionData.processCondition = "课题申报审核通过"
           await request.post('/process/updateProcess',this.submissionData)
         }else if(
             //如果教师审核与专家审核有一个审核驳回，更新流程进度为当前流程审核驳回
-            this.submissionData.submissionTeacherReview === '2'
+            this.submissionData.submissionTeacherReview === 2
             ||
-            this.submissionData.submissionExpertReview === '2'){
-          this.submissionData.processCondition = "开题报告审核驳回"
+            this.submissionData.submissionExpertReview === 2){
+          this.submissionData.processCondition = "课题申报审核驳回"
           await request.post('/process/updateProcess',this.submissionData)
         }
         this.$message.success("审核提交成功")

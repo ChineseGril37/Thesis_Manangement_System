@@ -33,8 +33,8 @@
         <el-table-column prop="processCondition" label="状态" min-width="10%" align="center"></el-table-column>
         <el-table-column  label="操作" min-width="10%" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" size="middle" v-if="condition === true" @click="informationView(scope.row)" plain>查看</el-button>
-            <el-button type="primary" size="middle" v-else @click="informationView(scope.row)" plain>提交</el-button>
+            <el-button type="primary" size="middle" v-if="scope.row.condition" @click="informationView(scope.row)" plain>查看</el-button>
+            <el-button type="primary" size="middle" v-else @click="informationSubmit(scope.row)" plain>提交</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -92,8 +92,8 @@ export default {
       })
       //获取当前学生的流程信息，如果没有则显示一条空信息并只能查看空信息
       await request.get('/process/listProcess',{params:that.params}).then(res =>{
-        let judge = true
         if (res.code === '200'){
+          let judge = true
           //console.log("查询到了数据")
           that.condition = true
           that.tableData = res.data
@@ -101,9 +101,11 @@ export default {
           that.condition = res.data[0].processCondition !== "课题申报审核通过";
           that.tableData.forEach((item) =>{
             if(item.processCondition !== '课题申报审核驳回'){
+              item.condition = false
               judge = false
+            }else {
+              item.condition = true
             }
-            item.condition = true
             item.userType=2
             request.get('/user/listGroup',{params:item}).then(res=>{
               if(res.code === '200'){
@@ -113,12 +115,14 @@ export default {
               }
             })
           })
-        }if(judge){
-          that.tableData.push({condition:this.condition})
+          if(judge){
+            that.condition = false
+            that.tableData.push({})
+          }
         }
       })
     },
-    async informationView(row){
+    async informationSubmit(row){
       // row存储单条process信息，用row中保存的reportID去查询申报信息，
       // 因为后台返回的是列表但我们ID对应的有且只有一条，所以使用data[0]给tableForm赋值
       // 给tableForm加一个fetchData里读出的下一流程deadTime，便于课程申报后更新截止日期
@@ -137,7 +141,25 @@ export default {
         this.$refs["ReportDialog"].showReportDialog = true;
       });
     },
+    async informationView(row){
+      this.condition = true
+      this.tableForm = row
+      this.tableForm.deadTime = this.deadTime
+      await request.get('/process/listReport',{params:row}).then(res=>{
+        if(res.code === "200"){
+          this.tableForm = res.data[0]
+        }
+      })
+      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
+      this.$set(this.tableForm, 'processName', row.processName);
+      //开启弹窗
+      this.showReportDialog = true
+      this.$nextTick(() => {
+        this.$refs["ReportDialog"].showReportDialog = true;
+      });
+    },
     closeDialog(){
+      this.tableData = []
       this.fetchData();
       this.showReportDialog = false
     },

@@ -28,7 +28,7 @@
         <el-table-column  label="操作" min-width="10%" align="center">
           <template slot-scope="scope">
             <el-button type="primary" size="middle" v-if="scope.row.condition" @click="informationView(scope.row)" plain>查看</el-button>
-            <el-button type="primary" size="middle" v-else @click="informationView(scope.row)" plain>提交</el-button>
+            <el-button type="primary" size="middle" v-else @click="informationSubmit(scope.row)" plain>提交</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -106,17 +106,37 @@ export default {
                 this.$set(item,"processGroup","查询失败")
               }
             })
+            console.log(judge)
           })
         }
         if(judge){
-            that.tableData.push({})
+          that.condition = false
+          that.tableData.push({})
         }
       })
     },
-    async informationView(row){
+    async informationSubmit(row){
       // row存储单条process信息，用row中保存的submissionID去查询申报信息，
       // 因为后台返回的是列表但我们ID对应的有且只有一条，所以使用data[0]给tableForm赋值
       // 给tableForm加一个fetchData里读出的下一流程deadTime，便于课程申报后更新截止日期
+      this.tableForm = row
+      this.tableForm.deadTime = this.deadTime
+      //这里可以直接用row或者赋值后的tableForm，其实只需要这条process中的submissionID
+      await request.get('/process/listSubmission',{params:row}).then(res=>{
+        if(res.code === "200"){
+          this.tableForm = res.data[0]
+        }
+      })
+      //因为弹窗里需要展示课题名称，所以把row里的课题名称赋给tableForm传进弹窗
+      this.$set(this.tableForm, 'processName', row.processName);
+      //开启弹窗
+      this.showSubmissionDialog = true
+      this.$nextTick(() => {
+        this.$refs["SubmissionDialog"].showSubmissionDialog = true;
+      });
+    },
+    async informationView(row){
+      this.condition = true
       this.tableForm = row
       this.tableForm.deadTime = this.deadTime
       //这里可以直接用row或者赋值后的tableForm，其实只需要这条process中的submissionID
@@ -135,8 +155,8 @@ export default {
       });
     },
     closeDialog(){
-      this.fetchData();
       this.tableData = []
+      this.fetchData();
       this.showSubmissionDialog = false
     }
   }

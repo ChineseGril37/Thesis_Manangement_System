@@ -4,24 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：审核逻辑创建&#10;前后端：中期检查变量名规范为midCheck(原midcheck)">
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：课题申报弹窗限制逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/ProcessController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/request/ProcessRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Process.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/ProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/UserDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/User/UserManage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +110,7 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\About" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringbootApplication">
+  <component name="RunManager" selected="npm.serve">
     <configuration name="SpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="springboot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.lengs.springboot.SpringbootApplication" />
@@ -198,7 +188,8 @@
       <workItem from="1712025698280" duration="19054000" />
       <workItem from="1712066116174" duration="5826000" />
       <workItem from="1712108606704" duration="24154000" />
-      <workItem from="1712194967845" duration="1406000" />
+      <workItem from="1712194967845" duration="7456000" />
+      <workItem from="1712206967959" duration="3848000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -328,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712066988856</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="前端：课题申报弹窗限制逻辑">
+      <option name="closed" value="true" />
+      <created>1712197773331</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1712197773331</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +367,8 @@
     <MESSAGE value="前端：课题申报弹窗独立" />
     <MESSAGE value="前端：开题报告、任务书提交弹窗独立&#10;后端：开题报告、任务书更新接口创建" />
     <MESSAGE value="前端：审核逻辑创建&#10;前后端：中期检查变量名规范为midCheck(原midcheck)" />
-    <option name="LAST_COMMIT_MESSAGE" value="前端：审核逻辑创建&#10;前后端：中期检查变量名规范为midCheck(原midcheck)" />
+    <MESSAGE value="前端：课题申报弹窗限制逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端：课题申报弹窗限制逻辑" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
