@@ -19,7 +19,7 @@
             <i class="el-icon-house"></i>
             <span>首页</span>
           </el-menu-item>
-          <el-submenu index="/Project">
+          <el-submenu index="/Project" v-if="checkType() === 3">
             <template slot="title">
               <i class="el-icon-folder-opened"></i>
               <span>课题申报</span>
@@ -41,24 +41,24 @@
               <span>填写中期检查</span>
             </el-menu-item>
           </el-submenu>
-          <el-submenu index="/User">
+          <el-submenu index="/User" v-if="checkType() !== 3">
             <template slot="title">
               <i class="el-icon-user"></i>
-              <span>人员管理</span>
+              <span>人员信息</span>
             </template>
             <el-menu-item index="/User/StudentList">
               <i class="el-icon-tickets"></i>
               <span>学生列表</span>
             </el-menu-item>
-            <el-menu-item index="/User/StudentManage">
+            <el-menu-item index="/User/StudentManage" v-if="checkType() === 2">
               <i class="el-icon-circle-plus-outline"></i>
               <span>组员管理</span>
             </el-menu-item>
-            <el-menu-item index="/User/TeacherList">
+            <el-menu-item index="/User/TeacherList" v-if="checkType() !== 2">
               <i class="el-icon-tickets"></i>
               <span>教师列表</span>
             </el-menu-item>
-            <el-menu-item index="/User/UserManage">
+            <el-menu-item index="/User/UserManage" v-if="checkType() !== 2">
               <i class="el-icon-edit-outline"></i>
               <span>信息修改</span>
             </el-menu-item>
@@ -72,11 +72,11 @@
               <i class="el-icon-tickets"></i>
               <span>流程查看</span>
             </el-menu-item>
-            <el-menu-item index="/Process/ProcessDate">
+            <el-menu-item index="/Process/ProcessDate" v-if="checkType() === 0">
               <i class="el-icon-date"></i>
               <span>截止日期</span>
             </el-menu-item>
-            <el-menu-item index="/Process/ProcessManage">
+            <el-menu-item index="/Process/ProcessManage" v-if="checkType() === 0 || checkType() === 1">
               <i class="el-icon-edit-outline"></i>
               <span>流程管理</span>
             </el-menu-item>
@@ -86,23 +86,23 @@
               <i class="el-icon-folder-opened"></i>
               <span>论文管理</span>
             </template>
-            <el-menu-item index="/Thesis/ThesisFirstDraftSubmission">
+            <el-menu-item index="/Thesis/ThesisFirstDraftSubmission" v-if="checkType() === 3">
               <i class="el-icon-document-add"></i>
               <span>初稿提交</span>
             </el-menu-item>
-            <el-menu-item index="/Thesis/ThesisFirstDraftEdit">
+            <el-menu-item index="/Thesis/ThesisFirstDraftEdit" v-if="checkType() === 3">
               <i class="el-icon-document"></i>
               <span>初稿修改</span>
             </el-menu-item>
-            <el-menu-item index="/Thesis/ThesisFinalizeSubmission">
+            <el-menu-item index="/Thesis/ThesisFinalizeSubmission" v-if="checkType() === 3">
               <i class="el-icon-document-add"></i>
               <span>定稿提交</span>
             </el-menu-item>
-            <el-menu-item index="/Thesis/ThesisFinalSubmission">
+            <el-menu-item index="/Thesis/ThesisFinalSubmission" v-if="checkType() === 3">
               <i class="el-icon-document-add"></i>
               <span>终稿提交</span>
             </el-menu-item>
-            <el-menu-item index="/Thesis/ThesisCheck">
+            <el-menu-item index="/Thesis/ThesisCheck" v-if="checkType() === 3">
               <i class="el-icon-takeaway-box"></i>
               <span>格式检测</span>
             </el-menu-item>
@@ -110,7 +110,7 @@
               <i class="el-icon-notebook-2"></i>
               <span>论文查看</span>
             </el-menu-item>
-            <el-menu-item index="/Thesis/ThesisReview">
+            <el-menu-item index="/Thesis/ThesisReview" v-if="checkType() !== 3">
               <i class="el-icon-takeaway-box"></i>
               <span>论文审核</span>
             </el-menu-item>
@@ -124,7 +124,7 @@
               <i class="el-icon-notebook-2"></i>
               <span>答辩信息</span>
             </el-menu-item>
-            <el-menu-item index="/OralDefense/OralDefenseMaterial">
+            <el-menu-item index="/OralDefense/OralDefenseMaterial" v-if="checkType() === 3">
               <i class="el-icon-document-add"></i>
               <span>材料提交</span>
             </el-menu-item>
@@ -197,6 +197,14 @@ export default defineComponent({
       setTimeout(() => {
         this.$router.push('/');
       }, 1000);
+    },
+    checkType(){
+      switch (sessionStorage.getItem('userType')){
+        case '0': return 0;
+        case '1': return 1;
+        case '2': return 2;
+        case '3': return 3;
+      }
     }
   },
   computed: {

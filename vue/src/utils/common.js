@@ -23,3 +23,11 @@ export function getJsonDateForMat(date){
     second = second > 9 ? second : '0' + second
     return (year + '-' + month + '-' + strDate + ' ' + hour + ':' + minute + ':' + second);
 }
+export function setHome(userType){
+    switch (userType){
+        case 0:this.$routebreak;
+        case 1:break;
+        case 2:break;
+        case 3:break;
+    }
+}

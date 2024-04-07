@@ -5,20 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：开题报告弹窗限制逻辑">
+      <change afterPath="$PROJECT_DIR$/vue/src/assets/404page.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/src/views/Error/Error.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/MidCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/MidCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Mission.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/Mission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/Process.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/components/MidCheckDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/MidCheckDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/MissionDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/ReportDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Process/ProcessManage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MidCheckSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/MissionReportSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectReportSubmission.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Project/ProjectSubmission.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/utils/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +26,8 @@
         <option value="Mybatis Mapper" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Vue Options API Component" />
         <option value="JavaScript File" />
+        <option value="Vue Options API Component" />
       </list>
     </option>
   </component>
@@ -110,11 +104,11 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\assets" />
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Error" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Project" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Begin" />
-      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Login" />
-      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\About" />
     </key>
   </component>
   <component name="RunManager" selected="npm.serve">
@@ -197,6 +191,11 @@
       <workItem from="1712108606704" duration="24154000" />
       <workItem from="1712194967845" duration="7456000" />
       <workItem from="1712206967959" duration="20490000" />
+      <workItem from="1712283382296" duration="1401000" />
+      <workItem from="1712286204000" duration="4916000" />
+      <workItem from="1712386077234" duration="4702000" />
+      <workItem from="1712417512007" duration="599000" />
+      <workItem from="1712457442865" duration="14951000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />

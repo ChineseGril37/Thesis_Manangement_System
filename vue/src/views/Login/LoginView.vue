@@ -58,6 +58,7 @@
 <script>
 import SIdentify from '../Login/SIdentify.vue'
 import request from "@/utils/request";
+import {setHome} from "@/utils/common";
 export default {
   name: 'Login',
   components: { SIdentify },
@@ -134,6 +135,7 @@ export default {
               sessionStorage.setItem("groupID", res.data.groupID)
               sessionStorage.setItem("userMajor", res.data.userMajor)
               this.$message.success("登录成功");
+              setHome(this.confirmForm.userType)
               setTimeout(() => {
                 this.$router.push("/Home");
               }, 1000);

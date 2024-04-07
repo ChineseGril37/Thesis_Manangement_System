@@ -13,13 +13,22 @@ Vue.use(Plugin);
 Vue.use(VueCookies)
 
 router.beforeEach((to,from,next) =>{
+  let isLogin = sessionStorage.getItem("isLogin");
+  switch (sessionStorage.getItem('userType')){
+    case '0':
+  }
   if(to.path === '' || to.path === '/Login'){//当前路由跳转是否为Login页面
     //console.log("是Login，继续跳转");
-    next();
+    if(isLogin === "true"){
+      next({
+        path: '/Home'
+      });
+    }else {
+      next();
+    }
   } else {
     //console.log("不是Login，进行判断")
     //定义变量isLogin读取session中的登录状态并console输出查看
-    let isLogin = sessionStorage.getItem("isLogin");
     //console.log("isLogin=" + isLogin);
     if(to.meta.requireAuth){//当前路由是否需要登录？
       //console.log("equireAuth=true时，表示需要登录");
