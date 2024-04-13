@@ -5,7 +5,18 @@
 <mapper namespace="org.lengs.springboot.mapper.FileMapper">
 
     <select id="fileList" resultType="org.lengs.springboot.entity.FileInfo">
-
+        select * from File;
+    </select>
+    <select id="listByFile" resultType="org.lengs.springboot.entity.FileInfo">
+        select * from File
+        <where>
+            <if test="fileName != null and fileName != ''">
+                fileName = #{fileName}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and fileType = #{fileType}
+            </if>
+        </where>;
     </select>
     <insert id="getUpload">
 

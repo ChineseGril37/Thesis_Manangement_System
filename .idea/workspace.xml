@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：开题报告弹窗限制逻辑">
-      <change afterPath="$PROJECT_DIR$/vue/src/assets/404page.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue/src/views/Error/Error.vue" afterDir="false" />
+    <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="前端：404页面跳转、动态路由表搭建">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/common/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/common/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/FileMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/FileMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IFileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/FileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/File.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/File.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/common/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/common/Result.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/components/SubmissionDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/utils/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Login/LoginView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,11 +109,11 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\assets" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Error" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\components" />
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Project" />
-      <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Begin" />
     </key>
   </component>
   <component name="RunManager" selected="npm.serve">
@@ -195,7 +200,12 @@
       <workItem from="1712286204000" duration="4916000" />
       <workItem from="1712386077234" duration="4702000" />
       <workItem from="1712417512007" duration="599000" />
-      <workItem from="1712457442865" duration="14951000" />
+      <workItem from="1712457442865" duration="16550000" />
+      <workItem from="1712634744323" duration="4621000" />
+      <workItem from="1712805251498" duration="6593000" />
+      <workItem from="1712899108108" duration="9866000" />
+      <workItem from="1712928173550" duration="4848000" />
+      <workItem from="1712973423948" duration="2174000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -341,7 +351,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712215981530</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="前端：404页面跳转、动态路由表搭建">
+      <option name="closed" value="true" />
+      <created>1712481830807</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1712481830807</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +401,8 @@
     <MESSAGE value="前端：审核逻辑创建&#10;前后端：中期检查变量名规范为midCheck(原midcheck)" />
     <MESSAGE value="前端：课题申报弹窗限制逻辑" />
     <MESSAGE value="前端：开题报告弹窗限制逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="前端：开题报告弹窗限制逻辑" />
+    <MESSAGE value="前端：404页面跳转、动态路由表搭建" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端：404页面跳转、动态路由表搭建" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

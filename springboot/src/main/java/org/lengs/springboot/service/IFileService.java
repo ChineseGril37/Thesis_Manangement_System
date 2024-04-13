@@ -9,4 +9,6 @@ public interface IFileService {
     List<FileInfo> listFile();
 
     void getUpload(MultipartFile mf, MultipartFile[] mfs);
+
+    List<FileInfo> listByFile(FileInfo fileInfo);
 }

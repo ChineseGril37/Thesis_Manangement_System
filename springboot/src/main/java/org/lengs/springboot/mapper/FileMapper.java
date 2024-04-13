@@ -9,5 +9,8 @@ import java.util.List;
 public interface FileMapper {
     List<FileInfo> fileList();
 
+    List<FileInfo> listByFile(FileInfo fileInfo);
+
     void getUpload();
+
 }

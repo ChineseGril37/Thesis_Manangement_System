@@ -21,6 +21,13 @@ public class Result {
         result.setData(data);
         return result;
     }
+    public  static Result success(String msg) {
+        Result result = new Result();
+        result.setMsg("success");
+        result.setCode(SUCCESS_CODE);
+        result.setMsg(msg);
+        return result;
+    }
     public  static Result error(String msg) {
         Result result = new Result();
         result.setCode(ERROR_CODE);

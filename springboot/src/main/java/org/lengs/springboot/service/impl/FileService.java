@@ -22,4 +22,9 @@ public class FileService implements IFileService {
     public void getUpload(MultipartFile mf, MultipartFile[] mfs) {
 
     }
+
+    @Override
+    public List<FileInfo> listByFile(FileInfo fileInfo) {
+        return fileMapper.listByFile(fileInfo);
+    }
 }

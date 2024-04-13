@@ -2,7 +2,12 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-233.14808.21">
     <data-source name="thesis_management@localhost" uuid="4a530cd6-b8b5-4d7c-9a9f-88ef7bff14ff">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <database-info product="MySQL" version="8.0.31" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.0.31" exact-driver-version="8.2">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>

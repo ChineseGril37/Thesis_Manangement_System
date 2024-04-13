@@ -25,7 +25,7 @@ export function getJsonDateForMat(date){
 }
 export function setHome(userType){
     switch (userType){
-        case 0:this.$routebreak;
+        case 0:break;
         case 1:break;
         case 2:break;
         case 3:break;

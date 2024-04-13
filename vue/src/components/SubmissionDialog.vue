@@ -71,16 +71,16 @@
                         clearable></el-input>
             </el-form-item>
           </el-col>
-          <!--              <el-col :span="24">-->
-          <!--                <el-form-item label="附件上传" prop="submissionFile">-->
-          <!--                  <el-upload ref="submissionFile" :file-list="fileList"-->
-          <!--                             :action="submissionFileAction" :auto-upload="false"-->
-          <!--                             :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">-->
-          <!--                    <el-button size="small" type="primary" icon="el-icon-upload" :disabled="conditionInfo">上传</el-button>-->
-          <!--                    <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
-          <!--                  </el-upload>-->
-          <!--                </el-form-item>-->
-          <!--              </el-col>-->
+          <el-col :span="24">
+            <el-form-item label="附件上传" prop="submissionFile">
+              <el-upload ref="submissionFile" :file-list="fileList"
+                         :action="submissionFileAction" :auto-upload="false"
+                         :before-upload="submissionFileBeforeUpload" accept=".doc,.docx">
+                <el-button size="small" type="primary" icon="el-icon-upload" :disabled="conditionInfo">上传</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>
+              </el-upload>
+            </el-form-item>
+          </el-col>
           <el-col :span="24">
             <el-form-item label="专业教师审核"  porp="submissionTeacherReview">
               <el-select v-model="submissionData.submissionTeacherReview"
