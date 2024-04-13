@@ -20,36 +20,39 @@ public class FileController {
     IFileService fileService;
 
     @GetMapping("/list")
-    public Result listFile(){
+    public Result listFile() {
         List<FileInfo> fileInfo = fileService.listFile();
-        if(fileInfo.isEmpty()){
+        if (fileInfo.isEmpty()) {
             return Result.error("未查询到数据");
-        }else {
+        } else {
             return Result.success(fileInfo);
         }
     }
+
     @GetMapping("/listBy")
-    public Result listByFile(FileInfo fileInfo){
+    public Result listByFile(FileInfo fileInfo) {
         List<FileInfo> fileInfos = fileService.listByFile(fileInfo);
-        if(fileInfos.isEmpty()){
+        if (fileInfos.isEmpty()) {
             return Result.error("未查询到数据");
-        }else {
+        } else {
+            for (int counter = 0; counter < fileInfos.size(); counter++){
+                fileInfos.set(counter,downloadFile(fileInfos.get(counter)));
+            }
             return Result.success(fileInfos);
         }
     }
+
     @PostMapping("/upload")
-    public Result upload(MultipartFile file,MultipartFile[] files,FileInfo fileInfo) throws IOException {
+    public Result upload(MultipartFile file, MultipartFile[] files, FileInfo fileInfo) throws IOException {
         Result result = new Result();
         //拿到具体文件 file
-        if(file != null){
-            result=getFile(fileInfo, file);
-        }
-        else if (files != null) {
+        if (file != null) {
+            result = uploadFile(fileInfo, file);
+        } else if (files != null) {
             for (MultipartFile multipartFile : files) {
-                result=getFile(fileInfo, multipartFile);
+                result = uploadFile(fileInfo, multipartFile);
             }
-        }
-        else{
+        } else {
             //如果获取到的文件为空
             result.setMsg("上传失败！请检查文件");
             result.setCode("-1");
@@ -57,7 +60,7 @@ public class FileController {
         return result;
     }
 
-    private Result getFile(FileInfo fileInfo, MultipartFile multipartFile) throws IOException {
+    private Result uploadFile(FileInfo fileInfo, MultipartFile multipartFile) throws IOException {
         String filename = multipartFile.getOriginalFilename();
         String pathname = "C:\\Users\\lengs\\IdeaProjects\\Thesis_Manangement_System\\File";
         File file_server = null;  //创建文件对象
@@ -68,7 +71,7 @@ public class FileController {
             //如果文件父目录不存在，就创建这样一个目录
             file_server.getAbsoluteFile().mkdir();
         }
-        file_server = new File(file_server.getAbsoluteFile(),filename);
+        file_server = new File(file_server.getAbsoluteFile(), filename);
         multipartFile.transferTo(file_server);
         fileInfo.setFileSize(multipartFile.getSize());
         fileInfo.setFileName(filename);
@@ -76,5 +79,8 @@ public class FileController {
         System.out.println(fileInfo);
         fileService.getUpload(fileInfo);
         return Result.success("上传成功！");
+    }
+    private Result downloadFile(FileInfo fileInfo) throws IOException{
+        return Result.success();
     }
 }
