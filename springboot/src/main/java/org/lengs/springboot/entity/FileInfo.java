@@ -6,7 +6,7 @@ public class FileInfo {
     private Integer fileID;
     private String fileAddress;
     private Integer fileType;
-    private Integer fileSize;
+    private Long fileSize;
     private String fileName;
     private Integer studentID;
     private Integer teacherID;

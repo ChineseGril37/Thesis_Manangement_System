@@ -11,6 +11,6 @@ public interface FileMapper {
 
     List<FileInfo> listByFile(FileInfo fileInfo);
 
-    void getUpload();
+    void getUpload(FileInfo fileInfo);
 
 }

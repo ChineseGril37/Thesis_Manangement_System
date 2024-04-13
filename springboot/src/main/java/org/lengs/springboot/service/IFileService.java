@@ -8,7 +8,7 @@ import java.util.List;
 public interface IFileService {
     List<FileInfo> listFile();
 
-    void getUpload(MultipartFile mf, MultipartFile[] mfs);
+    void getUpload(FileInfo fileInfo);
 
     List<FileInfo> listByFile(FileInfo fileInfo);
 }

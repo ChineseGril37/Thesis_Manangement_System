@@ -19,12 +19,9 @@ public class FileService implements IFileService {
     public List<FileInfo> listFile() { return fileMapper.fileList(); }
 
     @Override
-    public void getUpload(MultipartFile mf, MultipartFile[] mfs) {
-
-    }
-
-    @Override
     public List<FileInfo> listByFile(FileInfo fileInfo) {
         return fileMapper.listByFile(fileInfo);
     }
+    @Override
+    public void getUpload(FileInfo fileInfo) { fileMapper.getUpload(fileInfo);}
 }
