@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="body">
     <div class="userinfo" >这是一个学院介绍</div>
     <div class="userinfo" >这是一个系统公告栏</div>

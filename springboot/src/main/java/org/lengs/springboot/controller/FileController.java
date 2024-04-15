@@ -35,9 +35,6 @@ public class FileController {
         if (fileInfos.isEmpty()) {
             return Result.error("未查询到数据");
         } else {
-            for (int counter = 0; counter < fileInfos.size(); counter++){
-                fileInfos.set(counter,downloadFile(fileInfos.get(counter)));
-            }
             return Result.success(fileInfos);
         }
     }
@@ -79,8 +76,5 @@ public class FileController {
         System.out.println(fileInfo);
         fileService.getUpload(fileInfo);
         return Result.success("上传成功！");
-    }
-    private Result downloadFile(FileInfo fileInfo) throws IOException{
-        return Result.success();
     }
 }
