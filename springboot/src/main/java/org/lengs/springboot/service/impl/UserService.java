@@ -52,4 +52,9 @@ public class UserService implements IUserService {
     public List<User> listGroup(GroupRequest groupRequest) {
         return userMapper.listGroup(groupRequest);
     }
+
+    @Override
+    public Integer count(User user) {
+        return userMapper.count(user);
+    }
 }

@@ -21,4 +21,6 @@ public interface IUserService {
     User login(LoginRequest loginRequest);
 
     List<User> listGroup(GroupRequest groupRequest);
+
+    Integer count(User user);
 }

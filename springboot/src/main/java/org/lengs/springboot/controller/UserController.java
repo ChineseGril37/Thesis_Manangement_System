@@ -30,6 +30,11 @@ public class UserController {
     public Result page(UserRequest userRequest){
         return Result.success(userService.page(userRequest));
     }
+
+    @GetMapping("/count")
+    public Result count(User user){
+        return Result.success(userService.count(user));
+    }
     @GetMapping("/login")
     public Result login(LoginRequest loginRequest){
         return Result.success(userService.login(loginRequest));

@@ -6,10 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="23a0c0e0-7a6e-453d-a02d-dd7e5133a52c" name="更改" comment="后端：文件上传服务搭建(单文件、多文件上传)&#10;前端：开屏页面功能实现">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/FileInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/entity/FileInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/org/lengs/springboot/service/impl/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/mapper/User.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/mapper/User.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/mapper/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/IUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/IUserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/impl/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/org/lengs/springboot/service/impl/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Home/BeginView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/src/views/Thesis/ThesisFirstDraftSubmission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/src/views/Thesis/ThesisFirstDraftSubmission.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +116,7 @@
       <recent name="C:\Users\lengs\IdeaProjects\Thesis_Manangement_System\vue\src\views\Project" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringbootApplication">
+  <component name="RunManager" selected="npm.serve">
     <configuration name="SpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="springboot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.lengs.springboot.SpringbootApplication" />
@@ -200,7 +207,12 @@
       <workItem from="1712928173550" duration="4848000" />
       <workItem from="1712973423948" duration="13888000" />
       <workItem from="1713060890669" duration="2756000" />
-      <workItem from="1713186285434" duration="1013000" />
+      <workItem from="1713186285434" duration="4164000" />
+      <workItem from="1713232192281" duration="5251000" />
+      <workItem from="1713322953808" duration="3473000" />
+      <workItem from="1713423179825" duration="1048000" />
+      <workItem from="1713492209612" duration="1827000" />
+      <workItem from="1713669269495" duration="2420000" />
     </task>
     <task id="LOCAL-00001" summary="前后端搭建：前端Home页面搭建，elementUI建设界面，后端查询数据和数据库连接、前后端联动操作">
       <option name="closed" value="true" />
@@ -378,7 +390,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713010587707</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="后端：文件上传服务搭建(单文件、多文件上传)&#10;前端：开屏页面功能实现">
+      <option name="closed" value="true" />
+      <created>1713187310471</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1713187310471</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

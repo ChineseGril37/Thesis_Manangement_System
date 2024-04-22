@@ -69,6 +69,17 @@
                      </if>
                  </where>
     </select>
+    <select id="count" resultType="java.lang.Integer">
+        select COUNT(*) from User
+        <where>
+            <if test="userType != null and userType != ''">
+                userType = #{ userType }
+            </if>
+            <if test="userMajor != null and userMajor != ''">
+                and userMajor = #{userMajor}
+            </if>
+        </where>
+    </select>
     <select id="login">
         select * from User where userName = #{ userName } and password = #{ password }
     </select>
