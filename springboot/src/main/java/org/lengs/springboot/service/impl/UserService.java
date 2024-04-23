@@ -57,4 +57,9 @@ public class UserService implements IUserService {
     public Integer count(User user) {
         return userMapper.count(user);
     }
+
+    @Override
+    public List<String> listAcademy() {
+        return userMapper.listAcademy();
+    }
 }

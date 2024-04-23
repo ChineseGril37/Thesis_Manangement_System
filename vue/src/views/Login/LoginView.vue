@@ -129,11 +129,12 @@ export default {
               this.confirmForm = res.data
               sessionStorage.setItem("isLogin", "true")
               //这边后面做一个提交，服务器验证，通过之后获得token
-              sessionStorage.setItem("userID", this.confirmForm.userId)
-              sessionStorage.setItem("userType", this.confirmForm.userType)
-              sessionStorage.setItem("userRealName", this.confirmForm.userRealName)
               sessionStorage.setItem("groupID", res.data.groupID)
               sessionStorage.setItem("userMajor", res.data.userMajor)
+              sessionStorage.setItem("userID", this.confirmForm.userId)
+              sessionStorage.setItem("userType", this.confirmForm.userType)
+              sessionStorage.setItem("userAcademy", this.confirmForm.userAcademy)
+              sessionStorage.setItem("userRealName", this.confirmForm.userRealName)
               this.$message.success("登录成功");
               setHome(this.confirmForm.userType)
               setTimeout(() => {

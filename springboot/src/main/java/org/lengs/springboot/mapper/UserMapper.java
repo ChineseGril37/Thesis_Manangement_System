@@ -26,4 +26,6 @@ public interface UserMapper {
     List<User> listGroup(GroupRequest groupRequest);
 
     Integer count(User user);
+
+    List<String> listAcademy();
 }

@@ -19,7 +19,7 @@
         </where>;
     </select>
     <insert id="getUpload">
-        insert into file(fileAddress, fileType, fileSize, fileName, studentID, teacherID, fileCreateTime, fileChangeTime)
-        VALUES (#{fileAddress},#{fileType},#{fileSize},#{fileName},#{studentID},#{teacherID},#{fileCreateTime},#{fileChangeTime})
+        insert into file(fileAddress, fileType, fileSize, fileName, userID, fileCreateTime, fileChangeTime)
+        VALUES (#{fileAddress},#{fileType},#{fileSize},#{fileName},#{userID},#{fileCreateTime},#{fileChangeTime})
     </insert>
 </mapper>

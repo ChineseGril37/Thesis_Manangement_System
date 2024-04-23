@@ -37,14 +37,26 @@
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <!--                  <el-form-item label="附件上传" prop="midCheckFile">-->
-              <!--                    <el-upload ref="midCheckFile" :file-list="fileList"-->
-              <!--                               :action="midCheckFileAction" :auto-upload="false"-->
-              <!--                               :before-upload="midCheckFileBeforeUpload" accept=".doc,.docx">-->
-              <!--                      <el-button size="small" type="primary" icon="el-icon-upload" :disabled="condition">上传</el-button>-->
-              <!--                      <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>-->
-              <!--                    </el-upload>-->
-              <!--                  </el-form-item>-->
+              <el-form-item label="附件上传" prop="submissionFile">
+                <el-upload action
+                           ref="upload"
+                           class="upload"
+                           :limit="fileLimit"
+                           :headers="headers"
+                           :auto-upload="false"
+                           :file-list="fileList"
+                           :on-change="beforeUpload"
+                           :on-exceed="handleExceed"
+                           :http-request="uploadFile">
+                  <el-button slot="trigger"
+                             size="small"
+                             type="primary"
+                             icon="el-icon-upload"
+                             :disabled="conditionInfo">上传
+                  </el-button>
+                  <div slot="tip" class="el-upload__tip">只能上传不超过 50MB 的.doc,.docx文件</div>
+                </el-upload>
+              </el-form-item>
             </el-col>
             <el-col :span="24">
               <el-form-item label="专业教师审核" porp="midCheckTeacherReview">
@@ -87,6 +99,7 @@
 <script>
 import {setCurrentTime} from "@/utils/common";
 import request from "@/utils/request";
+import axios from "axios";
 
 export default {
   name: "MidCheckDialog",
@@ -135,9 +148,77 @@ export default {
           trigger: 'change'
         }]
       },
+      // el-upload组件绑定的属性—— :file-list=“fileList”,渲染后fileList[index]是Object类型,而不是后台所需的File类型,
+      // 而这个组件已经把对应的File类型存储到了fileList[index].raw这个属性里,直接拿来用就好.
+      //上传后的文件列表
+      fileList: [],
+      // 允许的文件类型
+      fileType: [ "pdf", "doc", "docx"],
+      // 运行上传文件大小，单位 M
+      fileSize: 50,
+      // 附件数量限制
+      fileLimit: 5,
+      //请求标头
+      headers: {'Content-Type': 'multipart/form-data'}
     }
   },
   methods:{
+    beforeUpload(file,fileList){
+      if (file.type !== "" || file.type != null || file.type !== undefined){
+        //截取文件的后缀，判断文件类型
+        const FileExt = file.name.replace(/.+\./, "").toLowerCase();
+        //计算文件的大小
+        const isLt5M = file.size / 1024 / 1024 < 50; //这里做文件大小限制
+        console.log(isLt5M)
+        //如果大于50M
+        if (!isLt5M) {
+          this.$showMessage('上传文件大小不能超过 50MB!');
+          return false;
+        }
+        //如果文件类型不在允许上传的范围内
+        if(this.fileType.includes(FileExt)){
+          this.fileList = fileList
+          return true;
+        }
+        else {
+          this.$message.error("上传文件格式不正确!");
+          return false;
+        }
+      }
+    },
+    //超出文件个数的回调
+    handleExceed(){
+      this.$message({
+        type:'warning',
+        message:'超出最大上传文件数量的限制！'
+      });
+      return false;
+    },
+    //文件上传
+    uploadFile(){
+      let formData = new FormData()
+      formData.append('userID',sessionStorage.getItem('userID'))
+      formData.append('fileType','4')
+      formData.append('fileCreateTime',setCurrentTime())
+      formData.append('fileChangeTime',setCurrentTime())
+      for(let i = 0;i < this.fileList.length; i++){
+        formData.append('fileList',this.fileList[i].raw)
+      }
+      axios.post('http://localhost:9090/file/upload',formData,{headers:this.headers}).then(res=>{
+        console.log(res)
+        if(res.data.code === '200'){
+          this.$message({
+            type:'success',
+            message:'文件上传成功!'
+          })
+        }else {
+          this.$message({
+            type:'error',
+            message:res.data.msg
+          })
+        }
+      })
+    },
     checkType(){
       switch (this.midCheckData.midCheckTeacherReview){
         case 1:this.midCheckData.midCheckTeacherReview = '审核通过';break;
@@ -238,6 +319,9 @@ export default {
         await request.post('/process/updateProcess',this.midCheckData).then(res=>{
           this.$message.success("中期检查申报成功")
         })
+      }
+      if(this.condition){
+        this.uploadFile()
       }
       this.closeDialog()
     },

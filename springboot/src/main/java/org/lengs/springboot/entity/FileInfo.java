@@ -11,8 +11,7 @@ public class FileInfo {
     private Integer fileType;
     private Long fileSize;
     private String fileName;
-    private Integer studentID;
-    private Integer teacherID;
+    private Integer userID;
     private String fileCreateTime;
     private String fileChangeTime;
 }

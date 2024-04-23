@@ -40,13 +40,14 @@ public class FileController {
     }
 
     @PostMapping("/upload")
-    public Result upload(MultipartFile file, MultipartFile[] files, FileInfo fileInfo) throws IOException {
+    public Result upload(MultipartFile[] fileList, FileInfo fileInfo) throws IOException {
+        System.out.println("upload!");
+        System.out.println("fileList="+fileList);
+        System.out.println("fileInfo="+fileInfo);
         Result result = new Result();
         //拿到具体文件 file
-        if (file != null) {
-            result = uploadFile(fileInfo, file);
-        } else if (files != null) {
-            for (MultipartFile multipartFile : files) {
+        if (fileList != null) {
+            for (MultipartFile multipartFile : fileList) {
                 result = uploadFile(fileInfo, multipartFile);
             }
         } else {
@@ -62,7 +63,7 @@ public class FileController {
         String pathname = "C:\\Users\\lengs\\IdeaProjects\\Thesis_Manangement_System\\File";
         File file_server = null;  //创建文件对象
         if (filename != null) {
-            file_server = new File(pathname, String.valueOf(fileInfo.getStudentID()));
+            file_server = new File(pathname, String.valueOf(fileInfo.getUserID()));
         }
         if (!file_server.getAbsoluteFile().exists()) {
             //如果文件父目录不存在，就创建这样一个目录
@@ -73,7 +74,6 @@ public class FileController {
         fileInfo.setFileSize(multipartFile.getSize());
         fileInfo.setFileName(filename);
         fileInfo.setFileAddress(file_server.getAbsolutePath());
-        System.out.println(fileInfo);
         fileService.getUpload(fileInfo);
         return Result.success("上传成功！");
     }

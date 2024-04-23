@@ -76,7 +76,7 @@
               <i class="el-icon-date"></i>
               <span>截止日期</span>
             </el-menu-item>
-            <el-menu-item index="/Process/ProcessManage" v-if="checkType() === 0 || checkType() === 1">
+            <el-menu-item index="/Process/ProcessManage" v-if="checkType() !== 3">
               <i class="el-icon-edit-outline"></i>
               <span>流程管理</span>
             </el-menu-item>

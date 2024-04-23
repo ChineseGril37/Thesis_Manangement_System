@@ -78,6 +78,9 @@
             <if test="userMajor != null and userMajor != ''">
                 and userMajor = #{userMajor}
             </if>
+            <if test="userAcademy != null and userAcademy != ''">
+                and userAcademy = #{userAcademy}
+            </if>
         </where>
     </select>
     <select id="login">
@@ -96,5 +99,8 @@
                 and userType = #{userType}
             </if>
         </where>
+    </select>
+    <select id="listAcademy" resultType="java.lang.String">
+        SELECT DISTINCT userAcademy FROM user;
     </select>
 </mapper>

@@ -2,13 +2,11 @@ package org.lengs.springboot.controller;
 import java.util.List;
 import java.util.Objects;
 
-import org.lengs.springboot.controller.request.GroupRequest;
-import org.lengs.springboot.controller.request.UserRequest;
+import org.lengs.springboot.controller.request.*;
 import org.lengs.springboot.entity.User;
 import org.lengs.springboot.common.Result;
 import org.lengs.springboot.service.IUserService;
 
-import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,14 @@ public class UserController {
 
     @GetMapping("/count")
     public Result count(User user){
-        return Result.success(userService.count(user));
+        System.out.println("user.getUserAcademy()=");
+        System.out.println(user.getUserAcademy());
+        int counter = userService.count(user);
+        if(counter != 0){
+            return Result.success(counter);
+        }else {
+            return Result.error("未查询到数据！");
+        }
     }
     @GetMapping("/login")
     public Result login(LoginRequest loginRequest){
@@ -61,5 +66,10 @@ public class UserController {
         }else {
             return Result.success(users);
         }
+    }
+    @GetMapping("/listAcademy")
+    public Result listAcademy(){
+        List<String> listAcademy = userService.listAcademy();
+        return Result.success(listAcademy);
     }
 }

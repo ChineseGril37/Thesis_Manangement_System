@@ -67,6 +67,11 @@ public class ProcessController {
             return Result.error("未查询到");
         }
     }
+    @GetMapping("/processQuickView")
+    public Result processQuickView(ProcessRequest processRequest){
+        Object userProcess = processService.listByProcess(processRequest);
+        return Result.success();
+    }
     //createProcess创建流程
     @PostMapping("/createProcess")
     public Result createProcess(@RequestBody Process process){

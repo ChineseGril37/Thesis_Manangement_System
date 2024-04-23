@@ -1,5 +1,6 @@
 package org.lengs.springboot.service;
 
+import org.lengs.springboot.controller.request.AcademyRequest;
 import org.lengs.springboot.controller.request.GroupRequest;
 import org.lengs.springboot.controller.request.LoginRequest;
 import org.lengs.springboot.controller.request.UserRequest;
@@ -23,4 +24,6 @@ public interface IUserService {
     List<User> listGroup(GroupRequest groupRequest);
 
     Integer count(User user);
+
+    List<String> listAcademy();
 }
