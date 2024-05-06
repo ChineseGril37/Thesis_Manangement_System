@@ -41,9 +41,6 @@ public class FileController {
 
     @PostMapping("/upload")
     public Result upload(MultipartFile[] fileList, FileInfo fileInfo) throws IOException {
-        System.out.println("upload!");
-        System.out.println("fileList="+fileList);
-        System.out.println("fileInfo="+fileInfo);
         Result result = new Result();
         //拿到具体文件 file
         if (fileList != null) {

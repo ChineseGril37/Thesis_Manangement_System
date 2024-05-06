@@ -337,7 +337,6 @@ export default {
           this.$message.success("课题申报更新成功")
         })
       } else {
-        //
         this.submissionData.processCreateTime = setCurrentTime();
         this.submissionData.processChangeTime = setCurrentTime();
         this.submissionData.processDeadTime = this.deadTime

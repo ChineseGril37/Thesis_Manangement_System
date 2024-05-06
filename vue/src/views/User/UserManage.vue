@@ -105,7 +105,7 @@ export default {
   },
   methods:{
     // 获取表格数据
-    // 这里最好把tableData换一个，这tableData是表格数据，给弹窗的应该是表格里面对应的行，要改不/OK
+    // 这里最好把tableData换一个，这tableData是表格数据，给弹窗的应该是表格里面对应的行
     fetchData() {
       //  console.log(JSON.parse(JSON.stringify(this.tableDataRow)));
       const that = this;
@@ -149,14 +149,6 @@ export default {
         this.$refs["UserDialog"].showDialog = true;
       });
     },
-    closeDialog(flag) {
-      if (flag) {
-        // 重新刷新表格内容
-        this.fetchData();
-        this.$refs.UserDialog.resetFields();
-      }
-      this.showDialog = false;
-    },
     del(row){
       this.deleteData={userId:row.userId}
       console.log(this.deleteData)
@@ -168,6 +160,14 @@ export default {
           this.$notify.error(res.msg)
         }
       })
+    },
+    closeDialog(flag) {
+      if (flag) {
+        // 重新刷新表格内容
+        this.fetchData();
+        this.$refs.UserDialog.resetFields();
+      }
+      this.showDialog = false;
     },
     reset(){
       //重置当前
